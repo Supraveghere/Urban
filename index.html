@@ -156,85 +156,168 @@ main{padding:10px 12px 80px;display:flex;flex-direction:column;gap:7px;}
 
 /* ══ BRAND SECTION ══════════════════════════════════════════════════ */
 .brs{
-  background:var(--card);border-radius:var(--r);border:1px solid var(--border);
-  overflow:hidden;opacity:0;transform:translateY(14px);
-  transition:opacity .45s ease,transform .45s ease,background .25s,border-color .25s;
-  box-shadow:var(--shadow);
+  background:var(--card);
+  border-radius:16px;
+  border:1px solid var(--border);
+  overflow:hidden;opacity:0;transform:translateY(16px);
+  transition:opacity .5s ease,transform .5s ease,background .25s,border-color .25s,box-shadow .3s;
+  box-shadow:0 2px 8px rgba(0,0,0,.05),0 1px 2px rgba(0,0,0,.04);
 }
 .brs.inv{opacity:1;transform:translateY(0);}
 .brs.hsr{display:none!important;}
+@media(hover:hover){
+  .brs:hover{box-shadow:0 6px 24px rgba(0,0,0,.09),0 2px 6px rgba(0,0,0,.05);}
+}
+[data-theme="dark"] .brs{box-shadow:0 2px 12px rgba(0,0,0,.3);}
+[data-theme="dark"] .brs:hover{box-shadow:0 6px 28px rgba(0,0,0,.45);}
 
 /* ══ BRAND HEADER ═══════════════════════════════════════════════════ */
 .brh{
-  display:flex;align-items:center;gap:10px;padding:13px 14px;
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;
   cursor:pointer;user-select:none;
-  border-left:3px solid var(--bac,#ccc);
-  transition:background .12s;min-height:50px;
+  position:relative;overflow:hidden;
+  transition:background .15s;min-height:58px;
+  background:linear-gradient(135deg,
+    rgba(var(--brg,160,160,160),.07) 0%,
+    rgba(var(--brg,160,160,160),.02) 60%,
+    transparent 100%);
+}
+.brh::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(var(--brg,160,160,160),.12) 0%,transparent 40%);
+  opacity:0;transition:opacity .2s;pointer-events:none;
+}
+.brh:active::before,.brh:hover::before{opacity:1;}
+.brh::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3.5px;
+  background:linear-gradient(180deg,rgba(var(--brg,160,160,160),1) 0%,rgba(var(--brg,160,160,160),.35) 100%);
+  border-radius:0 2px 2px 0;
 }
 .brh:active{background:var(--s2);}
 @media(hover:hover){.brh:hover{background:var(--s2);}}
 .be{font-size:16px;flex-shrink:0;width:22px;line-height:1;}
-.bt{font-size:13px;font-weight:600;color:var(--text);flex:1;line-height:1.3;}
-.bm{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);background:var(--s2);border:1px solid var(--border);padding:2px 8px;border-radius:20px;flex-shrink:0;}
-.bc{color:var(--dim);font-size:10px;transition:transform .25s ease;flex-shrink:0;margin-left:2px;}
+.bt{font-size:13px;font-weight:700;color:var(--text);flex:1;line-height:1.3;letter-spacing:-.1px;}
+.bm{
+  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;
+  color:rgba(var(--brg,100,100,100),1);
+  background:rgba(var(--brg,160,160,160),.1);
+  border:1px solid rgba(var(--brg,160,160,160),.22);
+  padding:3px 9px;border-radius:20px;flex-shrink:0;letter-spacing:.3px;
+}
+[data-theme="dark"] .bm{
+  color:rgba(var(--brg,200,200,200),.9);
+  background:rgba(var(--brg,160,160,160),.14);
+}
+.bc{
+  width:22px;height:22px;display:flex;align-items:center;justify-content:center;
+  color:var(--dim);font-size:9px;
+  background:var(--s2);border:1px solid var(--border);
+  border-radius:6px;
+  transition:transform .28s cubic-bezier(.34,1.4,.64,1),background .15s;
+  flex-shrink:0;
+}
+.brh:hover .bc{background:var(--s3);}
 .brs.col .bc{transform:rotate(-90deg);}
 
 /* ── PROGRESS BAR ── */
-.bprog{height:3px;background:var(--s2);position:relative;overflow:hidden;}
-.bprog-fill{height:100%;transition:width .8s cubic-bezier(.4,0,.2,1);background:linear-gradient(90deg,var(--bac,#60a5fa),var(--bac2,#93c5fd));}
-.bprog-label{position:absolute;right:8px;top:-11px;font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--dim);letter-spacing:.5px;}
+.bprog{height:2px;background:rgba(var(--brg,160,160,160),.1);position:relative;overflow:hidden;}
+.bprog-fill{
+  height:100%;transition:width .9s cubic-bezier(.4,0,.2,1);
+  background:linear-gradient(90deg,rgba(var(--brg,160,160,160),.7),rgba(var(--brg,160,160,160),.25));
+}
+.bprog-label{position:absolute;right:10px;top:-12px;font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(var(--brg,130,130,130),.8);letter-spacing:.5px;font-weight:500;}
 
 /* ══ PHONE GRID ══════════════════════════════════════════════════════ */
-.pg{border-top:1px solid var(--border2);max-height:9999px;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .3s ease;}
-.brs.col .pg{max-height:0;opacity:0;pointer-events:none;}
+.pg{
+  border-top:1px solid var(--border2);
+  max-height:9999px;overflow:hidden;
+  transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .3s ease;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:8px;
+  padding:12px 14px 14px;
+  background:linear-gradient(180deg,var(--s2) 0%,var(--card) 100%);
+}
+.brs.col .pg{max-height:0;opacity:0;pointer-events:none;padding:0 14px;}
 
 /* ══ PHONE CARD ══════════════════════════════════════════════════════ */
 .pc{
-  display:flex;align-items:center;gap:11px;
-  padding:10px 14px;border-bottom:1px solid var(--border2);
-  transition:background .12s,transform .2s;
-  animation:cardIn .35s ease both;
-  touch-action:pan-y;min-height:56px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;
+  gap:7px;padding:14px 10px 12px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--card);
+  box-shadow:0 1px 3px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.03);
+  transition:background .15s,transform .2s,box-shadow .2s,border-color .2s;
+  animation:cardIn .38s ease both;
+  touch-action:pan-y;cursor:pointer;
   position:relative;overflow:hidden;
+  text-align:center;
 }
-.pc:last-child{border-bottom:none;}
-@media(hover:hover){.pc:hover{background:var(--s2);}}
-.pc.isn{border-left:2.5px solid var(--blue);padding-left:11.5px;background:var(--bbg);}
+.pc::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,rgba(var(--brg,160,160,160),.6),rgba(var(--brg,160,160,160),.15));
+  opacity:0;transition:opacity .2s;
+}
+.pc:hover::before{opacity:1;}
+.pc:last-child{border-bottom:1px solid var(--border);}
+@media(hover:hover){
+  .pc:hover{
+    background:var(--card);
+    border-color:rgba(var(--brg,160,160,160),.35);
+    box-shadow:0 6px 20px rgba(0,0,0,.09),0 2px 6px rgba(0,0,0,.05);
+    transform:translateY(-3px);
+  }
+}
+.pc:active{transform:scale(.96);}
+.pc.isn{
+  border-color:rgba(var(--brg,160,160,160),.4);
+  background:var(--bbg);
+  box-shadow:0 0 0 1px rgba(var(--brg,160,160,160),.15);
+}
 .pc.sh{display:none!important;}
-@keyframes cardIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
-
-
+@keyframes cardIn{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
 
 /* phone thumbnail */
 .pthumb{
-  width:36px;height:44px;flex-shrink:0;
+  width:52px;height:60px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  font-size:28px;line-height:1;
-  border-radius:var(--r3);
-  background:linear-gradient(135deg,rgba(var(--brg,160,160,160),.12),rgba(var(--brg,160,160,160),.06));
-  border:1px solid rgba(var(--brg,160,160,160),.18);
+  font-size:32px;line-height:1;
+  border-radius:var(--r2);
+  background:transparent;
+  border:none;
   position:relative;overflow:hidden;
   transition:transform .2s;
 }
-.pc:hover .pthumb{transform:scale(1.06);}
-.pthumb img{width:100%;height:100%;object-fit:contain;border-radius:var(--r3);}
-.pthumb-fallback{font-size:22px;line-height:1;}
+.pc:hover .pthumb{transform:scale(1.08);}
+.pthumb img{width:100%;height:100%;object-fit:contain;border-radius:var(--r2);}
+.pthumb-fallback{font-size:26px;line-height:1;}
 
-.pif{flex:1;min-width:0;}
-.pm{font-size:14px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3;}
-.py{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);margin-top:1px;}
+.pif{width:100%;min-width:0;}
+.pm{font-size:12px;font-weight:600;color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  line-height:1.3;width:100%;}
+.py{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);margin-top:2px;}
 
 /* rating stars */
-.prat{display:flex;gap:1px;margin-top:2px;}
+.prat{display:flex;gap:1px;margin-top:3px;justify-content:center;}
 .star{font-size:8px;color:var(--dim);line-height:1;}
 .star.on{color:#f59e0b;}
 
 /* badges */
-.pbg{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;padding:3px 8px;border-radius:20px;flex-shrink:0;white-space:nowrap;}
+.pbg{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:500;padding:2px 7px;border-radius:20px;flex-shrink:0;white-space:nowrap;margin-top:2px;}
 .bok{background:var(--gbg);border:1px solid var(--gbr);color:var(--gtx);}
 .bnw{background:var(--bbg);border:1px solid var(--bbr);color:var(--blue);}
 .bup{background:var(--abg);border:1px solid var(--abr);color:var(--amber);}
 .bfid{background:var(--s2);border:1px solid var(--border);color:var(--mid);}
+
+@media(max-width:400px){
+  .pg{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;padding:8px 10px 10px;}
+  .pthumb{width:44px;height:52px;}
+  .pm{font-size:11px;}
+}
 
 /* ══ MODAL ═══════════════════════════════════════════════════════════ */
 #mo{
@@ -575,38 +658,90 @@ const RATINGS={
   "Oppo Find X9 Pro":4,"Oppo Find X8 Ultra":4,
 };
 
-// Phone emoji avatars (SVG-based inline, brand-keyed)
-const BRAND_ICONS={
-  "SAMSUNG":"📱","GOOGLE":"📱","APPLE":"📱",
-  "XIAOMI":"📱","OnePlus":"📱","VIVO":"📱","iQOO":"📱",
-  "OPPO":"📱","HONOR":"📱","REALME":"📱","HUAWEI":"📱",
+// Official brand logos as SVG data URIs
+const BRAND_LOGOS_THUMB = {
+  "SAM": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 60">
+    <rect width="52" height="60" rx="10" fill="#1428A0" opacity=".12"/>
+    <rect x="2" y="2" width="48" height="56" rx="9" fill="none" stroke="#1428A0" stroke-width="1.5" opacity=".3"/>
+    <text x="26" y="34" font-family="Arial" font-size="7" font-weight="bold" fill="#1428A0" text-anchor="middle" opacity=".9">SAMSUNG</text>
+    <rect x="10" y="38" width="32" height="1" rx=".5" fill="#1428A0" opacity=".15"/>
+  </svg>`,
+  "APPLE": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 60">
+    <rect width="52" height="60" rx="10" fill="#555" opacity=".1"/>
+    <rect x="2" y="2" width="48" height="56" rx="9" fill="none" stroke="#888" stroke-width="1.5" opacity=".3"/>
+    <path d="M33.5 22.2c1.6-2 1.5-4.7 1.5-4.7s-2.6.2-4.2 2c-1.5 1.7-1.4 4.3-1.4 4.3s2.7-.1 4.1-1.6zM37.5 32c0-4.3 3.5-6.4 3.5-6.4s-1.9-2.7-5.2-2.7c-2.3 0-3.5 1.2-5 1.2-1.5 0-3-1.2-5-1.2-3 0-6.5 2.4-6.5 7.3 0 4.7 3.2 12.4 5.9 12.4 1.2 0 2.3-.9 3.9-.9 1.6 0 2.4.9 4 .9 2.8 0 4.4-6.8 4.4-6.8s-2.7-1-2.7-4z" fill="#555" opacity=".7"/>
+  </svg>`,
+  "GOOGLE": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 60">
+    <rect width="52" height="60" rx="10" fill="#4285F4" opacity=".1"/>
+    <rect x="2" y="2" width="48" height="56" rx="9" fill="none" stroke="#4285F4" stroke-width="1.5" opacity=".3"/>
+    <circle cx="26" cy="30" r="10" fill="none" stroke="#ccc" stroke-width="1.5" opacity=".4"/>
+    <path d="M36 30h-10v-4h9.6A10 10 0 0 1 36 30z" fill="#4285F4" opacity=".8"/>
+    <path d="M26 20a10 10 0 0 1 7.1 2.9l-2.8 2.8A6 6 0 0 0 26 24z" fill="#EA4335" opacity=".8"/>
+    <path d="M16 30a10 10 0 0 1 10-10v4a6 6 0 0 0-6 6z" fill="#FBBC05" opacity=".8"/>
+    <path d="M26 40a10 10 0 0 1-10-10h4a6 6 0 0 0 10.3 4.2l2.8 2.8A10 10 0 0 1 26 40z" fill="#34A853" opacity=".8"/>
+  </svg>`,
+  "XIAOMI": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 60">
+    <rect width="52" height="60" rx="10" fill="#FF6900" opacity=".1"/>
+    <rect x="2" y="2" width="48" height="56" rx="9" fill="none" stroke="#FF6900" stroke-width="1.5" opacity=".3"/>
+    <text x="26" y="33" font-family="Arial" font-size="13" font-weight="bold" fill="#FF6900" text-anchor="middle" opacity=".85">Mi</text>
+  </svg>`,
+  "ONEPLUS": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 60">
+    <rect width="52" height="60" rx="10" fill="#F5010C" opacity=".1"/>
+    <rect x="2" y="2" width="48" height="56" rx="9" fill="none" stroke="#F5010C" stroke-width="1.5" opacity=".3"/>
+    <text x="26" y="34" font-family="Arial" font-size="8.5" font-weight="bold" fill="#F5010C" text-anchor="middle" opacity=".85">1+</text>
+  </svg>`,
+  "VIVO": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 60">
+    <rect width="52" height="60" rx="10" fill="#415FFF" opacity=".1"/>
+    <rect x="2" y="2" width="48" height="56" rx="9" fill="none" stroke="#415FFF" stroke-width="1.5" opacity=".3"/>
+    <text x="26" y="34" font-family="Arial" font-size="11" font-weight="bold" fill="#415FFF" text-anchor="middle" opacity=".85" letter-spacing="1">vivo</text>
+  </svg>`,
+  "IQOO": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 60">
+    <rect width="52" height="60" rx="10" fill="#1A1A1A" opacity=".1"/>
+    <rect x="2" y="2" width="48" height="56" rx="9" fill="none" stroke="#E879F9" stroke-width="1.5" opacity=".35"/>
+    <path d="M26 18l-8 14h6l-2 10 12-16h-6l2-8z" fill="#E879F9" opacity=".7"/>
+  </svg>`,
+  "OPPO": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 60">
+    <rect width="52" height="60" rx="10" fill="#1D4532" opacity=".1"/>
+    <rect x="2" y="2" width="48" height="56" rx="9" fill="none" stroke="#1D4532" stroke-width="1.5" opacity=".3"/>
+    <text x="26" y="34" font-family="Arial" font-size="10" font-weight="bold" fill="#1D4532" text-anchor="middle" opacity=".85">OPPO</text>
+  </svg>`,
+  "HONOR": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 60">
+    <rect width="52" height="60" rx="10" fill="#CF0A2C" opacity=".1"/>
+    <rect x="2" y="2" width="48" height="56" rx="9" fill="none" stroke="#CF0A2C" stroke-width="1.5" opacity=".3"/>
+    <text x="26" y="34" font-family="Arial" font-size="8.5" font-weight="bold" fill="#CF0A2C" text-anchor="middle" opacity=".85">HONOR</text>
+  </svg>`,
+  "REALME": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 60">
+    <rect width="52" height="60" rx="10" fill="#FFD700" opacity=".12"/>
+    <rect x="2" y="2" width="48" height="56" rx="9" fill="none" stroke="#e6a800" stroke-width="1.5" opacity=".35"/>
+    <text x="26" y="34" font-family="Arial" font-size="8" font-weight="bold" fill="#b08000" text-anchor="middle" opacity=".9">realme</text>
+  </svg>`,
+  "HUAWEI": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 60">
+    <rect width="52" height="60" rx="10" fill="#CF0A2C" opacity=".1"/>
+    <rect x="2" y="2" width="48" height="56" rx="9" fill="none" stroke="#CF0A2C" stroke-width="1.5" opacity=".3"/>
+    <text x="26" y="34" font-family="Arial" font-size="8" font-weight="bold" fill="#CF0A2C" text-anchor="middle" opacity=".85">HUAWEI</text>
+  </svg>`,
 };
 
-// Generate an SVG phone thumbnail with brand color
-function phoneSVG(color,emoji,model){
-  // Determine phone shape based on model name
-  const isUltra = model && (model.includes('Ultra') || model.includes('Pro Max') || model.includes('Pro+'));
-  const isFold = model && (model.includes('Fold') || model.includes('Z Fold'));
-  const isSmall = model && (model.includes('mini') || model.includes(' e') || model.includes('FE'));
-  
-  const w = isFold ? 44 : isSmall ? 30 : 36;
-  const h = isFold ? 38 : 46;
-  const rx = isUltra ? 8 : isFold ? 6 : 9;
-  
-  // Camera module
-  const camSVG = isUltra 
-    ? `<rect x="${w/2-7}" y="6" width="14" height="14" rx="4" fill="${color}" opacity=".25"/><circle cx="${w/2-3}" cy="13" r="3.5" fill="${color}" opacity=".5"/><circle cx="${w/2+3.5}" cy="10" r="2.5" fill="${color}" opacity=".5"/><circle cx="${w/2+3.5}" cy="16" r="2.5" fill="${color}" opacity=".5"/>`
-    : `<rect x="${w/2-5}" y="5" width="10" height="10" rx="3" fill="${color}" opacity=".2"/><circle cx="${w/2}" cy="10" r="3.5" fill="${color}" opacity=".45"/>`;
-  
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}">
-    <rect width="${w}" height="${h}" rx="${rx}" fill="${color}" opacity=".1"/>
-    <rect x="1.5" y="1.5" width="${w-3}" height="${h-3}" rx="${rx-1}" fill="none" stroke="${color}" stroke-width="1.5" opacity=".3"/>
-    ${isFold ? `<line x1="${w/2}" y1="2" x2="${w/2}" y2="${h-2}" stroke="${color}" stroke-width="1" opacity=".2"/>` : ''}
-    ${camSVG}
-    <rect x="4" y="${isFold?4:22}" width="${w-8}" height="${isFold?h-8:h-26}" rx="3" fill="${color}" opacity=".07"/>
-    <rect x="${w/2-8}" y="3" width="16" height="2" rx="1" fill="${color}" opacity=".25"/>
-    ${!isFold ? `<circle cx="${w/2}" cy="${h-4}" r="2.5" fill="${color}" opacity=".3"/>` : ''}
-  </svg>`;
+function getBrandKey(brandName) {
+  const n = brandName.toUpperCase();
+  if (n.includes('SAMSUNG')) return 'SAM';
+  if (n.includes('APPLE')) return 'APPLE';
+  if (n.includes('GOOGLE') || n.includes('PIXEL')) return 'GOOGLE';
+  if (n.includes('XIAOMI')) return 'XIAOMI';
+  if (n.includes('ONEPLUS') || n === 'ONEPLUS') return 'ONEPLUS';
+  if (n.includes('IQOO')) return 'IQOO';
+  if (n.includes('VIVO')) return 'VIVO';
+  if (n.includes('OPPO')) return 'OPPO';
+  if (n.includes('HONOR')) return 'HONOR';
+  if (n.includes('REALME')) return 'REALME';
+  if (n.includes('HUAWEI')) return 'HUAWEI';
+  return null;
+}
+
+// Generate an SVG phone thumbnail with brand logo
+function phoneSVG(color, emoji, model, brandName) {
+  const key = brandName ? getBrandKey(brandName) : null;
+  const svg = key && BRAND_LOGOS_THUMB[key] ? BRAND_LOGOS_THUMB[key] : BRAND_LOGOS_THUMB['VIVO'];
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 }
 
@@ -756,16 +891,26 @@ function render(){
     const cards=br.p.map((p,pi)=>{
       const isN=newList.some(x=>x.br===br.n&&x.m===p.m);
       const isFid=!!(br.fid&&!isN);
-      const isSoon=!!(p.up&&!isN);
+      // Already launched 2026 models (confirmed released, not "coming soon")
+      const LAUNCHED_2026=[
+        "Galaxy S26","Galaxy S26+","Galaxy S26 Ultra",
+        "OnePlus 16","Xiaomi 16","Xiaomi 16 Pro",
+        "Vivo X400 Pro","iQOO 15 Ultra","Realme GT 10 Pro",
+        "Honor Magic 9 Pro",
+      ];
+      const alreadyLaunched = LAUNCHED_2026.includes(p.m);
+      const isSoon=!!(p.up&&!isN&&!alreadyLaunched);
       const bdg=isN
         ?'<span class="pbg bnw">NOU</span>'
         :isSoon
           ?'<span class="pbg bup">Curând</span>'
-          :isFid
-            ?'<span class="pbg bfid">Face ID</span>'
-            :'<span class="pbg bok">✓ OK</span>';
+          :alreadyLaunched
+            ?'<span class="pbg bok">✓ 2026</span>'
+            :isFid
+              ?'<span class="pbg bfid">Face ID</span>'
+              :'<span class="pbg bok">✓ OK</span>';
 
-      const thumb=phoneSVG('#'+br.a.replace('#',''),emoji,p.m);
+      const thumb=phoneSVG('#'+br.a.replace('#',''),emoji,p.m,br.n);
       const stars=starsHTML(p.m);
 
       return `<div class="pc" data-m="${p.m.toLowerCase()}" style="animation-delay:${pi*.018}s"
