@@ -892,8 +892,8 @@ footer{
   .phone-name{font-size:14px;}
   .phone-year{font-size:11px;}
   /* feedback on mobile - side by side, good tap targets */
-  .feedback-row{gap:6px;margin-top:8px;}
-  .fb-btn{font-size:11px;padding:8px 8px;min-height:42px;}
+  .feedback-row{gap:5px;margin-top:8px;}
+  .fb-btn{font-size:11px;padding:8px 6px;min-height:42px;min-width:0;}
   .fb-count{font-size:11px;}
 }
 </style>
@@ -1171,7 +1171,7 @@ footer{
 <script>
 /* ── Cache buster — schimbă V la fiecare update pe GitHub ── */
 (function(){
-  var V = '20260406'; // ← SCHIMBĂ ASTA la fiecare update (orice număr diferit)
+  var V = '63709884'; // ← SCHIMBĂ ASTA la fiecare update (orice număr diferit)
   var url = new URL(window.location.href);
   if (url.searchParams.get('v') !== V) {
     url.searchParams.set('v', V);
