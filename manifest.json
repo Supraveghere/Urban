@@ -1,0 +1,36 @@
+{
+  "name": "SonicDB — Senzor Ultrasonic",
+  "short_name": "SonicDB",
+  "description": "Baza de date telefoane cu senzor de amprentă ultrasonic — compatibilitate folii TPU, PET și Glass OK.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "orientation": "portrait-primary",
+  "lang": "ro",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Caută model",
+      "short_name": "Caută",
+      "description": "Caută direct un model de telefon",
+      "url": "./index.html#search",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "categories": ["utilities", "shopping"],
+  "screenshots": []
+}
