@@ -645,14 +645,15 @@ footer{
 
 /* ─── FEEDBACK BUTTONS ──────────────────────────────────────── */
 .feedback-row{
-  display:flex;align-items:center;gap:8px;margin-top:9px;flex-wrap:nowrap;width:100%;
+  display:flex;align-items:center;gap:8px;margin-top:9px;flex-wrap:nowrap;
+  width:100%;max-width:700px;
 }
 .fb-btn{
   display:inline-flex;align-items:center;justify-content:center;gap:6px;
-  font-family:var(--sans);font-size:12px;font-weight:600;
-  padding:7px 12px;border-radius:10px;border:1.5px solid;cursor:pointer;
+  font-family:var(--sans);font-size:13px;font-weight:600;
+  padding:8px 20px;border-radius:10px;border:1.5px solid;cursor:pointer;
   background:transparent;transition:all .15s;white-space:nowrap;
-  min-height:40px;flex:1;
+  min-height:42px;min-width:180px;flex:1;max-width:320px;
   -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;user-select:none;
 }
@@ -1168,6 +1169,23 @@ footer{
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Sus">↑</button>
 
 <script>
+/* ── One-time SW + cache killer ── */
+(function(){
+  if (!localStorage.getItem('sw_cleaned')) {
+    localStorage.setItem('sw_cleaned', '1');
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(regs){
+        regs.forEach(function(r){ r.unregister(); });
+      });
+    }
+    if ('caches' in window) {
+      caches.keys().then(function(keys){
+        keys.forEach(function(k){ caches.delete(k); });
+      });
+    }
+  }
+})();
+
 /* ══════════════════════════════════════════════════════════════
    DATABAZA COMPLETĂ — Telefoane cu senzor ultrasonic confirmat
    ══════════════════════════════════════════════════════════════ */
