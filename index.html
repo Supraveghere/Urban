@@ -1,812 +1,2145 @@
 <!DOCTYPE html>
-<html lang="ro" data-theme="light">
+<html lang="ro" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#f8f8f8">
-<title>Urban Gadgets — Senzor Ultrasonic</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SonicDB">
+<meta name="description" content="Baza de date telefoane cu senzor de amprentă ultrasonic — compatibilitate folii TPU, PET și Glass OK.">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>SonicDB — Senzor Ultrasonic</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 <style>
+/* ─── TOKENS ─────────────────────────────────────────────────── */
 :root {
-  --bg:#f5f5f5;--card:#ffffff;--s2:#f0f0f0;--s3:#e8e8e8;
-  --border:#e2e2e2;--border2:#ebebeb;
-  --text:#0f0f0f;--mid:#666;--dim:#aaa;
-  --green:#16a34a;--gbg:#f0fdf4;--gbr:#bbf7d0;--gtx:#15803d;
-  --amber:#d97706;--abg:#fffbeb;--abr:#fde68a;
-  --blue:#2563eb;--bbg:#eff6ff;--bbr:#bfdbfe;
-  --red:#dc2626;--rbg:#fef2f2;--rbr:#fecaca;
-  --purple:#7c3aed;--pbg:#f5f3ff;--pbr:#ddd6fe;
-  --nh:52px;--r:12px;--r2:8px;--r3:6px;
-  --shadow:0 1px 2px rgba(0,0,0,.06);
-  --shadow-md:0 4px 12px rgba(0,0,0,.08);
-  --shadow-lg:0 12px 32px rgba(0,0,0,.12);
+  --bg:        #0a0a0f;
+  --bg2:       #111118;
+  --bg3:       #18181f;
+  --surface:   #1e1e28;
+  --surface2:  #252530;
+  --border:    #2a2a38;
+  --border2:   #1e1e2a;
+  --text:      #f0f0f8;
+  --text2:     #a0a0b8;
+  --text3:     #606078;
+  --accent:    #6c63ff;
+  --accent2:   #9d97ff;
+  --glow:      rgba(108,99,255,.18);
+  --green:     #00e5a0;
+  --greenbg:   rgba(0,229,160,.08);
+  --greenbdr:  rgba(0,229,160,.2);
+  --amber:     #ffb830;
+  --amberbg:   rgba(255,184,48,.08);
+  --amberbdr:  rgba(255,184,48,.2);
+  --red:       #ff5f5f;
+  --redbg:     rgba(255,95,95,.08);
+  --blue:      #5fa8ff;
+  --bluebg:    rgba(95,168,255,.08);
+  --bluebdr:   rgba(95,168,255,.2);
+  --navy:      #0070f3;
+  --r:         14px;
+  --r2:        10px;
+  --r3:        7px;
+  --nh:        58px;
+  --mono:      'IBM Plex Mono', monospace;
+  --sans:      'DM Sans', sans-serif;
+  --display:   'Syne', sans-serif;
 }
-[data-theme="dark"]{
-  --bg:#111;--card:#1a1a1a;--s2:#222;--s3:#2a2a2a;
-  --border:#2e2e2e;--border2:#262626;
-  --text:#f0f0f0;--mid:#999;--dim:#555;
-  --green:#22c55e;--gbg:#052e16;--gbr:#166534;--gtx:#4ade80;
-  --amber:#fbbf24;--abg:#1c1200;--abr:#78350f;
-  --blue:#60a5fa;--bbg:#0f172a;--bbr:#1e3a5f;
-  --red:#f87171;--rbg:#1a0505;--rbr:#7f1d1d;
-  --purple:#a78bfa;--pbg:#150e2a;--pbr:#4c1d95;
-  --shadow:0 1px 3px rgba(0,0,0,.4);
-  --shadow-md:0 4px 16px rgba(0,0,0,.5);
-  --shadow-lg:0 12px 40px rgba(0,0,0,.6);
+[data-theme="light"] {
+  --bg:        #f4f4f8;
+  --bg2:       #eeeef4;
+  --bg3:       #e8e8f0;
+  --surface:   #ffffff;
+  --surface2:  #f8f8fc;
+  --border:    #dcdce8;
+  --border2:   #e8e8f0;
+  --text:      #0f0f1a;
+  --text2:     #5a5a72;
+  --text3:     #a0a0b8;
+  --accent:    #5046e5;
+  --accent2:   #7c75f0;
+  --glow:      rgba(80,70,229,.1);
+  --green:     #00b880;
+  --greenbg:   rgba(0,184,128,.07);
+  --greenbdr:  rgba(0,184,128,.2);
+  --amber:     #d4960a;
+  --amberbg:   rgba(212,150,10,.07);
+  --amberbdr:  rgba(212,150,10,.2);
+  --red:       #e04040;
+  --redbg:     rgba(224,64,64,.07);
+  --blue:      #2878e8;
+  --bluebg:    rgba(40,120,232,.07);
+  --bluebdr:   rgba(40,120,232,.2);
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
 body{
   background:var(--bg);color:var(--text);
-  font-family:'Inter',sans-serif;font-size:15px;line-height:1.5;
+  font-family:var(--sans);font-size:15px;line-height:1.5;
   min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;
-  transition:background .2s,color .2s;
+  transition:background .25s,color .25s;
 }
-::-webkit-scrollbar{width:3px;}
+
+/* Subtle grid bg */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(var(--border2) 1px, transparent 1px),
+                   linear-gradient(90deg, var(--border2) 1px, transparent 1px);
+  background-size:40px 40px;
+  opacity:.4;
+  transition:opacity .25s;
+}
+[data-theme="light"] body::before{opacity:.6;}
+
+::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+::-webkit-scrollbar-track{background:transparent;}
 
-/* NAV */
+/* ─── NAV ───────────────────────────────────────────────────── */
 nav{
-  position:sticky;top:0;z-index:100;height:var(--nh);
-  background:rgba(245,245,245,.92);
+  position:sticky;top:0;z-index:200;height:var(--nh);
+  background:rgba(10,10,15,.88);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 20px;gap:12px;
+  transition:box-shadow .2s,background .25s;
+}
+[data-theme="light"] nav{background:rgba(244,244,248,.9);}
+nav.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.3);}
+
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;}
+.nav-logo-img{height:34px;width:34px;object-fit:contain;border-radius:9px;flex-shrink:0;}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.15;}
+.nav-brand{font-family:var(--display);font-size:14px;font-weight:700;color:var(--text);letter-spacing:-.3px;}
+.nav-sub{font-family:var(--mono);font-size:7.5px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;}
+.nav-div{width:1px;height:18px;background:var(--border);flex-shrink:0;}
+.nav-title{font-size:12px;color:var(--text3);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--mono);}
+.live-badge{
+  display:flex;align-items:center;gap:5px;
+  font-family:var(--mono);font-size:8px;letter-spacing:1.5px;
+  color:var(--green);background:var(--greenbg);
+  border:1px solid var(--greenbdr);padding:4px 10px;border-radius:20px;flex-shrink:0;
+}
+.live-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.8)}}
+
+#dm{
+  background:transparent;border:1.5px solid var(--border);color:var(--text2);
+  width:32px;height:32px;border-radius:var(--r3);cursor:pointer;
+  font-size:14px;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .2s;
+}
+#dm:hover{background:var(--surface);border-color:var(--accent);color:var(--accent);}
+
+/* ─── HERO ──────────────────────────────────────────────────── */
+.hero{
+  position:relative;z-index:1;
+  padding:40px 20px 32px;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);
+  overflow:hidden;
+}
+.hero::after{
+  content:'SONIC';
+  position:absolute;right:-20px;top:-10px;
+  font-family:var(--display);font-size:clamp(80px,18vw,160px);font-weight:800;
+  color:var(--accent);opacity:.04;letter-spacing:-4px;pointer-events:none;
+  line-height:1;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--accent);
+  background:var(--glow);border:1px solid rgba(108,99,255,.25);
+  padding:4px 12px;border-radius:20px;margin-bottom:14px;text-transform:uppercase;
+}
+h1{
+  font-family:var(--display);
+  font-size:clamp(26px,6vw,42px);
+  font-weight:800;letter-spacing:-1px;line-height:1.05;
+  color:var(--text);margin-bottom:8px;
+  position:relative;z-index:1;
+}
+h1 span{color:var(--accent);}
+.hero-desc{font-size:14px;color:var(--text2);max-width:500px;line-height:1.6;}
+.hero-desc strong{color:var(--text);}
+
+/* ─── STATS BAR ─────────────────────────────────────────────── */
+.stats-bar{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--border);
+  background:var(--bg2);
+}
+.stat-item{
+  padding:14px 10px;text-align:center;
+  border-right:1px solid var(--border);
+  transition:background .2s;
+}
+.stat-item:last-child{border-right:none;}
+.stat-item:hover{background:var(--surface);}
+.stat-num{
+  display:block;
+  font-family:var(--display);font-size:22px;font-weight:700;
+  color:var(--text);line-height:1;margin-bottom:3px;
+  font-variant-numeric:tabular-nums;letter-spacing:-1px;
+}
+.stat-lbl{
+  font-family:var(--mono);font-size:8px;letter-spacing:1.5px;
+  color:var(--text3);text-transform:uppercase;
+}
+
+/* ─── UPDATE BAR ─────────────────────────────────────────────── */
+.ubar{
+  position:relative;z-index:1;
+  background:var(--surface);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;padding:10px 20px;
+}
+.ubar-info{display:flex;align-items:center;gap:8px;flex:1;min-width:0;}
+.ubar-date{font-family:var(--mono);font-size:11px;color:var(--text3);}
+#upd-btn{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;border:none;padding:7px 16px;
+  font-family:var(--display);font-size:12px;font-weight:700;
+  cursor:pointer;border-radius:20px;transition:all .2s;
+  flex-shrink:0;letter-spacing:.2px;
+  box-shadow:0 0 20px var(--glow);
+}
+#upd-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 24px var(--glow);}
+#upd-btn:active:not(:disabled){transform:scale(.97);}
+#upd-btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;}
+
+/* ─── NOTICES ───────────────────────────────────────────────── */
+.notice-strip{
+  position:relative;z-index:1;
+  display:flex;gap:0;flex-direction:column;
+  border-bottom:1px solid var(--border);
+}
+.notice{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:9px 20px;font-size:12.5px;line-height:1.55;
+}
+.notice-amber{background:var(--amberbg);border-bottom:1px solid var(--amberbdr);color:var(--amber);}
+.notice-blue{background:var(--bluebg);color:var(--blue);}
+.notice strong{font-weight:600;}
+.notice-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+
+/* ─── SEARCH ────────────────────────────────────────────────── */
+.search-wrap{
+  position:sticky;top:var(--nh);z-index:190;
+  background:var(--bg2);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px 0;
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;padding:0 14px;gap:10px;
-  transition:background .2s,box-shadow .2s;
+  transition:background .25s;
 }
-[data-theme="dark"] nav{background:rgba(17,17,17,.92);}
-nav.scrolled{box-shadow:var(--shadow-md);}
-.nlw{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0;}
-.nli{height:30px;width:30px;object-fit:contain;border-radius:8px;}
-.nb{display:flex;flex-direction:column;line-height:1.1;}
-.nbn{font-weight:700;font-size:13px;color:var(--text);}
-.nbs{font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:1.5px;color:var(--dim);text-transform:uppercase;}
-.ndv{width:1px;height:16px;background:var(--border);flex-shrink:0;}
-.ntl{font-size:12px;color:var(--dim);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.nlv{display:flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--gtx);background:var(--gbg);border:1px solid var(--gbr);padding:3px 8px;border-radius:20px;flex-shrink:0;}
-.ld{width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 1.8s ease-in-out infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-#dm{background:transparent;border:1.5px solid var(--border);color:var(--mid);width:30px;height:30px;border-radius:var(--r3);cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
-#dm:hover{background:var(--s2);}
+[data-theme="light"] .search-wrap{background:rgba(238,238,244,.95);}
 
-/* HERO */
-.hero{background:var(--card);border-bottom:1px solid var(--border);padding:20px 16px 16px;}
-.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-bottom:8px;}
-h1{font-size:clamp(20px,5vw,30px);font-weight:800;letter-spacing:-0.5px;line-height:1.1;color:var(--text);margin-bottom:6px;}
-.hero-sub{font-size:13px;color:var(--mid);}
-
-/* STATS */
-.stats{background:var(--card);display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
-.stat{padding:12px 8px;text-align:center;border-right:1px solid var(--border);}
-.stat:last-child{border-right:none;}
-.sn{font-size:18px;font-weight:700;color:var(--text);display:block;line-height:1;margin-bottom:2px;font-variant-numeric:tabular-nums;letter-spacing:-0.5px;}
-.sl{font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:1px;color:var(--dim);text-transform:uppercase;}
-
-/* UPDATE BAR */
-.ubar{background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;padding:8px 14px;}
-.ubar-txt{font-size:12px;color:var(--mid);flex:1;min-width:0;}
-#ubtn{background:var(--text);border:none;color:var(--card);padding:6px 12px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;cursor:pointer;border-radius:20px;transition:opacity .15s,transform .1s;flex-shrink:0;}
-#ubtn:hover:not(:disabled){opacity:.8;}
-#ubtn:active:not(:disabled){transform:scale(.97);}
-#ubtn:disabled{opacity:.35;cursor:not-allowed;}
-
-/* NOTICES */
-.notice{background:var(--abg);border-bottom:1px solid var(--abr);padding:8px 14px;display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--amber);line-height:1.5;}
-.notice-blue{background:var(--bbg);border-bottom:1px solid var(--bbr);padding:8px 14px;display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--blue);line-height:1.5;}
-
-/* SEARCH */
-.sbar{
-  position:sticky;top:var(--nh);z-index:90;
-  background:rgba(245,245,245,.96);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-  padding:8px 14px 0;
-}
-[data-theme="dark"] .sbar{background:rgba(17,17,17,.96);}
-.sw{position:relative;margin-bottom:8px;}
+.search-row{position:relative;margin-bottom:10px;}
 #si{
-  width:100%;background:var(--s2);border:1.5px solid transparent;
-  color:var(--text);font-family:'Inter',sans-serif;font-size:14px;
-  padding:9px 32px 9px 36px;border-radius:var(--r);outline:none;
+  width:100%;background:var(--surface);
+  border:1.5px solid var(--border);
+  color:var(--text);font-family:var(--sans);font-size:14px;
+  padding:10px 36px 10px 40px;border-radius:var(--r);outline:none;
   transition:all .2s;-webkit-appearance:none;
 }
-#si:focus{background:var(--card);border-color:var(--text);}
-#si::placeholder{color:var(--dim);}
-.sic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--dim);font-size:13px;pointer-events:none;}
-.scl{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--dim);color:var(--card);border:none;width:17px;height:17px;border-radius:50%;font-size:9px;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1;transition:background .15s;}
-.scl.vis{display:flex;}
-
-/* BRAND FILTERS */
-.brand-filters{display:flex;gap:5px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none;}
-.brand-filters::-webkit-scrollbar{display:none;}
-.bf{display:flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);font-size:11px;font-weight:500;color:var(--mid);cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0;user-select:none;}
-.bf.active{background:var(--text);border-color:var(--text);color:var(--card);}
-.bf-emoji{font-size:12px;line-height:1;}
-
-/* SKELETON */
-.skeleton-wrap{padding:8px 12px;display:flex;flex-direction:column;gap:6px;}
-.sk-card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);overflow:hidden;}
-.sk-header{padding:12px 13px;display:flex;align-items:center;gap:9px;}
-.sk{background:linear-gradient(90deg,var(--s2) 25%,var(--s3) 50%,var(--s2) 75%);background-size:200%;animation:skl 1.6s ease infinite;border-radius:5px;}
-@keyframes skl{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.sk-rows{padding:0 13px 8px;}
-.sk-row{height:42px;display:flex;align-items:center;gap:9px;border-top:1px solid var(--border2);}
-
-/* MAIN */
-main{padding:8px 12px 70px;display:flex;flex-direction:column;gap:6px;}
-
-/* BRAND SECTION */
-.brs{
-  background:var(--card);border-radius:var(--r);border:1px solid var(--border);
-  overflow:hidden;opacity:0;transform:translateY(12px);
-  transition:opacity .4s ease,transform .4s ease,box-shadow .2s;
-  box-shadow:var(--shadow);
+#si:focus{border-color:var(--accent);background:var(--surface2);box-shadow:0 0 0 3px var(--glow);}
+#si::placeholder{color:var(--text3);}
+.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:14px;pointer-events:none;}
+.search-clear{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  background:var(--surface2);color:var(--text3);border:1px solid var(--border);
+  width:20px;height:20px;border-radius:50%;font-size:9px;
+  cursor:pointer;display:none;align-items:center;justify-content:center;
+  transition:all .15s;
 }
-.brs.inv{opacity:1;transform:translateY(0);}
-.brs.hsr{display:none!important;}
-@media(hover:hover){.brs:hover{box-shadow:var(--shadow-md);}}
+.search-clear.vis{display:flex;}
+.search-clear:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
 
-/* BRAND HEADER */
-.brh{
-  display:flex;align-items:center;gap:10px;padding:12px 14px;
-  cursor:pointer;user-select:none;position:relative;overflow:hidden;
-  transition:background .15s;min-height:52px;
-  border-left:3px solid rgba(var(--brg,160,160,160),1);
+.brand-pills{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;}
+.brand-pills::-webkit-scrollbar{display:none;}
+.pill{
+  display:flex;align-items:center;gap:5px;
+  padding:5px 12px;border-radius:20px;
+  border:1.5px solid var(--border);background:var(--surface);
+  font-size:11px;font-weight:500;color:var(--text2);
+  cursor:pointer;white-space:nowrap;transition:all .18s;flex-shrink:0;
+  font-family:var(--mono);
 }
-.brh:hover{background:var(--s2);}
-.brh:active{background:var(--s3);}
-.be{font-size:15px;flex-shrink:0;width:20px;line-height:1;}
-.bt{font-size:13px;font-weight:700;color:var(--text);flex:1;line-height:1.2;letter-spacing:-.1px;}
-.bm{
-  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;
-  color:rgba(var(--brg,100,100,100),1);
-  background:rgba(var(--brg,160,160,160),.1);
-  border:1px solid rgba(var(--brg,160,160,160),.2);
-  padding:2px 8px;border-radius:20px;flex-shrink:0;
-}
-.bc{
-  width:20px;height:20px;display:flex;align-items:center;justify-content:center;
-  color:var(--dim);font-size:9px;background:var(--s2);border:1px solid var(--border);
-  border-radius:5px;transition:transform .25s cubic-bezier(.34,1.4,.64,1);flex-shrink:0;
-}
-.brs.col .bc{transform:rotate(-90deg);}
+.pill:hover{border-color:var(--accent);color:var(--accent);background:var(--glow);}
+.pill.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 16px var(--glow);}
+.pill-dot{font-size:10px;}
 
-/* PROGRESS */
-.bprog{height:2px;background:rgba(var(--brg,160,160,160),.1);position:relative;overflow:hidden;}
-.bprog-fill{height:100%;transition:width .8s cubic-bezier(.4,0,.2,1);background:linear-gradient(90deg,rgba(var(--brg,160,160,160),.7),rgba(var(--brg,160,160,160),.2));}
-.bprog-label{position:absolute;right:10px;top:-11px;font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(var(--brg,130,130,130),.8);letter-spacing:.5px;}
-
-/* PHONE GRID */
-.pg{
-  border-top:1px solid var(--border2);max-height:9999px;overflow:hidden;
-  transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease;
-  display:flex;flex-direction:column;gap:0;
-  padding:0;background:var(--card);
+/* ─── SKELETON ──────────────────────────────────────────────── */
+#skeleton{padding:16px 20px;display:flex;flex-direction:column;gap:8px;}
+.sk-card{background:var(--surface);border-radius:var(--r);border:1px solid var(--border);padding:16px;}
+.sk{
+  background:linear-gradient(90deg,var(--surface) 25%,var(--surface2) 50%,var(--surface) 75%);
+  background-size:200%;animation:shimmer 1.8s ease infinite;border-radius:6px;
 }
-.brs.col .pg{max-height:0;opacity:0;pointer-events:none;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-/* PHONE CARD — always compact list */
-.pc{
-  display:flex;flex-direction:row;align-items:center;
-  gap:0;padding:11px 14px;
-  border:none;border-bottom:1px solid var(--border2);
-  border-radius:0;background:var(--card);
+/* ─── MAIN ──────────────────────────────────────────────────── */
+main{
+  position:relative;z-index:1;
+  padding:16px 20px 80px;
+  display:flex;flex-direction:column;gap:10px;
+}
+
+/* ─── BRAND SECTION ─────────────────────────────────────────── */
+.brand-section{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  overflow:hidden;
+  opacity:0;transform:translateY(16px);
+  transition:opacity .4s ease,transform .4s ease,border-color .2s,box-shadow .2s;
+  position:relative;
+}
+.brand-section::before{
+  content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+  background:linear-gradient(180deg,rgba(var(--brg),1) 0%,rgba(var(--brg),.15) 100%);
+  transition:width .2s;z-index:1;
+}
+.brand-section:hover{border-color:rgba(var(--brg),.4);box-shadow:0 4px 24px rgba(0,0,0,.2);}
+.brand-section:hover::before{width:5px;}
+.brand-section.visible{opacity:1;transform:translateY(0);}
+.brand-section.collapsed .phones{max-height:0;opacity:0;pointer-events:none;}
+.brand-section.hide{display:none!important;}
+
+/* brand header */
+.brand-header{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 18px 14px 20px;cursor:pointer;
+  transition:background .15s;
+  position:relative;z-index:1;
+}
+.brand-header:hover{background:rgba(var(--brg),.04);}
+.brand-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+  border:1px solid rgba(var(--brg),.25);
+  background:rgba(var(--brg),.08);
+}
+.brand-info{flex:1;min-width:0;}
+.brand-name{
+  font-family:var(--display);font-size:13.5px;font-weight:700;
+  color:var(--text);letter-spacing:-.2px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;
+}
+.brand-count{
+  font-family:var(--mono);font-size:9px;color:var(--text3);
+  letter-spacing:.5px;margin-top:2px;
+}
+.brand-badge{
+  font-family:var(--mono);font-size:8px;font-weight:600;
+  padding:3px 10px;border-radius:20px;flex-shrink:0;
+  color:rgba(var(--brg),1);
+  background:rgba(var(--brg),.12);
+  border:1px solid rgba(var(--brg),.28);
+}
+.chevron{
+  width:22px;height:22px;display:flex;align-items:center;justify-content:center;
+  color:var(--text3);font-size:9px;background:var(--bg3);
+  border:1px solid var(--border);border-radius:6px;
+  transition:transform .3s cubic-bezier(.34,1.4,.64,1);flex-shrink:0;
+}
+.brand-section.collapsed .chevron{transform:rotate(-90deg);}
+
+/* progress */
+.brand-progress{height:2px;background:rgba(var(--brg),.08);position:relative;}
+.brand-progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,rgba(var(--brg),.8),rgba(var(--brg),.2));
+  transition:width 1s cubic-bezier(.4,0,.2,1);
+}
+
+/* phones list */
+.phones{
+  border-top:1px solid var(--border2);
+  max-height:4000px;
+  transition:max-height .45s cubic-bezier(.4,0,.2,1),opacity .3s ease;
+}
+
+/* phone row */
+.phone-row{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 18px 12px 22px;
+  border-bottom:1px solid var(--border2);
   transition:background .12s;
-  animation:cardIn .25s ease both;
-  text-align:left;
+  animation:rowIn .2s ease both;
+  min-height:56px;
+  position:relative;
 }
-.pc:last-child{border-bottom:none;}
-@media(hover:hover){.pc:hover{background:var(--s2);}}
-.pc:active{background:var(--s3);}
-.pc.sh{display:none!important;}
-@keyframes cardIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+.phone-row:last-child{border-bottom:none;}
+.phone-row:hover{background:rgba(var(--brg),.04);}
+.phone-row.hidden{display:none!important;}
+/* left accent line on hover */
+.phone-row::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:rgba(var(--brg),.5);
+  transition:width .15s;
+}
+.phone-row:hover::before{width:2px;}
+@keyframes rowIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
 
-.pif{flex:1;min-width:0;}
-.pm{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3;width:100%;}
-.py{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);margin-top:2px;}
+.phone-info{flex:1;min-width:0;}
+.phone-name{
+  font-size:14.5px;font-weight:600;color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  line-height:1.3;font-family:var(--display);
+  letter-spacing:-.1px;
+}
+.phone-meta{display:flex;align-items:center;gap:8px;margin-top:3px;}
+.phone-year{
+  font-family:var(--mono);font-size:10px;color:var(--text3);
+  letter-spacing:.3px;
+}
+.phone-stars{display:flex;gap:1px;}
+.star{font-size:9px;color:var(--border);line-height:1;}
+.star.on{color:var(--amber);}
 
-/* rating stars */
-.prat{display:flex;gap:1px;margin-top:3px;justify-content:flex-start;}
-.star{font-size:8px;color:var(--dim);line-height:1;}
-.star.on{color:#f59e0b;}
+/* phone badge */
+.badge{
+  font-family:var(--mono);font-size:8px;font-weight:600;
+  padding:4px 10px;border-radius:20px;flex-shrink:0;white-space:nowrap;
+  letter-spacing:.4px;
+}
+.badge-ok{background:var(--greenbg);border:1px solid var(--greenbdr);color:var(--green);}
+.badge-new{background:var(--bluebg);border:1px solid var(--bluebdr);color:var(--blue);}
+.badge-soon{background:var(--amberbg);border:1px solid var(--amberbdr);color:var(--amber);}
+.badge-faceid{background:var(--surface2);border:1px solid var(--border);color:var(--text3);}
+.badge-glass{
+  background:linear-gradient(135deg,rgba(108,99,255,.15),rgba(95,168,255,.12));
+  border:1px solid rgba(108,99,255,.45);color:var(--accent2);
+}
 
-/* badges */
-.pbg{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:600;padding:3px 8px;border-radius:20px;flex-shrink:0;white-space:nowrap;margin-left:10px;}
-.bok{background:var(--gbg);border:1px solid var(--gbr);color:var(--gtx);}
-.bnw{background:var(--bbg);border:1px solid var(--bbr);color:var(--blue);}
-.bup{background:var(--abg);border:1px solid var(--abr);color:var(--amber);}
-.bfid{background:var(--s2);border:1px solid var(--border);color:var(--mid);}
+/* Glass info banner */
+.glass-banner{
+  position:relative;z-index:1;
+  background:linear-gradient(135deg,rgba(108,99,255,.08),rgba(95,168,255,.06));
+  border-bottom:1px solid rgba(108,99,255,.22);
+  padding:10px 20px;display:flex;align-items:flex-start;gap:10px;
+  font-size:12.5px;line-height:1.55;color:var(--accent2);
+}
+.glass-banner strong{color:var(--text);font-weight:600;}
+.glass-banner-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
 
-/* MODAL */
-#mo{
-  position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;
+/* ─── TIPS SECTION ──────────────────────────────────────────── */
+.tips-wrap{
+  position:relative;z-index:1;
+  padding:0 20px 16px;
+}
+.tips-box{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  overflow:hidden;
+}
+.tips-header{
+  display:flex;align-items:center;gap:8px;
+  padding:14px 16px 10px;
+  border-bottom:1px solid var(--border2);
+  background:linear-gradient(135deg,rgba(255,184,48,.06),rgba(255,184,48,.02));
+}
+.tips-header-lbl{
+  font-family:var(--mono);font-size:8.5px;letter-spacing:2px;
+  color:var(--amber);text-transform:uppercase;font-weight:600;
+}
+.tips-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;
+}
+@media(max-width:540px){.tips-grid{grid-template-columns:1fr;}}
+.tip-card{
+  padding:14px 16px;
+  border-right:1px solid var(--border2);
+  border-bottom:1px solid var(--border2);
+  transition:background .15s;
+}
+.tip-card:nth-child(even){border-right:none;}
+.tip-card:nth-last-child(-n+2){border-bottom:none;}
+@media(max-width:540px){
+  .tip-card{border-right:none;}
+  .tip-card:last-child{border-bottom:none;}
+}
+.tip-card:hover{background:var(--surface2);}
+.tip-icon{font-size:20px;margin-bottom:7px;display:block;}
+.tip-title{
+  font-family:var(--display);font-size:12.5px;font-weight:700;
+  color:var(--text);margin-bottom:4px;letter-spacing:-.1px;
+}
+.tip-body{font-size:11.5px;color:var(--text2);line-height:1.6;}
+.tip-body strong{color:var(--amber);font-weight:600;}
+.tip-tag{
+  display:inline-block;margin-top:6px;
+  font-family:var(--mono);font-size:8px;letter-spacing:1px;
+  color:var(--green);background:var(--greenbg);
+  border:1px solid var(--greenbdr);padding:2px 7px;border-radius:10px;
+}
+
+/* ─── MODAL ─────────────────────────────────────────────────── */
+#modal{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;transition:opacity .2s;
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:16px;
+  padding:20px;opacity:0;pointer-events:none;
+  transition:opacity .22s;
 }
-#mo.on{opacity:1;pointer-events:all;}
-.mbox{
-  background:var(--card);border-radius:var(--r);border:1px solid var(--border);
-  padding:0 18px 24px;width:100%;max-width:440px;max-height:88vh;
-  overflow-y:auto;box-shadow:var(--shadow-lg);
-  transform:scale(.95) translateY(8px);
-  transition:transform .25s cubic-bezier(.34,1.56,.64,1);
+#modal.on{opacity:1;pointer-events:all;}
+.modal-box{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:0 22px 24px;
+  width:100%;max-width:460px;max-height:85vh;
+  overflow-y:auto;
+  box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px var(--border);
+  transform:scale(.94) translateY(12px);
+  transition:transform .28s cubic-bezier(.34,1.4,.64,1);
 }
-#mo.on .mbox{transform:scale(1) translateY(0);}
-.mhandle{width:32px;height:3px;background:var(--border);border-radius:2px;margin:12px auto 16px;}
-.mtt{font-size:16px;font-weight:700;color:var(--text);margin-bottom:5px;display:flex;align-items:center;gap:7px;letter-spacing:-.2px;}
-.mtx{font-size:13px;color:var(--mid);line-height:1.6;margin-bottom:12px;}
-.mtx strong{color:var(--text);}
-.mdv{height:1px;background:var(--border);margin:12px 0;}
-.mlb{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-bottom:6px;}
-.mph{display:flex;flex-direction:column;gap:4px;max-height:200px;overflow-y:auto;margin-bottom:12px;}
-.mpi{background:var(--s2);border:1px solid var(--border);padding:7px 11px;font-size:13px;color:var(--text);display:flex;justify-content:space-between;align-items:center;border-radius:var(--r2);}
-.mpy{color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:10px;}
-.mac{display:flex;gap:7px;margin-top:4px;}
-.mbtn{flex:1;padding:11px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border-radius:var(--r2);border:none;transition:all .15s;min-height:44px;}
-.mbc{background:var(--text);color:var(--card);}
-.mbc:hover{opacity:.85;}
-.mbx{background:var(--s2);color:var(--mid);}
-.mbx:hover{background:var(--s3);}
-
-/* TOAST */
-#tst{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);
-  background:var(--text);color:var(--card);font-size:13px;font-weight:500;
-  padding:9px 16px;border-radius:20px;z-index:300;opacity:0;
-  transition:all .22s;white-space:nowrap;box-shadow:var(--shadow-lg);pointer-events:none;
+#modal.on .modal-box{transform:scale(1) translateY(0);}
+.modal-handle{width:36px;height:3px;background:var(--border);border-radius:2px;margin:14px auto 18px;}
+.modal-title{
+  font-family:var(--display);font-size:18px;font-weight:700;
+  color:var(--text);margin-bottom:6px;letter-spacing:-.3px;
+  display:flex;align-items:center;gap:8px;
 }
-#tst.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.modal-desc{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:14px;}
+.modal-div{height:1px;background:var(--border);margin:14px 0;}
+.modal-label{font-family:var(--mono);font-size:8px;letter-spacing:2px;color:var(--text3);text-transform:uppercase;margin-bottom:8px;}
+.modal-list{display:flex;flex-direction:column;gap:5px;max-height:200px;overflow-y:auto;margin-bottom:14px;}
+.modal-item{
+  background:var(--surface2);border:1px solid var(--border);
+  padding:8px 13px;font-size:13px;color:var(--text);
+  display:flex;justify-content:space-between;align-items:center;
+  border-radius:var(--r2);
+}
+.modal-item-year{color:var(--text3);font-family:var(--mono);font-size:10px;}
+.modal-actions{display:flex;gap:8px;margin-top:6px;}
+.btn{
+  flex:1;padding:12px;font-family:var(--display);font-size:13px;font-weight:700;
+  cursor:pointer;border-radius:var(--r2);border:none;transition:all .18s;
+  min-height:44px;letter-spacing:.2px;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;box-shadow:0 0 20px var(--glow);
+}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 28px var(--glow);}
+.btn-secondary{background:var(--surface2);color:var(--text2);border:1px solid var(--border);}
+.btn-secondary:hover{background:var(--bg3);}
 
-/* FAQ */
-.faq-wrap{padding:0 12px 8px;}
-.faq-section{background:var(--card);border-radius:var(--r);border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow);}
-.faq-hdr{display:flex;align-items:center;gap:7px;padding:12px 13px 5px;border-bottom:1px solid var(--border2);}
-.faq-hdr-txt{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;}
-.faq-item{border-bottom:1px solid var(--border2);}
-.faq-item:last-child{border-bottom:none;}
-.faq-q{padding:11px 13px;cursor:pointer;font-size:13px;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center;gap:7px;user-select:none;transition:background .12s;}
-.faq-q:hover{background:var(--s2);}
-.faq-arr{color:var(--dim);font-size:9px;transition:transform .25s;flex-shrink:0;}
-.faq-item.open .faq-arr{transform:rotate(180deg);}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
-.faq-a.open{max-height:280px;}
-.faq-a-inner{padding:0 13px 13px;font-size:13px;color:var(--mid);line-height:1.7;}
+/* ─── TOAST ─────────────────────────────────────────────────── */
+#toast{
+  position:fixed;bottom:28px;left:50%;
+  transform:translateX(-50%) translateY(12px);
+  background:var(--surface);color:var(--text);
+  font-size:13px;font-weight:500;font-family:var(--display);
+  padding:10px 20px;border-radius:24px;z-index:600;
+  opacity:0;border:1px solid var(--border);
+  transition:all .24s cubic-bezier(.34,1.4,.64,1);
+  white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.4);
+  pointer-events:none;display:flex;align-items:center;gap:8px;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* FOOTER */
-footer{padding:24px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:7px;}
-.fli{height:24px;object-fit:contain;opacity:.4;filter:grayscale(.4);transition:opacity .2s;}
-.fli:hover{opacity:.65;}
-.ftx{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--dim);letter-spacing:.8px;line-height:1.9;}
-
-/* BACK TO TOP */
-#btt{
-  position:fixed;bottom:24px;right:16px;z-index:150;
-  width:42px;height:42px;border-radius:50%;
-  background:var(--text);color:var(--card);
-  border:none;cursor:pointer;font-size:16px;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:var(--shadow-md);
-  opacity:0;transform:translateY(12px) scale(.85);
-  transition:opacity .22s,transform .22s;
+/* update toast (top) */
+#auto-toast{
+  position:fixed;top:calc(var(--nh) + 12px);right:16px;z-index:600;
+  background:var(--surface);border:1px solid var(--greenbdr);
+  border-radius:var(--r2);padding:12px 16px;
+  max-width:280px;box-shadow:0 8px 32px rgba(0,0,0,.4);
+  transform:translateX(110%);transition:transform .35s cubic-bezier(.34,1.4,.64,1);
   pointer-events:none;
 }
-#btt.vis{opacity:1;transform:translateY(0) scale(1);pointer-events:all;}
-#btt:active{transform:scale(.93);}
+#auto-toast.show{transform:translateX(0);}
+.auto-toast-title{
+  font-family:var(--display);font-size:12px;font-weight:700;
+  color:var(--green);display:flex;align-items:center;gap:6px;margin-bottom:4px;
+}
+.auto-toast-body{font-size:11px;color:var(--text2);line-height:1.5;}
 
-@media(max-width:480px){
-  .ntl,.ndv{display:none;}
-  h1{font-size:20px;}
-  .stats{grid-template-columns:repeat(2,1fr);}
-  .stat:nth-child(2){border-right:none;}
-  .stat:nth-child(3){border-top:1px solid var(--border);}
-  .stat:nth-child(4){border-top:1px solid var(--border);border-right:none;}
-  #btt{bottom:16px;right:12px;width:38px;height:38px;font-size:14px;}
+/* ─── FAQ ────────────────────────────────────────────────────── */
+.faq-wrap{padding:0 20px 16px;position:relative;z-index:1;}
+.faq-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;
+}
+.faq-header{
+  display:flex;align-items:center;gap:8px;
+  padding:13px 16px 8px;border-bottom:1px solid var(--border2);
+}
+.faq-header-lbl{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--text3);text-transform:uppercase;}
+.faq-item{border-bottom:1px solid var(--border2);}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{
+  padding:13px 16px;cursor:pointer;
+  font-size:13px;font-weight:600;color:var(--text);font-family:var(--display);
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+  transition:background .12s;user-select:none;
+}
+.faq-q:hover{background:var(--surface2);}
+.faq-arrow{color:var(--text3);font-size:10px;transition:transform .25s;flex-shrink:0;}
+.faq-item.open .faq-arrow{transform:rotate(180deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-a.open{max-height:300px;}
+.faq-a-inner{padding:0 16px 14px;font-size:13px;color:var(--text2);line-height:1.75;}
+
+/* ─── FOOTER ─────────────────────────────────────────────────── */
+footer{
+  position:relative;z-index:1;
+  padding:28px 20px;text-align:center;
+  border-top:1px solid var(--border);
+  background:var(--bg2);
+}
+.footer-logo{
+  font-family:var(--display);font-size:20px;font-weight:800;
+  color:var(--accent);letter-spacing:-1px;margin-bottom:6px;
+}
+.footer-txt{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px;line-height:2;}
+
+/* ─── BTT ────────────────────────────────────────────────────── */
+#btt{
+  position:fixed;bottom:28px;right:20px;z-index:150;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--surface);color:var(--text2);
+  border:1.5px solid var(--border);cursor:pointer;font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.3);
+  opacity:0;transform:translateY(16px) scale(.85);
+  transition:opacity .22s,transform .22s;pointer-events:none;
+}
+#btt.vis{opacity:1;transform:translateY(0) scale(1);pointer-events:all;}
+#btt:hover{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 4px 20px var(--glow);}
+#btt:active{transform:scale(.92);}
+
+/* ─── SEARCH RESULT EMPTY ────────────────────────────────────── */
+.empty-state{
+  text-align:center;padding:48px 20px;
+  font-size:13px;color:var(--text3);
+  font-family:var(--mono);display:none;
+}
+.empty-state.show{display:block;}
+.empty-state-icon{font-size:32px;margin-bottom:10px;}
+
+/* ─── FEEDBACK BUTTONS ──────────────────────────────────────── */
+.feedback-row{
+  display:flex;align-items:center;gap:6px;margin-top:5px;flex-wrap:wrap;
+}
+.fb-btn{
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.4px;
+  padding:3px 9px;border-radius:20px;border:1px solid;cursor:pointer;
+  background:transparent;transition:all .18s;white-space:nowrap;
+}
+.fb-btn-ok{color:var(--green);border-color:var(--greenbdr);}
+.fb-btn-ok:hover,.fb-btn-ok.active{background:var(--greenbg);border-color:var(--green);}
+.fb-btn-nok{color:var(--amber);border-color:var(--amberbdr);}
+.fb-btn-nok:hover,.fb-btn-nok.active{background:var(--amberbg);border-color:var(--amber);}
+.fb-count{font-family:var(--mono);font-size:9px;color:var(--text3);margin-left:1px;}
+.fb-btn.voted{opacity:.7;cursor:default;pointer-events:none;}
+
+/* ─── COMPARATOR MODAL ──────────────────────────────────────── */
+.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;}
+@media(max-width:400px){.comp-grid{grid-template-columns:1fr;}}
+.comp-card{
+  border-radius:var(--r2);border:1px solid var(--border);
+  padding:12px 10px;text-align:center;
+  transition:border-color .2s,background .2s;
+}
+.comp-card:hover{background:var(--surface2);}
+.comp-card.best{border-color:var(--green);background:var(--greenbg);}
+.comp-card-icon{font-size:22px;margin-bottom:6px;display:block;}
+.comp-card-name{
+  font-family:var(--display);font-size:12px;font-weight:700;
+  color:var(--text);letter-spacing:-.2px;margin-bottom:8px;
+}
+.comp-row{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:10px;padding:3px 0;border-bottom:1px solid var(--border2);gap:4px;
+}
+.comp-row:last-child{border-bottom:none;}
+.comp-lbl{color:var(--text3);font-family:var(--mono);font-size:8.5px;letter-spacing:.3px;}
+.comp-val{font-weight:600;font-size:9.5px;font-family:var(--mono);}
+.comp-val.good{color:var(--green);}
+.comp-val.mid{color:var(--amber);}
+.comp-val.bad{color:var(--red);}
+.comp-best-tag{
+  display:inline-block;margin-top:8px;
+  font-family:var(--mono);font-size:8px;letter-spacing:1px;
+  color:var(--green);background:var(--greenbg);
+  border:1px solid var(--greenbdr);padding:2px 8px;border-radius:10px;
+}
+
+/* ─── METHODOLOGY SECTION ───────────────────────────────────── */
+.meto-wrap{position:relative;z-index:1;padding:0 20px 16px;}
+.meto-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;
+}
+.meto-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 16px;border-bottom:1px solid var(--border2);
+  cursor:pointer;transition:background .12s;
+}
+.meto-header:hover{background:var(--surface2);}
+.meto-header-left{display:flex;align-items:center;gap:8px;}
+.meto-header-lbl{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;font-weight:600;}
+.meto-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);}
+.meto-body.open{max-height:800px;}
+.meto-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+@media(max-width:500px){.meto-grid{grid-template-columns:1fr;}}
+.meto-card{
+  padding:14px 16px;
+  border-right:1px solid var(--border2);
+  border-bottom:1px solid var(--border2);
+}
+.meto-card:nth-child(even){border-right:none;}
+.meto-card:nth-last-child(-n+2){border-bottom:none;}
+@media(max-width:500px){
+  .meto-card{border-right:none;}
+  .meto-card:last-child{border-bottom:none;}
+}
+.meto-icon{font-size:18px;margin-bottom:6px;display:block;}
+.meto-title{font-family:var(--display);font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.meto-body-txt{font-size:11.5px;color:var(--text2);line-height:1.6;}
+.meto-body-txt strong{color:var(--accent2);font-weight:600;}
+
+/* ─── VIEWS COUNTER ─────────────────────────────────────────── */
+.views-badge{
+  display:flex;align-items:center;gap:5px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.8px;
+  color:var(--text3);
+}
+.views-dot{width:4px;height:4px;background:var(--accent);border-radius:50%;opacity:.7;}
+
+/* ─── NAV COMPARATOR LINK ───────────────────────────────────── */
+#comp-nav-btn{
+  background:transparent;border:1.5px solid var(--border);color:var(--text2);
+  padding:5px 10px;border-radius:var(--r3);cursor:pointer;
+  font-family:var(--mono);font-size:9px;letter-spacing:.5px;
+  flex-shrink:0;transition:all .2s;white-space:nowrap;
+}
+#comp-nav-btn:hover{background:var(--surface);border-color:var(--accent);color:var(--accent);}
+
+/* ─── AI CHAT WIDGET ─────────────────────────────────────────── */
+#ai-fab{
+  position:fixed;bottom:28px;right:72px;z-index:300;
+  width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;border:none;cursor:pointer;font-size:22px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px var(--glow),0 2px 8px rgba(0,0,0,.4);
+  transition:transform .22s cubic-bezier(.34,1.4,.64,1),box-shadow .2s;
+}
+#ai-fab:hover{transform:scale(1.1);box-shadow:0 6px 28px var(--glow);}
+#ai-fab:active{transform:scale(.93);}
+#ai-fab .fab-badge{
+  position:absolute;top:-3px;right:-3px;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--green);border:2px solid var(--bg);
+  font-size:7px;font-family:var(--mono);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;letter-spacing:0;
+}
+
+#ai-panel{
+  position:fixed;bottom:90px;right:16px;z-index:301;
+  width:calc(100vw - 32px);max-width:380px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);
+  box-shadow:0 16px 48px rgba(0,0,0,.5),0 4px 16px rgba(0,0,0,.3);
+  display:flex;flex-direction:column;
+  transform:scale(.9) translateY(16px);transform-origin:bottom right;
+  opacity:0;pointer-events:none;
+  transition:transform .28s cubic-bezier(.34,1.4,.64,1),opacity .2s;
+  max-height:75vh;
+}
+#ai-panel.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all;}
+
+.ai-header{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 16px;border-bottom:1px solid var(--border2);flex-shrink:0;
+}
+.ai-header-icon{
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+}
+.ai-header-info{flex:1;}
+.ai-header-name{font-family:var(--display);font-size:13px;font-weight:700;color:var(--text);}
+.ai-header-status{font-family:var(--mono);font-size:8.5px;color:var(--green);letter-spacing:.5px;display:flex;align-items:center;gap:4px;margin-top:1px;}
+.ai-close{
+  background:transparent;border:1px solid var(--border);color:var(--text3);
+  width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:12px;
+  display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;
+}
+.ai-close:hover{background:var(--surface2);color:var(--text);}
+
+.ai-messages{
+  flex:1;overflow-y:auto;padding:14px 14px 10px;
+  display:flex;flex-direction:column;gap:10px;
+  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+  min-height:160px;
+}
+.ai-bubble{
+  max-width:90%;padding:10px 13px;border-radius:14px;
+  font-size:13px;line-height:1.55;
+}
+.ai-bubble.bot{
+  background:var(--bg3);border:1px solid var(--border2);
+  color:var(--text);align-self:flex-start;border-bottom-left-radius:4px;
+}
+.ai-bubble.user{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;align-self:flex-end;border-bottom-right-radius:4px;
+}
+.ai-bubble.thinking{
+  background:var(--bg3);border:1px solid var(--border2);
+  color:var(--text3);align-self:flex-start;
+  display:flex;align-items:center;gap:6px;font-style:italic;font-size:12px;
+}
+.ai-dots{display:flex;gap:3px;}
+.ai-dot{width:5px;height:5px;border-radius:50%;background:var(--text3);animation:aidot 1.2s ease-in-out infinite;}
+.ai-dot:nth-child(2){animation-delay:.2s;}
+.ai-dot:nth-child(3){animation-delay:.4s;}
+@keyframes aidot{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+
+.ai-input-row{
+  display:flex;gap:8px;padding:10px 12px 12px;
+  border-top:1px solid var(--border2);flex-shrink:0;
+}
+#ai-input{
+  flex:1;background:var(--bg3);border:1.5px solid var(--border);
+  color:var(--text);font-family:var(--sans);font-size:13px;
+  padding:8px 12px;border-radius:20px;outline:none;
+  transition:border-color .2s;
+}
+#ai-input:focus{border-color:var(--accent);}
+#ai-input::placeholder{color:var(--text3);}
+#ai-send{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;border:none;width:36px;height:36px;border-radius:50%;
+  cursor:pointer;font-size:14px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .15s,opacity .15s;
+}
+#ai-send:hover{transform:scale(1.08);}
+#ai-send:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+.ai-quick-btns{
+  display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 10px;flex-shrink:0;
+}
+.ai-quick{
+  font-family:var(--mono);font-size:9px;letter-spacing:.3px;
+  padding:4px 10px;border-radius:20px;cursor:pointer;
+  border:1px solid var(--border);background:var(--surface2);color:var(--text2);
+  transition:all .15s;white-space:nowrap;
+}
+.ai-quick:hover{border-color:var(--accent);color:var(--accent);background:var(--glow);}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media(max-width:500px){
+  .nav-title,.nav-div{display:none;}
+  h1{font-size:24px;}
+  .stats-bar{grid-template-columns:repeat(2,1fr);}
+  .stat-item:nth-child(2){border-right:none;}
+  .stat-item:nth-child(3){border-top:1px solid var(--border);}
+  .stat-item:nth-child(4){border-top:1px solid var(--border);border-right:none;}
+  main{padding:12px 12px 80px;}
+  .faq-wrap,.tips-wrap{padding:0 12px 12px;}
+  .hero{padding:28px 16px 22px;}
+  .search-wrap{padding:10px 12px 0;}
+  .ubar{padding:10px 14px;}
+  #btt{bottom:20px;right:14px;width:38px;height:38px;font-size:13px;}
+  .tips-grid{grid-template-columns:1fr;}
+  .tip-card{border-right:none;}
+  .tip-card:nth-last-child(-n+2){border-bottom:1px solid var(--border2);}
+  .tip-card:last-child{border-bottom:none;}
 }
 </style>
 </head>
 <body>
 
-<div id="mo"><div class="mbox"><div class="mhandle"></div><div id="mc"></div></div></div>
-<div id="tst"></div>
+<!-- Modal -->
+<div id="modal"><div class="modal-box"><div class="modal-handle"></div><div id="modal-content"></div></div></div>
+
+<!-- Toast (bottom) -->
+<div id="toast"><span id="toast-icon">✓</span><span id="toast-msg"></span></div>
+
+<!-- Auto-update toast (top-right) -->
+<div id="auto-toast">
+  <div class="auto-toast-title"><span>●</span><span id="at-title">Bază actualizată</span></div>
+  <div class="auto-toast-body" id="at-body"></div>
+</div>
 
 <nav id="nav">
-  <a class="nlw" href="#">
-    <img class="nli" src="data:image/webp;base64,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" alt="Urban Gadgets">
-    <div class="nb"><span class="nbn">Urban Gadgets</span><span class="nbs">Tech DB</span></div>
+  <a class="nav-logo" href="#">
+    <img class="nav-logo-img" alt="SonicDB" src="data:image/webp;base64,UklGRmAlAABXRUJQVlA4IFQlAADwdgGdASqqA6oDPlEolEako6MhotUoQJAKCWlu8p+3+zbLPDUCoOM/61Bub/P+R/s38o+We7a817D+6c6P3v0hcxmiL1i+Rp7f6e9hP9c+nb5s/Ns08zoWb5v9Af6T+6exH4z+rf5X+6fj/2yPtmYIcP/KPwP/P/yPpd4H/JHUR/KP6N/lf7P+63ENAH/VP8F5zH3/of/B9GHilndf+Hz4ZuwXaB2k8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8uk8ujIFc6KGg7PZSK/Yhy2TcbDtJ5dJ5dJ5dJ5dJ5dJ5dJ5dJ5dJ5ceYkX9/7Bqju0iR/gaiQcknPXVHQfkDKaqfFCzYdpPLpPLpPLpPLpPLpMwEb/DZpz/d65ZbpzyhsefcLyPVfNNXyG3b84OIDYdpPLpPLpPLpPLpPLpPLpO81CrjyaPf+hEDf4fAkP7OxDQT/7qARntsORqkSXvzl9J5dJ5dJ5dJ5dJ5dJ5dJ5dJ5cW23HSfUfeI3zlcWAjbO5KNTsaKlFVFlPoAFSXBmV8hQK7A88WlTYdpPLpPLpPLpPLpPLpPLpPLjYBDLBak6NvFu9xN0OKfIn9A7reBq5+oNpGXx7g3Zmis+/4BxU6yvlUuqnxQs2HaTy6Ty6Ty6Ty6TvELzI8tyLiNM8HrBYQeNZ71NUgMZuJZdplNJazI2CVaLDHvVQdfQ/wgHXSeXSeXSeXSeXSeXSeXSeXHY7f4xjRarg+clUCAFmgvgYEMJRzZqzGnCQZzgVYjem847YdpPLpPLpPLpPLpPLpPLpPKZX95N9rhbuUy2VpFSOlLzxOl30cQGw7SeXSeXSeXSeXSeXSeXFMyj6a6zh/C2xSD03Eygj1Mr/ODiA2HaTy6Ty6Ty6Ty6Ty6TEyWbWLE47kiQPTAM1n/5BZwUyO/6hWHnwrk9tKQaFNQjp6x7IWBsO0nl0nl0nl0nl0nl0nl0neH+W9NlzX+kNxpaq5n6g+ejdABuI0zKaqfFCzYdpPLpPLpPLpPLpMe2AArOaELgUYmwx1NQ6BK/7a44LGmUnLxA7GQ4a84sxh2k8uk8uk8uk8uk8uk8uk8uk8sSiSD09hEuNXxDW0Q8sNWKMUMjP5ZW7ZDspXNLwivLpPLpPLpPLpPLpPLpPLpPLpPLpMSI68gw9hSE7GiI3bxkS+DSZy4iSc6WDH41kf10/mAhvEBsO0nl0nl0nl0nl0nl0nl0nl0W5n93Kaj4jL6sgflt7WfoMB84Okd+U+Q5sqUNo/UB2k8uk8uk8uk8uk8uk8uk8uk8uKOtlKoQIRTDMhgmPM8DCdYwqFWqrsk/jUMmveA2FCzYdpPLpPLpPLpPLpPLpPLpPLpO8Kpkn7sH+AF2NCCP7uybDz1WoFMgH6Dqxc3El0/u5qL3RAcgZTVT4oWbDtJ5dJ5dJ5dJ5dJ5dJ6IkRHJ8gNfJCGsc/jhgtwCwISfZN9i+jz6PNh2k8uk8uk8uk8uk8uk8uk8uk8uk8ulwdxPADUDYdpPLpPLpPLpPLpPLpPLpPLpPLpPLpPLpPLpPLpPLpPLpPLpPLpPLpO+AQwy/pTVT4oWbDtJ5dJmEyX2/mFAdpPLpPLpPLpNYVDbn9oMoX2wBvFz6upkb8NlFCoTv9yIzwTYdpPLowsDHHn//dXKAlSIo3Rf+jTmjDh/Y+jl6pnQP0+KFZ9fd3qF/DiZvvihZsO1HJvyjisEHpIx2pqmHtBel8t54JJ1tlP63Uidp9Z+mevH3OrlQns38flKzXLaWBjhkn/XoTGnfDtY8tcsLdPs9rOHkHpZvdqZmBh90eFsrAK+bO6MfZtIP/J7XuFoE13shE0xLHVDTZXkis+oJlE3fFdTryU7EzOKLE0TVerN4CmB/8GE1pZLyTNX1vgStt9iCwOhG4WSy4gkYDbjoN9Ihii7BFQK+d44HaaqfKa46t5BRnFDP0AMyCpfUxCA6qgE6C0LnfUdqQfRvO0+XWY343kDVvXAyIggQvvBYqyTsJ3UvOLY3Td/c1m0zjtAPhb8vEmDYiQKLzKLNJr+loR5LS0HqqMx4D8RTDMZFahGoQ/eGjtpIK/oME1U37Hv0kFESsfTHaqPzAj/XP8p8+6NnX4A4MNDi7uirqa3FkplTahVuPw09vhxR2W9CZAfHeSHj2q4LFWiSVMV1MxRF7jwVAMFIe1yrqXdT0SdPVThU8HxQtGIYEguuK1eQWxxZRSuTBQe7k1Tcau8Ho9v1dq+zT12ICoqOB03fjPhLgKikERmboRI8l72YLrRZ/LzNsxrjhii7wylP7v/TOK1eH+r7yC2V7iZwtkV+5+C2Gn1v9qCRmbrnxWc8fBdmuNuAKkmJrd41OhPFJ5js+zddJ35Z0W+w9ZELw5QG2Dhm2hHYX9kdmMXj22paoyXWw7v3WpTLt1H1Pbjx26iNCZ/hp+HhuAko357QnudPnRZpzY3PjzV/SZNF2nEMB3JXTBgCRGZ1pEPTXzoUfBOjiSCAMT8WkdTeb2UsUbYUAp5KCeuGPyePlUXyaDi02AtaUGHc2DuTn2AC1ZahD98Ob07+5omzBGsSlA/QmFjm51UEuTLYrvduP9O+Q8yFRPgj2yYXsy8mwls27hlG1GzQCEhdmctI/9GfTE23RTEZyLdYsDKXrDUsxdkoJ3VEAJCpckI/mT6VY96VHGOmvt30KPfNXj4oU8bagXmVd9YPLs/GYbgYeLosTjB5b0tdkp0KI3s7ywWukFq7ZO1jhXhpeInoNccGRaSAeQiex/bDHLb3JoM9cwfIhb1H6GrAjGEwlR9nIyEf7RKkPgPq4M7RSyTVNVm/UncN+XqBfau9TiNCfIob2z4gIEgrbHQw51DwgNB0FX/8DizQ8T4GRixeaKe6c6YAbDCjwq1/IVGZMA5Ia+03hVLqp8UMzw8ETrrSl0noNZWLAZraHGWojdGezjUqwaDw5F9xUlV/9gCdAlClNVPihZsO0nl0nl0nl0nl0nl0nl0nlOxT0XRRCGzMh1LtBkXU2CzEBsO0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0nl0neAAD+/9BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGjeETahgWiFffILD23gPktzmranlN0m1SbXP/UoKA3RZ2xSYidYRzMGLOf41mpe89F683XqbyCxsI+7rbGOma3KmpzgCEkXrfdhVQEikGGGvbT3R0VkhZy4g9CYDYxlQFccrTxFTzIj4Y7VR7wrnietTCwxQYyrZ4YTIt70DQL99/xfa9fk7IGkT/cgHKYLNovyhZgAipSgYiXlOkYv7mv/cclrcmcbjFSbYqKs/2gDgPeW39FxDodsp7UF6KmSeaZvZkhDhe6PmEhForAfE3gZhw69LBRLBoFKcAUYIscdYJ/+bLYK4XTTY/Moy35YRZtsJ7RdxUlNBki0JEobHHYRFI2MSoyI+OJEMAS4UQp0wRywJ7VSgqST54EAToE+HZeR09hRw0b1Ax+zySVEBzEPYb7OK2pOaKu7DSHhTREraCXl2GXyWvBsSEWy2pzy/lxAYL6BIlfS6ux4UptdsKtSSOkRjk6yyeU22mLNJs8nNpLnjJtjlZdpIv8hp5DRQkM9FRx7nQ+h83yT1CrsvqPcv8m0Y73hW4d5lGg3NLAY//XdkgDz+NcK3owOQ6Y9I2jJAleI1LK1dhCloL/JqqZwO+ebrV/zmW5eZ9jd9+/qWeSIV3vqC+Fxxm64kJl3Ybo+PaUMvUXcUXEuYlHawTHsC8oto4w6AArlu+ebe6e28YTlLRWM1ZCKMKLTB+W8wUHrjPveH2mAXDFFY8hCUntKadxi6yL8IajJJdYfzm0g1isAMz39mpKeGaI8GBpCkY6O4U9ggrHO6iMdG4BZIn6B09FQmX8COhH4ACTQJxaGvZk6eMriMdZUzu3BXjaRrJpwixDGzOsCSkLNjjdbtTzNBBrEZGO+RON7Z2bpT1BvBnCUm5QiFhP3OyS3O4vpjsfajx0yXyy8zTnyBY7+mro9h8Xht8btzgIwdC22l7DkFymkeqvc7ZNbTvOvcVfAF0OtFyltFLUMEc08ZGoEsu371tpkK9TXO4d3IUD0x9flQcdEPMAeySzSADSxKaXtiOX/fD8La3aIcfruYZV+Y9kriYAFpqJ/mku0EZQe3JVRP4IGMAeO9Rq7xysDMY56daffnDKqbsTkIr6l9+/adpnrwZblpWiAb5VHtB1Au0HKYYH2cQfz/MPPu6OjDxfcS/9Pq0V1qgzmoOz0f3CK6WGOlVRswyv9SAiuTr99pkbufSztyahr06/1UHt2eMmWtJsxVwcXtX82tUn6MDz1jlmYbA7fXzCgbAUrqJyrbi8Txl0emo2MdZe0Y2J0yPbXGi3ZcAAWcjDgs//9YAJ8rdG9iBEx4jiUFBY3EymHI6lWJZhd+kHlj0qUBouRzXJKi0GrEtMhv/VL+DI4Itt0MMgQPvMrp5jKsTmixiwKq1ROK2CdEA5Fj0TnL3c969myTHbkKgdQzd4f5aopaQnpoqBDtbiJlf2ZEU8AVdkMIEYwON6LojvyZLBVrtWuZ6zwaFRBgGTEfa/cRNS1E5guCYAN4OF9FmqLwH29Pk1FAiVE48ym34wYfTrPFJec1JUmn+KRnpt/bzZI+noKZt7zS4xzQTw2jsQ9dxi6QPF+YNprtDytcOjHbOoNbQVo4wxY/tLxfplj2mYDUDa00xT8Gbgid6H6thCYpOYpCfmZXfC+P7R0ZycXJnlBaBoyPD9IaiicfrxMn8c1Jo+inoMDvhz2MU9hX94+6cCtTpNHagn9aylLF08Dzp0lPfOfmcf0hTTmvV0DvmNOUmgjJXDfaRppldHYjfrXtOM60QVkrSwxe8bpqQaa2Z+Tdr0HL0VCaNeYkwqpQ/lD6ZhelKmoPzCvglOKcf00mNTuQbaiBYR6aLjk7plpP7YkR6IoZ8NMHWuJegCagMHzhMM0jcuJ+I22b8xqzij7EHauJFehD2fI19ub0iwb6xFjbcIlgqdbE2uK4A/PNx/DMjqcLNNKjoK1942+ar2OUgAAAAIOjKVqkAgYemuChP1MzGgZo6VfWux57s5gXRRfdQSUooSym7OYmcUQWL+x2ODco/Maeq56PMUOqhuLk38cgJTiQivQYdwYjyUpVShsd7OK2nh3HfqxajmpqL/f1knfXYoNoIz1mCVEnqG3lLfsG+rSRlIhvus2JLIHokOhyNjhIxiUGxfn4BdlAQClweKyvAAGoIeHkS6JlwIlRs+fR7p+q9Koxp0joN4Q4f/5R3iygPhTdkIa8sTY3btLAT+66TghEXXeDXgiE41Jovg13YliKKhOuY3UWANevGrpB+yGiDabXBtpCexY5ZWJV6yskdqcFv+32VLG0qG8uek3n1LM2cUTb+lKAS9/VD1yPSbnn9uZwi+YUvdxdI+5GnZRQBfUm6mXCSGA+UKJ6cjEvk+lMRP9unedEmyPV0a0DRH42+mglP1OwnwEJu3n+k5i10niJ/mYRjH6BecpIzf6fGMQP8Xbn/F0TKpW3LIEwJfOZ7F0bSfOEKRfc9KTcA6zN/SqJ0m1BmH0rtzF+Rmtl1pZqlINlncHFtPUUCjDuVEwIkKkKoR10traOMaDHf7SACmbdbWOZH2HHYhY+julPsPuGeU2MfWHkTCgYz8A76/CMyVp1CgWfUF4Lbc72Pamw1Xy1Tf1g7LQGbWZkgzAAsDaccUaiwZXCNZVGyeha2XJMjXjFEsEfGU+NueDsTBBQSwU2MvAF1Sw1DUiC4/QrmzWI1IiUi77gastBPGH5ESSCNZHf/jREPv8J90AOCZCxffx25g9SvTa7SyFP/Lxr9VrWLaohHMV4uXMyst5uIHvzGd08Fjh0+5AChxm+fFC8zayQp+B75I4oYYXelL0lTWKtn4CXl/LCYs9upmcQs2Ot0MABDmglDgRMdtWvxaAVv8t0BuYT6PBxsporeg4UQ9ClcPwVCpkpSe1UJJ87oJm3akwG+N+702hoVwTEIxdUhVHEfEo4UqS/gMWOlFCajv4xO7suaOgVli2J/bDQEKpx9GJEqUZYTRnPPTcutDkSfgQahl0axu2+APjGCKmlclStbiYH4nF+wgAtbmA1ABzwxDCXiLSKaRTCj4ivLf4z5OyL9qRx9sKDsXImeOpnjxOCJ14nU9JjhzxJsevlIBPrnSo1xTY8knEjpvDpVKqR9E15cIljSi9olrpg/tBtHK32AuZlcvdmePTmiDAnlt7jdSzBWfkbx97Bkr02C6o1fn+oxHMrJ6TyrLC1uYEQ8AAAAID3tmB1gAAAAGDjb/N46fHl5pCoBPabXrmqScm2QF9F3wX0JD/fwgMfqfYoEDFOni8iqDpyfED4xGScH1Ka2yXIwInRComqgf/km+fBtQ01pGx0s9LqrbfD6D9PVrKihuFuJF2zF52RhF0iXj/CA/H2MLe1ZqSPVA6yrGJvns8hJy7+iuJwHYlJJV0UKqgXm/a8UBsamJ+FGdGAxI7LLf1eh61s1OPXWSdockWBUrWRL9kUu3mrk2LXx7g9YFe86Mh/zmxe0D6xlJCc3C71eAfv/Pbta11eXNENun0mvaFGuBTeus5JC14o0QzRr7kQm3xfDuY5TI6HR++kr5erLc13d27a6HmbdGydkOBRLMlhbUNrba61x5xFkDd7isunMl/Bm2SMtN3LQEqQR339COvXWkP54GIwWiMaK50g1WWwjlCMXGATbrVeDzGDSI/c7zesqq1hA0MyJAd5gotXwB6csWjdBx304KB47QcfqoU/6UQtit3/1XTss6PZftqV3GomhxElpAs+Be2zOZTIJeTJTPfxDnEJBpKLweWJax+7ArEErvruHXSf7e/DPGuk+MumCDloOb+jT09hx9Bc1PZENUwE8X9eYicXIE4MV5zKzEXKPy+/vQJ1Vrh0IeqUI0lYgl9vSA8g5upukLPP85jjdPrmxn6rQ6q27vd84kSAWZfhVodnbJ6b6BNvKzBoJN2LxUlsuYBkPsCUwYVnO/0bOOFRkp1TOZxBrtWd3c7RcLFUgygH3j/HX7FhUbYvUe4ChDlS5iasn1t87C5HMDwPDRfdcdTJAmUYSwflLLP1rqFMkrvA05fev96+U8ANprhvXhJbPkSLPUBNiOT/v7KFyTy0/eBIgEpqxRxFudZYApmnTznUDpxOqAisJdw2Y/UuYAgTiDBvH9nsBkJVWjbrhwu7GGOvek3AOU/3ilF/KMTULFqGW3Kkp3Bk77xTfbwOfWFaeYalr1D0U/qA64Pxthlrl+Zs3eYroIJ9CqT7rOlBCOTZOZUC+njU8UmDnqfTEK2/2C06yPkCRJfO/lpqga3dP5j35NfyB7G2v3iYFmJi9QDYEVqxFwsaR8a5O0RZjlultEbKGAxI0Uo1PvbsETiLX+DHUruhapAWt2Vt8tVB2Czb1eeXEWJCY8EZxjNya015ocVsih0RO1TIcgknD2CT5DEF3oJtRsfmofBhsYhsP4t2Yr5pygGgq3vgnpPvnG0XEio6NQUeLT+GwNvZTcB7KXc5lpnFRk8tHPzd4lSH4Y1T+IwrWtbw/H/Y5W2BEDU2b1KwP+lu/Tv2H9hrdBju7ORu69Oa+2YmZplPHWGeclpIsXaeyvoqcmmDnYy2EpL+pR6mDu1g9CPqklpyrA8z2/cuWb2J930QoHqRokUVPc4PK5H0RRhbK2/2t9hqRYS+dRGIPAV5C3qXi9WHRq5/GPnji78G6zuuf7VCyvVByEvL/CTCnWs/0yBaE64ZWJNxGUy2nff3JO7moNVY1Xgr31j+6rWr+yften/r19gahC7gdZdKirYZykjsEE0If9FyrPNznScOji+zXTrwP5O5GgEDg1oP+Ubm3d0EXCOsK9WreRePOn72i2+YybT3hBWmwD4kCNvhxQ/gr9hR6vzLpTZmwfC+d6XR2KQkKd+COjBjLAUwrWbFi1L4T7aGIdbg67L/FjpmzbaOcSRkkLT1ZknRXdEQnOm8uaK3MB3GsIC7Rula7bHZzupN0AzKBgc5bznQN1WNawEKZl2qtrEuJHVFVpV+GyrhzAvNjbtCnHx8x418mICtZwHGN7prXsc5vmFgkzZldBCEdPsYRBKYv5yvLdnOiNMv6DPY/rk+E6qDObLkWQm86lYruGw4Qg/K85BEi9O3wBFX9die151lLiVXkCgOOQX99fVdOtcYrBrV5tCxlt8NXJhyOBnPWbFeiu51RbszpEHF2dJ5Ft9mzpiMJRBLi0fzhrzLylimMZAoz6DKXM4b1LST4LUYA4WGkVKpa+6KOLBnJyDJZQSRLwFLkAqHB7yTSil+jxPAfY6SG75S40QPfNAjGfF/yJ3EjFAwaGlVemcS1Mv1DzFyPKuoFqYzVK1zwV+KbEXlblpGpOD73ukxQ47A3z9DlgOz2M/qorrupxk7CbXYUM2wik/X3tcBJh2WZN2iwi4NDo7G69fV73L4eIldc+/+k0EPJJ+aYGP94lKGMBq13DbDxs8WeV/jiTmRzSnGzMUdnO6PWzresXs8CsE69zCe7aq4RkHAb0/ywca5u2kMk+aPLMSWF8N4ytZWlyEsDdW/0jeA85t20Qm3zE4tTPIQ594GnNfcArewPb2uiIS7cATZ89TTNVVSv26OJryKqcvT4HzHW5ACtVH6Z/9Vi1CO+HYq7BWKh1Z/IQywlugB72x7PZ+rAm6k1LSrklK3EZIgSD623fH2jZzh79J2KUubvyGVdPYhF+yESQD1+Ovn6UF0VIDxhSvCsPg7odlyt+dx3HUxalv5tkhYdcJUY9VdMyA4TWm4DLvIuD0c7uMggJ4rq5L821Lfq0vRmFySXxI0Jw8/6TsGo1byH6VI9L57U+GJLLtO0kGoJ7p88KcZb9u5EfGVXjbSyCypmkS0RyKz+U09qCpnd6ybfO/QPBI/cATF/tFbXanrM5NtHUbKpzlUi3aG9SFZwAJgc+3io/3SSkG72TbIo2gU5pMJvtSIZ1mN06c+Ot+kQEmxoHdoFGz8NrcVXTE62a6Jj6DkGtauo4QxLk99vCKILsj3ovJ010U79lOZfgh85Onmmvm8KgdWKdkWYhf50Xg3cGGyObbx3sk5ZTfxncLaMnxp+94TMgI6L4nDtisP8Ho40At9lJ/7TD4BzeD3H7O/5K7sKMJOaqKnfRaSGVh0GnS3hb7IBZveys3v24o2FElI10LnE6xwO7CPWhDAYk97Q7jpncFViwxX1xPHmu7rfUlCsTrTtYhEd+CCBW+G1sKKOhe+hMHCHeC1Ke/9zL2MeWDQvhIkmEueXzLoAsf12yMqiKkf+mbBmq6/sYbQHaVvh0i/9ILjXfOS0nwc+pes3YvRIcD6546k4MMpD/QPC5Vnv1OxQ2UpfFvwuuhNFMQDcHuk6CpbmOizNWlg6xTTAEQWC6lihTAZDHWRxRgcY/mMhMVG+ou0z4HvXylgnK28RTWBGHfsf9fUDXXztWWMKadgBBZXjxS6H45+uLBFOB+UBdYuv5smNzH1R6cK/upfyJ0Tq+NuVZ/f83HTeUAy4co5ZWotLME2ivYK5COW51fT3gLD0LN1kSbpQsHbNosx904L6YfiYs/GtW34D6szAv5s60BnlXxC7qrY5DlKEPV2ug0CFHSQj1QWVY2meExznQN15NSNDmMbDeRnCXYyvwLyGdOKHEsObfSRaU8JcUCsuCDtQljDtJnCyzOiXoPyRPMsUoLLu1tdpy4RBTyWYFpnNaEWkraXRElUPK1FUEvlPkmT0PP6CbTRUmRI/BiQOeODc4Ai/Pk4MHw9Sw6xSg2EcWY+WFqYa3llD0FZ2EcMN3HGeY00pdMmdfm4CuXbkiQUOKGyp1MQzUYj0+vBF5zVl30ivnLiWdQAhoWI1njXjI1cYqWeSIB5tcCCjD+yrHL+PT6xKcmASRjBLr+7yiWsAIshB6hrS7YxkvKD3G8QBKnFNHtYn3NNRAB1NKT1KWCagefX47/SuprKOetEA++QUDKS5Odq9UNFMxY6EUan63TYa/J6od2opYoXAHnjviBXrFNaCv/ybMm8Xipq+j7LzsAFDJHHNz6WloLFfksnfUkjccsCOZ+G1kKfk1tQzCtBSYbD0H4vtOrfcmY0mfQoiBPZc04vvL0i+bDwt9tGpqSfEl0kYPbuZIPOwu1F4ufM1X7/PhdIehDmzgljfy+bd5pvwC45UkwSrbNUNg4eAkNqqDGAJJnC2Mo+I2XtAC/lIsRQJVmgwkuov7OLJlKGGzRKnn5nc1eO/NB6CVv1YSC+ySIzI9h7xmX/BkPu9EZX9HCZhahnPTo8c1EHfMVIEjqKiNUhcVUq8jatQtySjNSCMDO8BfSwmk7MO/gsLqVgj542BENuji0biJYsxJpR22TzPAd4rc8T8JD+Vyd99CPUPcW79OkBrvARox6CYwdXNg8RiLeMITzWY+GnlMa/NSdkBSLTun8PGBxn5F2eV+8UegtF11fyKXiXyTgRqNSiXkMvgWNTOrnVuvGyjwfruyXrkyYAWI2SdxeFO1M1JoaE9XyZEdkwLJkoawwgEs9seL5V9sh5yw8GFM3knD9Ii8QIc0ub49OPr8rsQ0j9hFcr5zDlGib0fb466bLG6UK4wjyYRY6+J2ZjnezDhuU+FQq1Wdyiby/xVXM67Sd6uAQZhIH0Xz3On7LOInThZTYcygz+kjNHVkGqTT/a5JBm8MkGCeNnK+Rn0GTIvrmNDktTA82tH8PlJwVKprEA569edHqm5MVpgh6WIFbY1zMKC3egjGQY5IdoQO/4nY62FkEY0ETwpeGXV2dX0zgrDAjZ9Qh6yGSl5ZjHg7Fk8C/MfqIau26GyQEbOjWzMb2LcIIZ/zUqN1CV3a/awUdKTQotwPwpLcs2hwtxhGyj5je1GDeS9N0vKOy7wMx1r7oHxShmjQwzpDYm5GJ+/MLGqSVPmqEy0UZSBoxN8HoLL78aIIFN21ZEmxC3N6bSC2Cz3tmz63PGudBT9I55W3hw8RV6OMvV3kEYNgBMVuomvG3kSH+9a5BTO+hHcs0rJWEfE0ViTRuYj5c3laZcLSGwH6Icr35j8QYUcK+bb6n9YNIDHJh4cbpLVhP7ADY9RCpwNSArORt1vIXwbqKQPkFYLdXEbbvYR3ma9PPNxnUFHp1aymlY3rjYCRJboiQboESo+FreTFOYKglAJK50AnCkxupdvN77SyXy7nKwUPhnkEnQnttiYXxKpZOsQs/wqQBSV1vKwBEc8UPKRc5JVTG9bpwQjDHP8WFCmhcKMxVmjZr1AkpRBy+tkJwTbv+whaPJgiG5255TeTTCqZBwGRYwdd21GNEo/vZDRHySnO8sm4hV0mT0YPGue2ZA7t5KmHrLkkhIc7gTL1D7udNLkpNZSWgMU9uWjTQUVEdooWNl0xKqbzdwM7FvDC83xJmeuP4cNRDSutDdmN33EPTLMaEpNbkqfZuiOfjYNj2Uin//6zsgbqYCrODdegZaUOaXXXZiiE5REZJAwxQlYpFTlqgNTqBsA5gYKFzG/4nFHnST/nosAOzuZzLZSeiObUbLp4pcJ3/KnfGTQwY7LWT2JWn8DzHPVo9MN84q/sda8dAdqdf0W1ryBBxYCDLu2fAgs9/Nvp563+d05/P2Jl4sufQQEJrfDvQRJbQ9BF84cDZY1MaTx18eR46cdBSZnc0aI1bxmAABOucQMlYPcuLbaXn01v1vP1apmlwUJpPI47hwa7tpSdI6doOcD6T7XbZp5LCTWUlL//cGmvUiZf3XwZ5+IIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
+
   </a>
-  <div class="ndv"></div>
-  <span class="ntl">Senzor Ultrasonic</span>
-  <div class="nlv"><span class="ld"></span>LIVE</div>
-  <button id="dm" title="Dark / Light" onclick="toggleDark()">🌙</button>
+  <div class="nav-div"></div>
+  <span class="nav-title">Senzor Amprentă Ultrasonic</span>
+  <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+  <button id="comp-nav-btn" onclick="showComparator()">⚖️ Comparator</button>
+  <button id="dm" title="Schimbă tema" onclick="toggleDark()">☀️</button>
 </nav>
 
 <div class="hero">
-  <div class="hero-eyebrow">Database v6.1 — Actualizat Martie 2026</div>
-  <h1>Senzor Amprentă<br>Ultrasonic</h1>
-  <p class="hero-sub">Toate brandurile · toate modelele · 2018–2026</p>
+  <div class="hero-tag">📡 Database v7.0 — 2018–2026</div>
+  <h1>Senzor Amprentă<br><span>Ultrasonic</span></h1>
+  <p class="hero-desc">Baza de date completă cu telefoane cu senzor de amprentă ultrasonic — modele compatibile cu <strong>folie TPU/PET</strong> și <strong>🛡️ Glass OK</strong>.</p>
 </div>
 
-<div class="stats">
-  <div class="stat"><span class="sn" id="stT">0</span><span class="sl">Modele</span></div>
-  <div class="stat"><span class="sn" id="stB">0</span><span class="sl">Branduri</span></div>
-  <div class="stat"><span class="sn" id="stY">'26</span><span class="sl">Actualizat</span></div>
-  <div class="stat"><span class="sn" id="stN">0</span><span class="sl">Adăugate</span></div>
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-num" id="st-models">0</span><span class="stat-lbl">Modele</span></div>
+  <div class="stat-item"><span class="stat-num" id="st-brands">0</span><span class="stat-lbl">Branduri</span></div>
+  <div class="stat-item"><span class="stat-num" id="st-new">0</span><span class="stat-lbl">Noi 2026</span></div>
+  <div class="stat-item" style="cursor:default;">
+    <span class="stat-num" id="st-views">—</span>
+    <span class="stat-lbl">Verificări azi</span>
+  </div>
 </div>
 
 <div class="ubar">
-  <span class="ld"></span>
-  <span class="ubar-txt" id="ulb">Mart 2026 — date verificate complet</span>
-  <button id="ubtn" onclick="checkUpd()">↻ Actualizează</button>
+  <div class="ubar-info">
+    <span class="live-dot"></span>
+    <span class="ubar-date" id="ubar-date">Actualizat: 06 Apr 2026</span>
+  </div>
+  <button id="upd-btn" onclick="checkUpdate()">↻ Verifică actualizări</button>
 </div>
 
-<div class="notice">
-  <span>⚠️</span>
-  <span>Foliile de sticlă călită (tempered glass) blochează undele ultrasonice — folosiți EXCLUSIV film TPU/PET.</span>
-</div>
-<div class="notice-blue">
-  <span>🍎</span>
-  <span><strong>iPhone utilizează Face ID</strong>, nu senzor de amprentă — orice folie funcționează pe toate modelele iPhone.</span>
+<div class="notice-strip">
+  <div class="notice notice-amber">
+    <span class="notice-icon">⚠️</span>
+    <span><strong>Atenție:</strong> Foliile de sticlă călită (tempered glass) blochează complet undele ultrasonice. Folosiți EXCLUSIV film TPU sau PET moale.</span>
+  </div>
+  <div class="notice notice-blue">
+    <span class="notice-icon">🍎</span>
+    <span><strong>iPhone folosește Face ID</strong> (recunoaștere facială 3D) — nu are senzor de amprentă. Orice folie funcționează pe iPhone.</span>
+  </div>
 </div>
 
-<div class="sbar" id="sbar">
-  <div class="sw">
-      <span class="sic">🔍</span>
-      <input id="si" type="search" autocomplete="off" spellcheck="false" placeholder="Caută model...">
-      <button class="scl" id="scl" onclick="clearSearch()">✕</button>
+<div class="glass-banner">
+  <span class="glass-banner-icon">🛡️</span>
+  <span>Telefoanele marcate cu <strong>🛡️ Glass OK</strong> suportă și <strong>folii de sticlă călită (tempered glass privacy)</strong> — senzorul ultrasonic funcționează prin sticlă datorită tehnologiei speciale de ecran sau senzorilor de generație nouă. Verificați întotdeauna că folia este certificată pentru modelul dvs.</span>
+</div>
+
+<div class="search-wrap" id="search-wrap">
+  <div class="search-row">
+    <span class="search-icon">🔍</span>
+    <input id="si" type="search" autocomplete="off" spellcheck="false" placeholder="Caută model (ex: Galaxy S25, Pixel 10...)">
+    <button class="search-clear" id="scl" onclick="clearSearch()">✕</button>
+  </div>
+  <div class="brand-pills" id="brand-pills"></div>
+</div>
+
+<div id="skeleton">
+  <div class="sk-card"><div class="sk" style="height:16px;width:40%;margin-bottom:10px"></div><div class="sk" style="height:11px;width:22%;margin-bottom:16px"></div><div class="sk" style="height:40px;margin-bottom:6px"></div><div class="sk" style="height:40px;margin-bottom:6px"></div><div class="sk" style="height:40px"></div></div>
+  <div class="sk-card"><div class="sk" style="height:16px;width:35%;margin-bottom:10px"></div><div class="sk" style="height:11px;width:18%;margin-bottom:16px"></div><div class="sk" style="height:40px;margin-bottom:6px"></div><div class="sk" style="height:40px"></div></div>
+</div>
+
+<main id="main" style="display:none">
+  <div class="empty-state" id="empty"><div class="empty-state-icon">🔎</div>Niciun model găsit pentru această căutare.</div>
+</main>
+
+<div class="tips-wrap" id="tips-wrap" style="display:none">
+  <div class="tips-box">
+    <div class="tips-header">
+      <span>⚡</span>
+      <span class="tips-header-lbl">Ghid rapid pentru agenți — Tips &amp; Tricks</span>
+    </div>
+    <div class="tips-grid">
+
+      <div class="tip-card">
+        <span class="tip-icon">🔍</span>
+        <div class="tip-title">Caută rapid modelul</div>
+        <div class="tip-body">Folosește bara de căutare de sus — poți scrie <strong>parțial</strong> (ex: "S25", "Pixel 10", "14 Ultra"). Apasă filtrul de brand pentru a restrânge lista rapid.</div>
+        <span class="tip-tag">✓ Rapid</span>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-icon">🛡️</span>
+        <div class="tip-title">Badge-uri — ce înseamnă</div>
+        <div class="tip-body"><strong>✓ OK</strong> = folie TPU/PET moale.<br><strong>🛡️ Glass OK</strong> = merge și cu sticlă călită privacy.<br><strong>Curând</strong> = în așteptare confirmare.</div>
+        <span class="tip-tag">✓ Esențial</span>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-icon">👆</span>
+        <div class="tip-title">Refacere amprentă după folie</div>
+        <div class="tip-body">După aplicarea foliei, <strong>șterge amprenta veche</strong> din Setări → Biometrics, aplică folia, și înregistrează amprenta <strong>din nou</strong>. Înregistrează de 2–3 ori același deget în poziții ușor diferite pentru precizie maximă.</div>
+        <span class="tip-tag">✓ Obligatoriu</span>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-icon">💧</span>
+        <div class="tip-title">Folie nu citește — pași de rezolvare</div>
+        <div class="tip-body">1. Curăță senzorul cu o lavetă. 2. Verifică că nu există bule sub folie. 3. Șterge și re-înregistrează amprenta. 4. Încearcă cu un deget diferit. <strong>Dacă tot nu merge</strong> — telefonul nu suportă folia respectivă.</div>
+        <span class="tip-tag">✓ Troubleshoot</span>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-icon">⭐</span>
+        <div class="tip-title">Ce înseamnă stele 1–5</div>
+        <div class="tip-body"><strong>★★★★★</strong> = citire instant, mereu din prima.<br><strong>★★★★☆</strong> = foarte bun, rar ratează.<br><strong>★★★☆☆</strong> = funcționează, necesită amprentare atentă.<br><strong>★★☆☆☆</strong> = accept. cu TPU de calitate.</div>
+        <span class="tip-tag">✓ Rating</span>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-icon">📏</span>
+        <div class="tip-title">Grosime folie — cont pentru Glass OK</div>
+        <div class="tip-body">Pentru telefoanele <strong>Glass OK</strong>, folosiți sticlă de <strong>max. 0.33mm</strong>. Sticla mai groasă blochează semnalul chiar și pe modelele compatibile. Verificați întotdeauna că pe ambalaj scrie „compatible with in-display fingerprint".</div>
+        <span class="tip-tag">✓ Glass OK</span>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-icon">🌡️</span>
+        <div class="tip-title">Deget ud sau rece</div>
+        <div class="tip-body">Senzorul ultrasonic <strong>funcționează cu degete umede</strong> (avantaj față de optic). Totuși, degetele foarte reci sau foarte murdare pot reduce precizia. Sfătuiți clientul să înregistreze amprenta în condiții normale de utilizare.</div>
+        <span class="tip-tag">✓ Info client</span>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-icon">🍎</span>
+        <div class="tip-title">iPhone — orice folie merge</div>
+        <div class="tip-body">iPhone nu are senzor de amprentă în ecran — folosește <strong>Face ID</strong> (față). Orice folie de orice tip funcționează fără probleme. Nu există restricții pentru iPhone.</div>
+        <span class="tip-tag">✓ iPhone</span>
+      </div>
+
     </div>
   </div>
-  <div class="brand-filters" id="bfilters"></div>
 </div>
 
-<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Înapoi sus">↑</button>
-
-<div id="skeleton" class="skeleton-wrap">
-  <div class="sk-card"><div class="sk-header"><div class="sk" style="width:20px;height:20px;border-radius:5px;flex-shrink:0"></div><div style="flex:1"><div class="sk" style="height:12px;width:50%;margin-bottom:5px"></div><div class="sk" style="height:9px;width:28%"></div></div></div><div class="sk-rows"><div class="sk-row"><div class="sk" style="width:34px;height:42px;border-radius:7px;flex-shrink:0"></div><div style="flex:1"><div class="sk" style="height:12px;width:55%;margin-bottom:4px"></div><div class="sk" style="height:8px;width:22%"></div></div><div class="sk" style="width:38px;height:18px;border-radius:20px"></div></div><div class="sk-row"><div class="sk" style="width:34px;height:42px;border-radius:7px;flex-shrink:0"></div><div style="flex:1"><div class="sk" style="height:12px;width:65%;margin-bottom:4px"></div><div class="sk" style="height:8px;width:18%"></div></div><div class="sk" style="width:38px;height:18px;border-radius:20px"></div></div></div></div>
-  <div class="sk-card"><div class="sk-header"><div class="sk" style="width:20px;height:20px;border-radius:5px;flex-shrink:0"></div><div style="flex:1"><div class="sk" style="height:12px;width:38%;margin-bottom:5px"></div><div class="sk" style="height:9px;width:22%"></div></div></div></div>
+<div class="meto-wrap" id="meto-wrap" style="display:none">
+  <div class="meto-box">
+    <div class="meto-header" onclick="toggleMeto()">
+      <div class="meto-header-left">
+        <span>🔬</span>
+        <span class="meto-header-lbl">Metodologie & Sursa datelor</span>
+      </div>
+      <span class="chevron" id="meto-chevron">▼</span>
+    </div>
+    <div class="meto-body" id="meto-body">
+      <div class="meto-grid">
+        <div class="meto-card">
+          <span class="meto-icon">📡</span>
+          <div class="meto-title">Cum sunt selectate modelele</div>
+          <div class="meto-body-txt">Includem <strong>exclusiv</strong> telefoane cu senzor de amprentă de tip <strong>ultrasonic</strong> confirmat oficial de producător sau prin specificații tehnice verificate. Senzorii optici in-display NU sunt incluși.</div>
+        </div>
+        <div class="meto-card">
+          <span class="meto-icon">⭐</span>
+          <div class="meto-title">Cum e calculat ratingul cu stele</div>
+          <div class="meto-body-txt">Ratingul 1–5★ combină: <strong>viteza de citire</strong> cu folie TPU/PET, <strong>rata de succes</strong> la prima atingere și <strong>feedback colectat</strong> de la utilizatori reali. ★★★★★ = instant, mereu din prima.</div>
+        </div>
+        <div class="meto-card">
+          <span class="meto-icon">🛡️</span>
+          <div class="meto-title">Certificare Glass OK</div>
+          <div class="meto-body-txt">Badge-ul <strong>Glass OK</strong> se acordă doar modelelor confirmate că funcționează cu sticlă călită de <strong>max. 0.33mm</strong> certificată in-display. Sursă: teste interne + specificații Qualcomm 3D Sonic Max.</div>
+        </div>
+        <div class="meto-card">
+          <span class="meto-icon">🗄️</span>
+          <div class="meto-title">Sursa datelor</div>
+          <div class="meto-body-txt">Datele provin din: <strong>specificații oficiale producători</strong>, fișe tehnice Qualcomm, teste efectuate pe dispozitive fizice și <strong>feedback validat</strong> de la comunitatea de utilizatori SonicDB.</div>
+        </div>
+        <div class="meto-card">
+          <span class="meto-icon">🔄</span>
+          <div class="meto-title">Frecvența actualizărilor</div>
+          <div class="meto-body-txt">Baza de date se verifică <strong>automat la fiecare accesare</strong>. Modelele noi confirmate sunt adăugate instant. Lansările anunțate apar cu badge <strong>„Curând"</strong> până la confirmare oficială.</div>
+        </div>
+        <div class="meto-card">
+          <span class="meto-icon">⚠️</span>
+          <div class="meto-title">Limitări & disclaimer</div>
+          <div class="meto-body-txt">Compatibilitatea poate varia în funcție de <strong>producătorul foliei</strong> și calitatea acesteia. Recomandăm folii cu mențiunea explicită <em>„compatible with in-display fingerprint sensor"</em> pe ambalaj.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<main id="pr" style="display:none"></main>
 
 <div class="faq-wrap" id="faq-wrap" style="display:none">
-  <div class="faq-section">
-    <div class="faq-hdr"><span>❓</span><span class="faq-hdr-txt">Întrebări frecvente</span></div>
+  <div class="faq-box">
+    <div class="faq-header"><span>❓</span><span class="faq-header-lbl">Întrebări frecvente</span></div>
     <div class="faq-item">
-      <div class="faq-q" onclick="faqToggle(this)">Ce este senzorul ultrasonic și de ce e mai bun? <span class="faq-arr">▼</span></div>
-      <div class="faq-a"><div class="faq-a-inner">Senzorul ultrasonic emite unde sonore ultraînalte care creează o hartă 3D a amprentei. Este mai sigur și mai precis decât senzorii optici — funcționează și cu degete umede sau parțial acoperite și nu poate fi păcălit cu fotografii 2D.</div></div>
+      <div class="faq-q" onclick="toggleFaq(this)">Ce înseamnă 🛡️ Glass OK? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Telefoanele marcate cu <strong>🛡️ Glass OK</strong> suportă și folii de sticlă călită (tempered glass privacy) — senzorul ultrasonic funcționează prin sticlă datorită unei tehnologii avansate de ecran sau a unui senzor de generație superioară (ex: Qualcomm 3D Sonic Max). Asigurați-vă că folia este certificată specific pentru modelul dvs. și că are grosimea corectă (de regulă max. 0.33mm).</div></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="faqToggle(this)">De ce nu funcționează cu sticlă călită? <span class="faq-arr">▼</span></div>
-      <div class="faq-a"><div class="faq-a-inner">Sticla călită (tempered glass) blochează și reflectă undele ultrasonice, împiedicând senzorii să citească amprenta. Singura soluție 100% compatibilă este folia moale TPU sau PET.</div></div>
+      <div class="faq-q" onclick="toggleFaq(this)">Ce este senzorul ultrasonic? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Senzorul ultrasonic emite unde sonore de înaltă frecvență care construiesc o hartă 3D a amprentei. Este mai precis și mai sigur decât senzorii optici — funcționează cu degete umede și nu poate fi păcălit cu fotografii 2D.</div></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="faqToggle(this)">iPhone-urile sunt compatibile cu orice folie? <span class="faq-arr">▼</span></div>
-      <div class="faq-a"><div class="faq-a-inner">Da! iPhone utilizează Face ID (recunoaștere facială 3D), nu senzor de amprentă. Prin urmare, orice tip de folie — TPU, PET sau sticlă călită — funcționează perfect.</div></div>
+      <div class="faq-q" onclick="toggleFaq(this)">De ce nu merge cu sticlă călită? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Sticla călită (tempered glass) are o densitate mare care absoarbe și reflectă undele ultrasonice, blocând semnalul complet. Folia TPU/PET moale lasă undele să treacă liber.</div></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="faqToggle(this)">Ce înseamnă ratingul ★★★★☆? <span class="faq-arr">▼</span></div>
-      <div class="faq-a"><div class="faq-a-inner">Ratingul de compatibilitate (1-5 stele) se bazează pe teste reale cu folii TPU/PET. 5 stele = citire perfectă. 3 stele = funcționează, dar poate necesita mai multe încercări la amprentare inițială.</div></div>
+      <div class="faq-q" onclick="toggleFaq(this)">iPhone are senzor ultrasonic? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Nu. Toate iPhone-urile moderne folosesc Face ID (recunoaștere facială 3D infraroșu), nu senzor de amprentă. Prin urmare, orice tip de folie de protecție funcționează pe iPhone fără restricții.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Ce înseamnă ratingul cu stele? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Ratingul 1–5 stele reflectă performanța senzorului în condiții reale cu folie TPU/PET. ★★★★★ = citire instant, precisă. ★★★☆☆ = funcționează, dar uneori necesită mai multe încercări la amprentare inițială.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Cât de des se actualizează baza de date? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Baza de date se verifică automat la fiecare accesare a site-ului. Modelele anunțate oficial cu senzor ultrasonic confirmat sunt adăugate în lista „Curând". Modelele lansate sunt marcate cu „✓ OK".</div></div>
     </div>
   </div>
 </div>
 
 <footer>
-  <img class="fli" src="data:image/webp;base64,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" alt="Urban Gadgets">
-  <span class="ftx">© Urban Gadgets · Ultrasonic Database v6.1 · 2018–2026<br>AI Specs powered by Claude</span>
+  <div class="footer-logo">SonicDB</div>
+  <div class="footer-txt">
+    Ultrasonic Fingerprint Sensor Database v7.0<br>
+    2018–2026 · Toate brandurile · Toate modelele<br>
+    Actualizat automat · 06 Apr 2026
+  </div>
 </footer>
 
+<!-- AI Chat FAB -->
+<button id="ai-fab" onclick="toggleAiPanel()" title="Ce folie îmi trebuie?">
+  💬
+  <span class="fab-badge">AI</span>
+</button>
+
+<!-- AI Chat Panel -->
+<div id="ai-panel">
+  <div class="ai-header">
+    <div class="ai-header-icon">🤖</div>
+    <div class="ai-header-info">
+      <div class="ai-header-name">Asistent SonicDB</div>
+      <div class="ai-header-status"><span class="live-dot"></span>Online — răspunde instant</div>
+    </div>
+    <button class="ai-close" onclick="toggleAiPanel()">✕</button>
+  </div>
+  <div class="ai-messages" id="ai-messages">
+    <div class="ai-bubble bot">👋 Salut! Spune-mi modelul telefonului și îți spun exact ce folie îți trebuie și dacă merge Glass OK.</div>
+  </div>
+  <div class="ai-quick-btns" id="ai-quick-btns">
+    <button class="ai-quick" onclick="aiQuick('Galaxy S25 Ultra')">Galaxy S25 Ultra</button>
+    <button class="ai-quick" onclick="aiQuick('Pixel 9 Pro')">Pixel 9 Pro</button>
+    <button class="ai-quick" onclick="aiQuick('Xiaomi 15 Ultra')">Xiaomi 15 Ultra</button>
+    <button class="ai-quick" onclick="aiQuick('OnePlus 13')">OnePlus 13</button>
+  </div>
+  <div class="ai-input-row">
+    <input id="ai-input" type="text" placeholder="ex: Galaxy S24, Pixel 9 Pro..." autocomplete="off" autocorrect="off">
+    <button id="ai-send" onclick="aiSend()">➤</button>
+  </div>
+</div>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Sus">↑</button>
+
 <script>
+/* ══════════════════════════════════════════════════════════════
+   DATABAZA COMPLETĂ — Telefoane cu senzor ultrasonic confirmat
+   ══════════════════════════════════════════════════════════════ */
 
-const BRAND_LOGOS = {
-  "SAM": `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#1428A0"/><text x="20" y="25" font-family="Arial" font-size="8.5" font-weight="bold" fill="white" text-anchor="middle">SAMSUNG</text></svg>`,
-  "🔵": `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#4285F4"/><circle cx="20" cy="20" r="10" fill="white"/><circle cx="20" cy="20" r="6" fill="#4285F4"/><circle cx="20" cy="20" r="2.5" fill="white"/></svg>`,
-  "🍎": `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#555"/><path d="M24.5 13.2c1.2-1.5 1.1-3.5 1.1-3.5s-1.9.1-3.1 1.5c-1.1 1.3-1 3.2-1 3.2s2-.1 3-1.2zM27.5 21c0-3.2 2.6-4.8 2.6-4.8s-1.4-2-3.9-2c-1.7 0-2.6.9-3.7.9-1.1 0-2.2-.9-3.7-.9-2.2 0-4.8 1.8-4.8 5.5 0 3.5 2.4 9.3 4.4 9.3.9 0 1.7-.7 2.9-.7 1.2 0 1.8.7 3 .7 2.1 0 3.2-5.1 3.2-5.1s-2-.8-2-3z" fill="white"/></svg>`,
-  "🟠": `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#FF6900"/><text x="20" y="24" font-family="Arial" font-size="10" font-weight="bold" fill="white" text-anchor="middle">Mi</text></svg>`,
-  "🔴": `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#F5010C"/><text x="20" y="25" font-family="Arial" font-size="8" font-weight="bold" fill="white" text-anchor="middle">OnePlus</text></svg>`,
-  "💎": `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#415FFF"/><text x="20" y="24" font-family="Arial" font-size="9.5" font-weight="bold" fill="white" text-anchor="middle">vivo</text></svg>`,
-  "📱": `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#415FFF"/><text x="20" y="24" font-family="Arial" font-size="9.5" font-weight="bold" fill="white" text-anchor="middle">vivo</text></svg>`,
-  "✨": `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#6B5EFF"/><text x="20" y="24" font-family="Arial" font-size="9.5" font-weight="bold" fill="white" text-anchor="middle">vivo</text></svg>`,
-  "⚡": `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#1A1A1A"/><path d="M22 10L14 22h7l-1 8 10-14h-7l1-6z" fill="#E879F9"/></svg>`,
-  "🟢": `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#1D4532"/><text x="20" y="24" font-family="Arial" font-size="10" font-weight="bold" fill="white" text-anchor="middle">OPPO</text></svg>`,
-  "🔷": `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#CF0A2C"/><text x="20" y="24" font-family="Arial" font-size="7.5" font-weight="bold" fill="white" text-anchor="middle">HONOR</text></svg>`,
-  "🟡": `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#FFD700"/><text x="20" y="25" font-family="Arial" font-size="7.5" font-weight="bold" fill="#333" text-anchor="middle">realme</text></svg>`,
-  "🌸": `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#CF0A2C"/><text x="20" y="24" font-family="Arial" font-size="7" font-weight="bold" fill="white" text-anchor="middle">HUAWEI</text></svg>`,
-};
-
-function brandLogoHTML(e, a) {
-  const svg = BRAND_LOGOS[e];
-  if (svg) {
-    const b64 = btoa(unescape(encodeURIComponent(svg)));
-    return `<img src="data:image/svg+xml;base64,${b64}" style="width:32px;height:32px;border-radius:7px;object-fit:contain;flex-shrink:0;" alt="logo">`;
-  }
-  return `<span style="font-size:17px;flex-shrink:0;">${e}</span>`;
-}
-
-// ══ DATA ══════════════════════════════════════════════════════════════
-// Note: 2026 models already launched (S26, OnePlus 16, etc.) are confirmed WITHOUT up:1
-// Models still upcoming (iPhone 18, Pixel 10a, Z Fold 8) stay in UPC only
-const BD=[
-  {n:"SAMSUNG — Galaxy S Series",e:"SAM",a:"#60a5fa",r:"96,165,250",p:[
-    {m:"Galaxy S10",y:"2019"},{m:"Galaxy S10+",y:"2019"},{m:"Galaxy S10 5G",y:"2019"},
-    {m:"Galaxy S20",y:"2020"},{m:"Galaxy S20+",y:"2020"},{m:"Galaxy S20 Ultra",y:"2020"},
-    {m:"Galaxy S21 5G",y:"2021"},{m:"Galaxy S21+ 5G",y:"2021"},{m:"Galaxy S21 Ultra 5G",y:"2021"},
-    {m:"Galaxy S22",y:"2022"},{m:"Galaxy S22+",y:"2022"},{m:"Galaxy S22 Ultra",y:"2022"},
-    {m:"Galaxy S23",y:"2023"},{m:"Galaxy S23+",y:"2023"},{m:"Galaxy S23 Ultra",y:"2023"},
-    {m:"Galaxy S24",y:"2024"},{m:"Galaxy S24+",y:"2024"},{m:"Galaxy S24 Ultra",y:"2024"},
-    {m:"Galaxy S25",y:"2025"},{m:"Galaxy S25+",y:"2025"},{m:"Galaxy S25 Ultra",y:"2025"},
-    {m:"Galaxy S25 Edge",y:"2025"},{m:"Galaxy S25 FE",y:"2025"},
-    {m:"Galaxy S26",y:"2026"},{m:"Galaxy S26+",y:"2026"},{m:"Galaxy S26 Ultra",y:"2026"},
-  ]},
-  {n:"SAMSUNG — Galaxy Note Series",e:"SAM",a:"#3b82f6",r:"59,130,246",p:[
-    {m:"Galaxy Note 10",y:"2019"},{m:"Galaxy Note 10+",y:"2019"},{m:"Galaxy Note 10+ 5G",y:"2019"},
-    {m:"Galaxy Note 20 5G",y:"2020"},{m:"Galaxy Note 20 Ultra 5G",y:"2020"},
-  ]},
-  {n:"SAMSUNG — Galaxy Z Fold Series",e:"SAM",a:"#93c5fd",r:"147,197,253",p:[
-    {m:"Galaxy Z Fold 3",y:"2021"},{m:"Galaxy Z Fold 4",y:"2022"},
-    {m:"Galaxy Z Fold 5",y:"2023"},{m:"Galaxy Z Fold 6",y:"2024"},
-    {m:"Galaxy Z Fold 7",y:"2025"},
-  ]},
-  {n:"GOOGLE PIXEL",e:"🔵",a:"#34d399",r:"52,211,153",p:[
-    {m:"Pixel 9",y:"2024"},{m:"Pixel 9 Pro",y:"2024"},{m:"Pixel 9 Pro XL",y:"2024"},
-    {m:"Pixel 10",y:"2025"},{m:"Pixel 10 Pro",y:"2025"},{m:"Pixel 10 Pro XL",y:"2025"},
-  ]},
-  {n:"APPLE — iPhone",e:"🍎",a:"#a3a3a3",r:"163,163,163",p:[
-    {m:"iPhone X",y:"2017"},{m:"iPhone XS",y:"2018"},{m:"iPhone XS Max",y:"2018"},
-    {m:"iPhone 11",y:"2019"},{m:"iPhone 11 Pro",y:"2019"},{m:"iPhone 11 Pro Max",y:"2019"},
-    {m:"iPhone 12",y:"2020"},{m:"iPhone 12 mini",y:"2020"},{m:"iPhone 12 Pro",y:"2020"},{m:"iPhone 12 Pro Max",y:"2020"},
-    {m:"iPhone 13",y:"2021"},{m:"iPhone 13 mini",y:"2021"},{m:"iPhone 13 Pro",y:"2021"},{m:"iPhone 13 Pro Max",y:"2021"},
-    {m:"iPhone 14",y:"2022"},{m:"iPhone 14 Plus",y:"2022"},{m:"iPhone 14 Pro",y:"2022"},{m:"iPhone 14 Pro Max",y:"2022"},
-    {m:"iPhone 15",y:"2023"},{m:"iPhone 15 Plus",y:"2023"},{m:"iPhone 15 Pro",y:"2023"},{m:"iPhone 15 Pro Max",y:"2023"},
-    {m:"iPhone 16",y:"2024"},{m:"iPhone 16 Plus",y:"2024"},{m:"iPhone 16 Pro",y:"2024"},{m:"iPhone 16 Pro Max",y:"2024"},
-    {m:"iPhone 16e",y:"2025"},
-    {m:"iPhone 17",y:"2025"},{m:"iPhone 17 Plus",y:"2025"},{m:"iPhone 17 Pro",y:"2025"},{m:"iPhone 17 Pro Max",y:"2025"},
-  ],fid:1},
-  {n:"XIAOMI — 15 & 16 Series",e:"🟠",a:"#fb923c",r:"251,146,60",p:[
-    {m:"Xiaomi 15",y:"2024"},{m:"Xiaomi 15 Pro",y:"2024"},
-    {m:"Xiaomi 15 Ultra",y:"2025"},
-    {m:"Xiaomi 17",y:"2025"},{m:"Xiaomi 17 Pro Max",y:"2025"},
-    {m:"Xiaomi 17 Ultra",y:"2025"},
-    {m:"Xiaomi 16",y:"2026"},{m:"Xiaomi 16 Pro",y:"2026"},
-  ]},
-  {n:"OnePlus",e:"🔴",a:"#f87171",r:"248,113,113",p:[
-    {m:"OnePlus 13",y:"2024/2025"},
-    {m:"OnePlus 15",y:"2025"},{m:"OnePlus 15R",y:"2025"},
-    {m:"OnePlus 16",y:"2026"},
-  ]},
-  {n:"VIVO — X Series",e:"💎",a:"#818cf8",r:"129,140,248",p:[
-    {m:"Vivo X80 Pro",y:"2022"},{m:"Vivo X90 Pro+",y:"2022"},
-    {m:"Vivo X100 Ultra",y:"2024"},
-    {m:"Vivo X200",y:"2024"},{m:"Vivo X200 Pro",y:"2024"},{m:"Vivo X200 Pro Mini",y:"2024"},
-    {m:"Vivo X200 Ultra",y:"2025"},{m:"Vivo X200 Ultra Satellite Edition",y:"2025"},
-    {m:"Vivo X300",y:"2025"},{m:"Vivo X300 Pro",y:"2025"},
-    {m:"Vivo X400 Pro",y:"2026"},
-  ]},
-  {n:"VIVO — X Fold Series",e:"📱",a:"#a5b4fc",r:"165,180,252",p:[
-    {m:"Vivo X Fold",y:"2022"},{m:"Vivo X Fold+",y:"2022"},
-    {m:"Vivo X Fold 2",y:"2023"},{m:"Vivo X Fold 3 Pro",y:"2024"},
-  ]},
-  {n:"VIVO — S Series",e:"✨",a:"#c4b5fd",r:"196,181,253",p:[
-    {m:"Vivo S50",y:"2025"},{m:"Vivo S50 Pro",y:"2025"},{m:"Vivo S50 Pro Mini",y:"2025"},
-  ]},
-  {n:"iQOO (Vivo sub-brand)",e:"⚡",a:"#e879f9",r:"232,121,249",p:[
-    {m:"iQOO 8 Pro",y:"2021"},{m:"iQOO 9 Pro",y:"2022"},
-    {m:"iQOO 11 Pro",y:"2023"},{m:"iQOO 12 Pro",y:"2023"},
-    {m:"iQOO Neo 9S Pro+",y:"2024"},{m:"iQOO 13",y:"2024"},
-    {m:"iQOO 15",y:"2025"},{m:"iQOO 15 Ultra",y:"2026"},
-  ]},
-  {n:"OPPO — Find X Series",e:"🟢",a:"#22d3ee",r:"34,211,238",p:[
-    {m:"Oppo Find X8 Ultra",y:"2025"},
-    {m:"Oppo Find X9",y:"2025"},{m:"Oppo Find X9 Pro",y:"2025"},
-  ]},
-  {n:"HONOR — Magic Series",e:"🔷",a:"#38bdf8",r:"56,189,248",p:[
-    {m:"Honor Magic 7",y:"2024/2025"},{m:"Honor Magic 7 Pro",y:"2024/2025"},
-    {m:"Honor Magic 7 Ultimate",y:"2025"},
-    {m:"Honor Magic 8",y:"2025"},{m:"Honor Magic 8 Pro",y:"2025"},
-    {m:"Honor Magic 8 Pro Air",y:"2025"},
-    {m:"Honor Magic 8 RSR Porsche Edition",y:"2025"},
-    {m:"Honor WIN",y:"2025"},{m:"Honor WIN RT",y:"2025"},
-    {m:"Honor Magic 9 Pro",y:"2026"},
-  ]},
-  {n:"REALME",e:"🟡",a:"#fbbf24",r:"251,191,36",p:[
-    {m:"Realme GT 8 Pro",y:"2025"},
-    {m:"Realme GT 8 Pro Dream Edition",y:"2025"},
-    {m:"Realme GT 10 Pro",y:"2026"},
-  ]},
-  {n:"HUAWEI",e:"🌸",a:"#f472b6",r:"244,114,182",p:[
-    {m:"Mate RS Porsche Design",y:"2018 (pilot)"},
-  ]},
+const BRANDS = [
+  /* ─── SAMSUNG ─── */
+  {
+    id: "samsung-s", label: "SAMSUNG Galaxy S",
+    color: "#4a9eff", rgb: "74,158,255",
+    phones: [
+      {m:"Galaxy S10",y:"2019",r:3},
+      {m:"Galaxy S10+",y:"2019",r:3},
+      {m:"Galaxy S10 5G",y:"2019",r:3},
+      {m:"Galaxy S20",y:"2020",r:3},
+      {m:"Galaxy S20+",y:"2020",r:3},
+      {m:"Galaxy S20 Ultra",y:"2020",r:4},
+      {m:"Galaxy S21",y:"2021",r:3},
+      {m:"Galaxy S21+",y:"2021",r:4},
+      {m:"Galaxy S21 Ultra",y:"2021",r:4},
+      {m:"Galaxy S22",y:"2022",r:3},
+      {m:"Galaxy S22+",y:"2022",r:4},
+      {m:"Galaxy S22 Ultra",y:"2022",r:4},
+      {m:"Galaxy S23",y:"2023",r:4},
+      {m:"Galaxy S23+",y:"2023",r:4},
+      {m:"Galaxy S23 Ultra",y:"2023",r:5},
+      {m:"Galaxy S24",y:"2024",r:4},
+      {m:"Galaxy S24+",y:"2024",r:4},
+      {m:"Galaxy S24 Ultra",y:"2024",r:5},
+      {m:"Galaxy S25",y:"2025",r:5,glass:true},
+      {m:"Galaxy S25+",y:"2025",r:5,glass:true},
+      {m:"Galaxy S25 Ultra",y:"2025",r:5,glass:true},
+      {m:"Galaxy S25 Edge",y:"2025",r:4,glass:true},
+      {m:"Galaxy S25 FE",y:"2025",r:4},
+      {m:"Galaxy S26",y:"2026",r:5,glass:true},
+      {m:"Galaxy S26+",y:"2026",r:5,glass:true},
+      {m:"Galaxy S26 Ultra",y:"2026",r:5,glass:true},
+    ]
+  },
+  {
+    id: "samsung-note", label: "SAMSUNG Galaxy Note",
+    color: "#4a9eff", rgb: "74,158,255",
+    phones: [
+      {m:"Galaxy Note 10",y:"2019",r:3},
+      {m:"Galaxy Note 10+",y:"2019",r:3},
+      {m:"Galaxy Note 10+ 5G",y:"2019",r:3},
+      {m:"Galaxy Note 20",y:"2020",r:3},
+      {m:"Galaxy Note 20 Ultra",y:"2020",r:4},
+    ]
+  },
+  {
+    id: "samsung-fold", label: "SAMSUNG Galaxy Z Fold",
+    color: "#4a9eff", rgb: "74,158,255",
+    phones: [
+      {m:"Galaxy Z Fold 3",y:"2021",r:3},
+      {m:"Galaxy Z Fold 4",y:"2022",r:4},
+      {m:"Galaxy Z Fold 5",y:"2023",r:4},
+      {m:"Galaxy Z Fold 6",y:"2024",r:4},
+      {m:"Galaxy Z Fold 7",y:"2025",r:4,glass:true},
+      {m:"Galaxy Z Fold 8",y:"2026",r:0,soon:1},
+    ]
+  },
+  {
+    id: "samsung-a", label: "SAMSUNG Galaxy A (select)",
+    color: "#4a9eff", rgb: "74,158,255",
+    phones: [
+      {m:"Galaxy A52s 5G",y:"2021",r:3},
+      {m:"Galaxy A53 5G",y:"2022",r:3},
+      {m:"Galaxy A54 5G",y:"2023",r:3},
+      {m:"Galaxy A55 5G",y:"2024",r:3},
+      {m:"Galaxy A56 5G",y:"2025",r:4},
+    ]
+  },
+  /* ─── GOOGLE PIXEL ─── */
+  {
+    id: "google-pixel", label: "GOOGLE Pixel",
+    color: "#00e5a0", rgb: "0,229,160",
+    phones: [
+      {m:"Pixel 9",y:"2024",r:4},
+      {m:"Pixel 9 Pro",y:"2024",r:5,glass:true},
+      {m:"Pixel 9 Pro XL",y:"2024",r:5,glass:true},
+      {m:"Pixel 9 Pro Fold",y:"2024",r:4,glass:true},
+      {m:"Pixel 10",y:"2025",r:4},
+      {m:"Pixel 10 Pro",y:"2025",r:5,glass:true},
+      {m:"Pixel 10 Pro XL",y:"2025",r:5,glass:true},
+      {m:"Pixel 10 Pro Fold",y:"2025",r:4,glass:true},
+      {m:"Pixel 10a",y:"2026",r:0,soon:1},
+    ]
+  },
+  /* ─── APPLE (Face ID) ─── */
+  {
+    id: "apple-iphone", label: "APPLE iPhone (Face ID)",
+    color: "#aaaaaa", rgb: "170,170,170",
+    faceid: true,
+    phones: [
+      {m:"iPhone X",y:"2017"},
+      {m:"iPhone XS",y:"2018"},
+      {m:"iPhone XS Max",y:"2018"},
+      {m:"iPhone 11",y:"2019"},{m:"iPhone 11 Pro",y:"2019"},{m:"iPhone 11 Pro Max",y:"2019"},
+      {m:"iPhone 12",y:"2020"},{m:"iPhone 12 mini",y:"2020"},{m:"iPhone 12 Pro",y:"2020"},{m:"iPhone 12 Pro Max",y:"2020"},
+      {m:"iPhone 13",y:"2021"},{m:"iPhone 13 mini",y:"2021"},{m:"iPhone 13 Pro",y:"2021"},{m:"iPhone 13 Pro Max",y:"2021"},
+      {m:"iPhone 14",y:"2022"},{m:"iPhone 14 Plus",y:"2022"},{m:"iPhone 14 Pro",y:"2022"},{m:"iPhone 14 Pro Max",y:"2022"},
+      {m:"iPhone 15",y:"2023"},{m:"iPhone 15 Plus",y:"2023"},{m:"iPhone 15 Pro",y:"2023"},{m:"iPhone 15 Pro Max",y:"2023"},
+      {m:"iPhone 16",y:"2024"},{m:"iPhone 16 Plus",y:"2024"},{m:"iPhone 16 Pro",y:"2024"},{m:"iPhone 16 Pro Max",y:"2024"},
+      {m:"iPhone 16e",y:"2025"},
+      {m:"iPhone 17",y:"2025"},{m:"iPhone 17 Plus",y:"2025"},{m:"iPhone 17 Pro",y:"2025"},{m:"iPhone 17 Air",y:"2025"},{m:"iPhone 17 Pro Max",y:"2025"},
+      {m:"iPhone 18",y:"2026",soon:1},{m:"iPhone 18 Pro",y:"2026",soon:1},{m:"iPhone 18 Pro Max",y:"2026",soon:1},
+    ]
+  },
+  /* ─── XIAOMI ─── */
+  {
+    id: "xiaomi", label: "XIAOMI",
+    color: "#ff7043", rgb: "255,112,67",
+    phones: [
+      {m:"Xiaomi 12 Pro",y:"2022",r:3},
+      {m:"Xiaomi 13",y:"2023",r:4},
+      {m:"Xiaomi 13 Pro",y:"2023",r:4},
+      {m:"Xiaomi 13 Ultra",y:"2023",r:5},
+      {m:"Xiaomi 14",y:"2024",r:4},
+      {m:"Xiaomi 14 Pro",y:"2024",r:4},
+      {m:"Xiaomi 14 Ultra",y:"2024",r:5,glass:true},
+      {m:"Xiaomi 15",y:"2024/2025",r:4},
+      {m:"Xiaomi 15 Pro",y:"2024/2025",r:4},
+      {m:"Xiaomi 15 Ultra",y:"2025",r:5,glass:true},
+      {m:"Xiaomi 16",y:"2026",r:5,glass:true},
+      {m:"Xiaomi 16 Pro",y:"2026",r:5,glass:true},
+      {m:"Xiaomi 17",y:"2025",r:4},
+      {m:"Xiaomi 17 Pro Max",y:"2025",r:5,glass:true},
+      {m:"Xiaomi 17 Ultra",y:"2025",r:5,glass:true},
+    ]
+  },
+  /* ─── ONEPLUS ─── */
+  {
+    id: "oneplus", label: "OnePlus",
+    color: "#ff4444", rgb: "255,68,68",
+    phones: [
+      {m:"OnePlus 7 Pro",y:"2019",r:3},
+      {m:"OnePlus 7T Pro",y:"2019",r:3},
+      {m:"OnePlus 8 Pro",y:"2020",r:3},
+      {m:"OnePlus 9 Pro",y:"2021",r:3},
+      {m:"OnePlus 10 Pro",y:"2022",r:3},
+      {m:"OnePlus 11",y:"2023",r:4},
+      {m:"OnePlus 12",y:"2024",r:4},
+      {m:"OnePlus 13",y:"2024/2025",r:4},
+      {m:"OnePlus 13R",y:"2025",r:3},
+      {m:"OnePlus 15",y:"2025",r:5,glass:true},
+      {m:"OnePlus 15R",y:"2025",r:4},
+      {m:"OnePlus 16",y:"2026",r:5,glass:true},
+    ]
+  },
+  /* ─── VIVO X ─── */
+  {
+    id: "vivo-x", label: "VIVO X Series",
+    color: "#7c6aff", rgb: "124,106,255",
+    phones: [
+      {m:"Vivo X70 Pro+",y:"2021",r:3},
+      {m:"Vivo X80 Pro",y:"2022",r:3},
+      {m:"Vivo X90 Pro+",y:"2022",r:4},
+      {m:"Vivo X100",y:"2023",r:4},
+      {m:"Vivo X100 Pro",y:"2023",r:4},
+      {m:"Vivo X100 Ultra",y:"2024",r:5,glass:true},
+      {m:"Vivo X200",y:"2024",r:4},
+      {m:"Vivo X200 Pro",y:"2024",r:4},
+      {m:"Vivo X200 Pro Mini",y:"2024",r:4},
+      {m:"Vivo X200 Ultra",y:"2025",r:5,glass:true},
+      {m:"Vivo X200 Ultra Satellite",y:"2025",r:5,glass:true},
+      {m:"Vivo X300",y:"2025",r:4},
+      {m:"Vivo X300 Pro",y:"2025",r:5,glass:true},
+      {m:"Vivo X400",y:"2026",r:4},
+      {m:"Vivo X400 Pro",y:"2026",r:5,glass:true},
+    ]
+  },
+  {
+    id: "vivo-fold", label: "VIVO X Fold",
+    color: "#7c6aff", rgb: "124,106,255",
+    phones: [
+      {m:"Vivo X Fold",y:"2022",r:3},
+      {m:"Vivo X Fold+",y:"2022",r:3},
+      {m:"Vivo X Fold 2",y:"2023",r:4},
+      {m:"Vivo X Fold 3 Pro",y:"2024",r:4},
+      {m:"Vivo X Fold 4",y:"2025",r:4,glass:true},
+    ]
+  },
+  {
+    id: "vivo-s", label: "VIVO S Series",
+    color: "#7c6aff", rgb: "124,106,255",
+    phones: [
+      {m:"Vivo S19 Pro",y:"2024",r:4},
+      {m:"Vivo S20",y:"2025",r:4},
+      {m:"Vivo S20 Pro",y:"2025",r:4},
+      {m:"Vivo S50",y:"2025",r:4},
+      {m:"Vivo S50 Pro",y:"2025",r:5,glass:true},
+    ]
+  },
+  /* ─── iQOO ─── */
+  {
+    id: "iqoo", label: "iQOO (Vivo)",
+    color: "#d946ef", rgb: "217,70,239",
+    phones: [
+      {m:"iQOO 8 Pro",y:"2021",r:3},
+      {m:"iQOO 9 Pro",y:"2022",r:3},
+      {m:"iQOO 11 Pro",y:"2023",r:4},
+      {m:"iQOO 12",y:"2023",r:4},
+      {m:"iQOO 12 Pro",y:"2023",r:4},
+      {m:"iQOO Neo 9S Pro+",y:"2024",r:4},
+      {m:"iQOO 13",y:"2024",r:4},
+      {m:"iQOO 15",y:"2025",r:5,glass:true},
+      {m:"iQOO 15 Pro",y:"2025",r:5,glass:true},
+      {m:"iQOO 15 Ultra",y:"2026",r:5,glass:true},
+    ]
+  },
+  /* ─── OPPO ─── */
+  {
+    id: "oppo", label: "OPPO Find X",
+    color: "#00cc88", rgb: "0,204,136",
+    phones: [
+      {m:"Oppo Find X3 Pro",y:"2021",r:3},
+      {m:"Oppo Find X5 Pro",y:"2022",r:4},
+      {m:"Oppo Find X6 Pro",y:"2023",r:4},
+      {m:"Oppo Find X7 Ultra",y:"2024",r:5,glass:true},
+      {m:"Oppo Find X8",y:"2024",r:4},
+      {m:"Oppo Find X8 Pro",y:"2024",r:4},
+      {m:"Oppo Find X8 Ultra",y:"2025",r:5,glass:true},
+      {m:"Oppo Find X9",y:"2025",r:4},
+      {m:"Oppo Find X9 Pro",y:"2025",r:5,glass:true},
+      {m:"Oppo Find X9 Ultra",y:"2026",r:0,soon:1},
+    ]
+  },
+  /* ─── HONOR ─── */
+  {
+    id: "honor", label: "HONOR Magic",
+    color: "#38bdf8", rgb: "56,189,248",
+    phones: [
+      {m:"Honor Magic 5 Pro",y:"2023",r:4},
+      {m:"Honor Magic 6 Pro",y:"2024",r:4},
+      {m:"Honor Magic 6 Ultimate",y:"2024",r:5,glass:true},
+      {m:"Honor Magic 7",y:"2024/2025",r:4},
+      {m:"Honor Magic 7 Pro",y:"2024/2025",r:4,glass:true},
+      {m:"Honor Magic 7 Ultimate",y:"2025",r:5,glass:true},
+      {m:"Honor Magic 8",y:"2025",r:4},
+      {m:"Honor Magic 8 Pro",y:"2025",r:5,glass:true},
+      {m:"Honor Magic 8 Pro Air",y:"2025",r:4,glass:true},
+      {m:"Honor Magic 8 RSR",y:"2025",r:5,glass:true},
+      {m:"Honor WIN",y:"2025",r:4},
+      {m:"Honor Magic 9 Pro",y:"2026",r:5,glass:true},
+      {m:"Honor Magic 9 Ultimate",y:"2026",r:0,soon:1},
+    ]
+  },
+  /* ─── REALME ─── */
+  {
+    id: "realme", label: "realme GT",
+    color: "#fbbf24", rgb: "251,191,36",
+    phones: [
+      {m:"Realme GT 5 Pro",y:"2023",r:4},
+      {m:"Realme GT 6 Pro",y:"2024",r:4},
+      {m:"Realme GT 7 Pro",y:"2024",r:4},
+      {m:"Realme GT 8 Pro",y:"2025",r:4},
+      {m:"Realme GT 8 Pro Dream",y:"2025",r:5,glass:true},
+      {m:"Realme GT 10 Pro",y:"2026",r:4},
+    ]
+  },
+  /* ─── HUAWEI ─── */
+  {
+    id: "huawei", label: "HUAWEI",
+    color: "#f472b6", rgb: "244,114,182",
+    phones: [
+      {m:"Huawei Mate RS",y:"2018",r:3},
+      {m:"Huawei Mate 40 Pro",y:"2020",r:3},
+      {m:"Huawei Mate 50 Pro",y:"2022",r:4},
+      {m:"Huawei Mate 60 Pro",y:"2023",r:4},
+      {m:"Huawei Mate 60 Pro+",y:"2023",r:4},
+      {m:"Huawei Mate 70 Pro",y:"2024",r:4,glass:true},
+      {m:"Huawei Pura 70 Pro",y:"2024",r:4,glass:true},
+      {m:"Huawei Pura 80 Pro",y:"2025",r:4,glass:true},
+    ]
+  },
 ];
 
-// UPC = only truly upcoming models (not yet released)
-const UPC=[
-  {br:"APPLE — iPhone",m:"iPhone 18",y:"2026",up:1},
-  {br:"APPLE — iPhone",m:"iPhone 18 Plus",y:"2026",up:1},
-  {br:"APPLE — iPhone",m:"iPhone 18 Pro",y:"2026",up:1},
-  {br:"APPLE — iPhone",m:"iPhone 18 Pro Max",y:"2026",up:1},
-  {br:"SAMSUNG — Galaxy Z Fold Series",m:"Galaxy Z Fold 8",y:"2026",up:1},
-  {br:"GOOGLE PIXEL",m:"Pixel 10a",y:"2026",up:1},
+/* Modele viitoare confirmate pentru auto-update */
+const UPCOMING = [
+  /* Soon → lansate */
+  {br:"samsung-fold", m:"Galaxy Z Fold 8", y:"2026", glass:true},
+  {br:"google-pixel", m:"Pixel 10a", y:"2026"},
+  {br:"oppo", m:"Oppo Find X9 Ultra", y:"2026", glass:true},
+  {br:"honor", m:"Honor Magic 9 Ultimate", y:"2026", glass:true},
+  /* Modele noi TPU/PET */
+  {br:"samsung-a", m:"Galaxy A57 5G", y:"2026"},
+  {br:"xiaomi", m:"Xiaomi 16 Ultra", y:"2026", glass:true},
+  {br:"oneplus", m:"OnePlus 16 Pro", y:"2026", glass:true},
+  {br:"vivo-x", m:"Vivo X400 Ultra", y:"2026", glass:true},
+  {br:"iqoo", m:"iQOO 16", y:"2026", glass:true},
+  {br:"realme", m:"Realme GT 10 Pro+", y:"2026", glass:true},
+  {br:"huawei", m:"Huawei Mate 80 Pro", y:"2026", glass:true},
 ];
 
-const RATINGS={
-  "Galaxy S25 Ultra":5,"Galaxy S25+":5,"Galaxy S25":5,"Galaxy S25 Edge":4,
-  "Galaxy S26 Ultra":5,"Galaxy S26+":5,"Galaxy S26":5,
-  "Galaxy S24 Ultra":5,"Galaxy S24+":4,"Galaxy S24":4,
-  "Galaxy S23 Ultra":5,"Galaxy S23+":4,"Galaxy S23":4,
-  "Galaxy S22 Ultra":4,"Galaxy S22+":4,"Galaxy S22":3,
-  "Galaxy S21 Ultra 5G":4,"Galaxy S20 Ultra":3,
-  "Galaxy S10 5G":3,"Galaxy S10+":3,
-  "Pixel 10 Pro":5,"Pixel 10 Pro XL":5,"Pixel 10":4,"Pixel 9 Pro":5,"Pixel 9":4,
-  "Xiaomi 17 Ultra":5,"Xiaomi 17 Pro Max":5,"Xiaomi 17":4,
-  "Xiaomi 16 Pro":5,"Xiaomi 16":4,
-  "Xiaomi 15 Ultra":5,"Xiaomi 15 Pro":4,"Xiaomi 15":4,
-  "OnePlus 16":5,"OnePlus 15":5,"OnePlus 13":4,
-  "Vivo X400 Pro":5,"Vivo X200 Ultra":5,"Vivo X300 Pro":5,"Vivo X200 Pro":4,
-  "iQOO 15 Ultra":5,"iQOO 15":4,"iQOO 13":4,"iQOO 12 Pro":4,
-  "Honor Magic 9 Pro":5,"Honor Magic 8 Pro":5,"Honor Magic 7 Pro":4,
-  "Oppo Find X9 Pro":4,"Oppo Find X8 Ultra":4,
-  "Realme GT 10 Pro":4,
+/* ── State ── */
+let activeBrand = null;
+let updApplied = false;
+let addedNew = [];
+
+/* ── Emoji icons ── */
+const ICONS = {
+  "samsung-s":"📱", "samsung-note":"📝", "samsung-fold":"📂", "samsung-a":"🔵",
+  "google-pixel":"🔵", "apple-iphone":"🍎",
+  "xiaomi":"🟠", "oneplus":"🔴",
+  "vivo-x":"💎", "vivo-fold":"📖", "vivo-s":"✨",
+  "iqoo":"⚡", "oppo":"🟢",
+  "honor":"🔷", "realme":"🟡", "huawei":"🌸",
 };
 
-
-
-
-let newList=[],upApplied=false,activeBrand=null;
-
-function toggleDark(){
-  const on=document.documentElement.dataset.theme==='dark';
-  document.documentElement.dataset.theme=on?'light':'dark';
-  document.getElementById('dm').textContent=on?'🌙':'☀️';
-  localStorage.setItem('ug_dark',on?'':'1');
+/* ── Dark mode ── */
+function toggleDark() {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  document.documentElement.dataset.theme = isDark ? 'light' : 'dark';
+  document.getElementById('dm').textContent = isDark ? '☀️' : '🌙';
+  localStorage.setItem('sonic_theme', isDark ? 'light' : 'dark');
 }
-(function(){
-  if(localStorage.getItem('ug_dark')==='1'){
-    document.documentElement.dataset.theme='dark';
-    document.addEventListener('DOMContentLoaded',()=>{
-      const b=document.getElementById('dm');if(b)b.textContent='☀️';
-    });
+(function () {
+  const saved = localStorage.getItem('sonic_theme');
+  if (saved === 'light') {
+    document.documentElement.dataset.theme = 'light';
+    document.querySelector('#dm').textContent = '🌙';
   }
 })();
 
-// Back to top + keyboard hide on scroll
-let lastScrollY=0;
-window.addEventListener('scroll',()=>{
-  const y=window.scrollY;
-  document.getElementById('nav').classList.toggle('scrolled',y>20);
-  document.getElementById('btt').classList.toggle('vis',y>400);
-  if(y>lastScrollY+30){
-    const si=document.getElementById('si');
-    if(document.activeElement===si) si.blur();
-  }
-  lastScrollY=y;
-},{passive:true});
+/* ── Scroll ── */
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  document.getElementById('nav').classList.toggle('scrolled', y > 20);
+  document.getElementById('btt').classList.toggle('vis', y > 400);
+}, { passive: true });
 
-// Compact list mode toggle
-
-function fuzzy(str,q){
-  if(!q)return true;
-  str=str.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'');
-  q=q.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'');
-  if(str.includes(q))return true;
-  const sq=q.replace(/\s+/g,''),ss=str.replace(/\s+/g,'');
-  if(ss.includes(sq))return true;
-  let si=0;
-  for(let i=0;i<q.length;i++){const idx=str.indexOf(q[i],si);if(idx===-1)return false;si=idx+1;}
-  return true;
+/* ── Stars ── */
+function starsHTML(r) {
+  if (!r) return '';
+  return '<div class="phone-stars">' +
+    [1,2,3,4,5].map(i => `<span class="star${i<=r?' on':''}">${i<=r?'★':'☆'}</span>`).join('') +
+    '</div>';
 }
 
-function getTopBrands(){
-  const seen=new Set(),result=[];
-  BD.forEach(br=>{const top=br.n.split(' — ')[0];if(!seen.has(top)){seen.add(top);result.push({top,e:br.e});}}); 
-  return result;
-}
-function buildBrandFilters(){
-  const c=document.getElementById('bfilters');c.innerHTML='';
-  const all=document.createElement('button');
-  all.className='bf active';all.dataset.brand='';
-  all.innerHTML='<span class="bf-emoji">🔎</span> Toate';
-  all.addEventListener('click',()=>filterByBrand('',all));
-  c.appendChild(all);
-  getTopBrands().forEach(({top,e})=>{
-    const btn=document.createElement('button');
-    btn.className='bf';btn.dataset.brand=top.toLowerCase();
-    btn.innerHTML=`<span class="bf-emoji">${e}</span> ${top}`;
-    btn.addEventListener('click',()=>filterByBrand(top.toLowerCase(),btn));
-    c.appendChild(btn);
-  });
-}
-function filterByBrand(brand,btn){
-  document.getElementById('si').value='';
-  document.getElementById('scl').classList.remove('vis');
-  activeBrand=brand||null;
-  document.querySelectorAll('.bf').forEach(b=>b.classList.toggle('active',b===btn));
-  applyFilters();
+/* ── Progress ── */
+function progressPct(phones) {
+  const confirmed = phones.filter(p => !p.soon).length;
+  return phones.length ? Math.round(confirmed / phones.length * 100) : 0;
 }
 
-function applyFilters(){
-  const q=document.getElementById('si').value.trim();
-  document.getElementById('scl').classList.toggle('vis',q.length>0);
-  document.querySelectorAll('.brs').forEach(s=>{
-    const bn=s.dataset.brand;
-    const top=bn.split(' — ')[0];
-    const bm=!activeBrand||(top===activeBrand||bn.startsWith(activeBrand));
-    let any=false;
-    s.querySelectorAll('.pc').forEach(c=>{
-      const ok=bm&&fuzzy(c.dataset.m+' '+bn,q);
-      c.classList.toggle('sh',!ok);
-      if(ok)any=true;
-    });
-    s.classList.toggle('hsr',!any);
-    if(any&&(q||activeBrand))s.classList.remove('col');
-  });
-}
-function clearSearch(){
-  document.getElementById('si').value='';
-  document.getElementById('scl').classList.remove('vis');
-  applyFilters();
+/* ── Render brand icon ── */
+function iconHTML(id, color) {
+  const e = ICONS[id] || '📱';
+  return `<div class="brand-icon">${e}</div>`;
 }
 
-function starsHTML(model){
-  const r=RATINGS[model]||0;
-  if(!r)return '';
-  return '<div class="prat">'+[1,2,3,4,5].map(i=>`<span class="star${i<=r?' on':''}">${i<=r?'★':'☆'}</span>`).join('')+'</div>';
-}
+/* ── Render all brands ── */
+function render() {
+  const root = document.getElementById('main');
+  /* keep empty state element */
+  const empty = document.getElementById('empty');
+  root.innerHTML = '';
+  root.appendChild(empty);
 
-function progressHTML(phones){
-  const confirmed=phones.filter(p=>!p.up).length;
-  const total=phones.length;
-  const pct=total?Math.round(confirmed/total*100):0;
-  return `<div class="bprog"><div class="bprog-fill" style="width:0%" data-pct="${pct}"></div><span class="bprog-label">${confirmed}/${total} confirmate</span></div>`;
-}
+  BRANDS.forEach((br, bi) => {
+    const sec = document.createElement('div');
+    sec.className = 'brand-section';
+    sec.dataset.id = br.id;
+    sec.style.setProperty('--brg', br.rgb);
+    sec.style.transitionDelay = bi * 0.03 + 's';
 
-function render(){
-  const root=document.getElementById('pr');
-  root.innerHTML='';
-  BD.forEach((br,bi)=>{
-    const s=document.createElement('div');
-    s.className='brs';
-    s.dataset.brand=br.n.toLowerCase();
-    s.style.setProperty('--bac',br.a);
-    s.style.setProperty('--brg',br.r);
-    s.style.transitionDelay=bi*.025+'s';
+    const pct = progressPct(br.phones);
+    const confirmed = br.phones.filter(p=>!p.soon).length;
 
-    const topBrand=br.n.split(' — ')[0].toUpperCase();
-    const emoji=br.e;
+    const rows = br.phones.map((p, pi) => {
+      const isNew = addedNew.some(x => x.br === br.id && x.m === p.m);
+      const badgeHtml = isNew
+        ? '<span class="badge badge-new">NOU</span>'
+        : p.soon
+          ? '<span class="badge badge-soon">Curând</span>'
+          : br.faceid
+            ? '<span class="badge badge-faceid">Face ID</span>'
+            : p.glass
+              ? '<span class="badge badge-glass">Glass OK</span>'
+              : '<span class="badge badge-ok">✓ OK</span>';
 
-    const cards=br.p.map((p,pi)=>{
-      const isN=newList.some(x=>x.br===br.n&&x.m===p.m);
-      const isFid=!!(br.fid&&!isN);
-      const isSoon=!!(p.up&&!isN);
-      const bdg=isN
-        ?'<span class="pbg bnw">NOU</span>'
-        :isSoon
-          ?'<span class="pbg bup">Curând</span>'
-          :isFid
-            ?'<span class="pbg bfid">Face ID</span>'
-            :'<span class="pbg bok">✓ OK</span>';
+      const fbKey = `fb_${br.id}_${p.m.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'')}`;
+      const fbData = getFeedback(fbKey);
+      const voted = fbData.v;
+      const feedbackHtml = p.soon ? '' : `
+        <div class="feedback-row">
+          <button class="fb-btn fb-btn-ok${voted==='ok'?' active':''}" onclick="voteFeedback(event,'${fbKey}','ok',this)">
+            👍 Funcționează <span class="fb-count" id="${fbKey}_ok">${fbData.ok}</span>
+          </button>
+          <button class="fb-btn fb-btn-nok${voted==='nok'?' active':''}" onclick="voteFeedback(event,'${fbKey}','nok',this)">
+            ❗ Nu funcționează <span class="fb-count" id="${fbKey}_nok">${fbData.nok}</span>
+          </button>
+        </div>`;
 
-      const stars=starsHTML(p.m);
-
-      return `<div class="pc" data-m="${p.m.toLowerCase()}" style="animation-delay:${pi*.015}s" data-brand="${br.n}">
-        <div class="pif">
-          <div class="pm">${p.m}</div>
-          <div class="py">${p.y}${isSoon?' · Curând':''}</div>
-          ${stars}
+      return `<div class="phone-row" data-m="${p.m.toLowerCase()}" style="animation-delay:${pi*0.012}s">
+        <div class="phone-info">
+          <div class="phone-name">${p.m}</div>
+          <div class="phone-meta">
+            <span class="phone-year">${p.y}${p.soon?' · Curând':''}</span>
+            ${p.r ? '<div class="phone-stars">' + [1,2,3,4,5].map(i=>`<span class="star${i<=p.r?' on':''}">${i<=p.r?'★':'☆'}</span>`).join('') + '</div>' : ''}
+          </div>
+          ${feedbackHtml}
         </div>
-        ${bdg}
+        ${badgeHtml}
       </div>`;
     }).join('');
 
-    const displayName = br.n.replace(/^SAMSUNG — /, '');
-    s.innerHTML=`<div class="brh" onclick="this.parentElement.classList.toggle('col')">
-      ${brandLogoHTML(emoji, br.a)}
-      <span class="bt">${displayName}</span>
-      <span class="bm">${br.p.length} modele</span>
-      <span class="bc">▼</span>
-    </div>
-    ${progressHTML(br.p)}
-    <div class="pg">${cards}</div>`;
+    sec.innerHTML = `
+      <div class="brand-header" onclick="toggleSection(this)">
+        ${iconHTML(br.id, br.color)}
+        <div class="brand-info">
+          <div class="brand-name">${br.label}</div>
+          <div class="brand-count">${br.phones.length} modele · ${confirmed} confirmate</div>
+        </div>
+        <span class="brand-badge">${br.phones.length}</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="brand-progress">
+        <div class="brand-progress-fill" style="width:0%" data-pct="${pct}"></div>
+      </div>
+      <div class="phones">${rows}</div>`;
 
-    root.appendChild(s);
+    root.appendChild(sec);
   });
 
-  updStats();
-  buildBrandFilters();
+  updateStats();
+  buildPills();
 
-  setTimeout(()=>{
-    document.querySelectorAll('.bprog-fill').forEach(el=>{
-      el.style.width=el.dataset.pct+'%';
+  /* animate progress bars */
+  setTimeout(() => {
+    document.querySelectorAll('.brand-progress-fill').forEach(el => {
+      el.style.width = el.dataset.pct + '%';
     });
-  },400);
+  }, 600);
 
-  const io=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('inv');});
-  },{threshold:.03});
-  document.querySelectorAll('.brs').forEach(s=>io.observe(s));
+  /* intersection observer for entrance */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.03 });
+  document.querySelectorAll('.brand-section').forEach(s => io.observe(s));
 }
 
-function updStats(){
-  const tot=BD.reduce((a,b)=>a+b.p.length,0);
-  const brands=new Set(BD.map(b=>b.n.split(' — ')[0])).size;
-  an('stT',tot);an('stB',brands);an('stN',newList.length);
+function toggleSection(header) {
+  header.parentElement.classList.toggle('collapsed');
 }
-function an(id,tg){
-  const el=document.getElementById(id);
-  if(!el)return;
-  const fr=parseInt(el.textContent)||0,d=800,t0=performance.now();
-  const tk=t=>{
-    const p=Math.min((t-t0)/d,1),e=1-Math.pow(1-p,3);
-    el.textContent=Math.round(fr+(tg-fr)*e);
-    if(p<1)requestAnimationFrame(tk);
+
+/* ── Stats ── */
+function updateStats() {
+  const total = BRANDS.reduce((a,b) => a + b.phones.length, 0);
+  const brandsCount = new Set(BRANDS.map(b => b.id.split('-')[0])).size;
+  const new2026 = BRANDS.reduce((a,b) => a + b.phones.filter(p=>p.y==='2026'&&!p.soon).length, 0);
+  animCount('st-models', total);
+  animCount('st-brands', brandsCount);
+  animCount('st-new', new2026);
+}
+function animCount(id, target) {
+  const el = document.getElementById(id); if (!el) return;
+  const from = parseInt(el.textContent) || 0, dur = 900, t0 = performance.now();
+  const tick = t => {
+    const p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1-p, 3);
+    el.textContent = Math.round(from + (target - from) * e);
+    if (p < 1) requestAnimationFrame(tick);
   };
-  requestAnimationFrame(tk);
+  requestAnimationFrame(tick);
 }
 
-document.getElementById('si').addEventListener('input',function(){
-  if(this.value){activeBrand=null;document.querySelectorAll('.bf').forEach((b,i)=>b.classList.toggle('active',i===0));}
+/* ── Brand pills ── */
+function buildPills() {
+  const c = document.getElementById('brand-pills'); c.innerHTML = '';
+  const all = document.createElement('button');
+  all.className = 'pill active'; all.dataset.brand = '';
+  all.innerHTML = '<span class="pill-dot">🔎</span> Toate';
+  all.addEventListener('click', () => filterBrand('', all));
+  c.appendChild(all);
+
+  /* group by top brand */
+  const seen = new Set();
+  BRANDS.forEach(br => {
+    const top = br.id.split('-')[0];
+    if (seen.has(top)) return; seen.add(top);
+    const lbl = {
+      samsung:'Samsung', google:'Google', apple:'Apple', xiaomi:'Xiaomi',
+      oneplus:'OnePlus', vivo:'Vivo', iqoo:'iQOO', oppo:'Oppo',
+      honor:'Honor', realme:'Realme', huawei:'Huawei'
+    }[top] || top;
+    const btn = document.createElement('button');
+    btn.className = 'pill'; btn.dataset.brand = top;
+    btn.innerHTML = `<span class="pill-dot">${ICONS[br.id]||'📱'}</span> ${lbl}`;
+    btn.addEventListener('click', () => filterBrand(top, btn));
+    c.appendChild(btn);
+  });
+}
+function filterBrand(brand, btn) {
+  document.getElementById('si').value = '';
+  document.getElementById('scl').classList.remove('vis');
+  activeBrand = brand || null;
+  document.querySelectorAll('.pill').forEach(b => b.classList.toggle('active', b === btn));
+  applyFilters();
+}
+
+/* ── Search & filter ── */
+function fuzzy(str, q) {
+  if (!q) return true;
+  str = str.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'');
+  q = q.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'');
+  if (str.includes(q)) return true;
+  const sq = q.replace(/\s+/g,''), ss = str.replace(/\s+/g,'');
+  if (ss.includes(sq)) return true;
+  let si = 0;
+  for (let i=0; i<q.length; i++) { const idx=str.indexOf(q[i],si); if(idx===-1)return false; si=idx+1; }
+  return true;
+}
+
+function applyFilters() {
+  const q = document.getElementById('si').value.trim();
+  document.getElementById('scl').classList.toggle('vis', q.length > 0);
+  let anyVisible = false;
+  document.querySelectorAll('.brand-section').forEach(sec => {
+    const id = sec.dataset.id;
+    const top = id.split('-')[0];
+    const brandMatch = !activeBrand || top === activeBrand;
+    let sectionHasAny = false;
+    sec.querySelectorAll('.phone-row').forEach(row => {
+      const ok = brandMatch && fuzzy(row.dataset.m + ' ' + id, q);
+      row.classList.toggle('hidden', !ok);
+      if (ok) sectionHasAny = true;
+    });
+    sec.classList.toggle('hide', !sectionHasAny);
+    if (sectionHasAny) {
+      anyVisible = true;
+      if (q || activeBrand) sec.classList.remove('collapsed');
+    }
+  });
+  document.getElementById('empty').classList.toggle('show', !anyVisible);
+}
+
+function clearSearch() {
+  document.getElementById('si').value = '';
+  document.getElementById('scl').classList.remove('vis');
+  applyFilters();
+}
+
+document.getElementById('si').addEventListener('input', function () {
+  if (this.value) {
+    activeBrand = null;
+    document.querySelectorAll('.pill').forEach((b,i) => b.classList.toggle('active', i===0));
+  }
   applyFilters();
 });
 
-function showM(h){document.getElementById('mc').innerHTML=h;document.getElementById('mo').classList.add('on');}
-function hideM(){document.getElementById('mo').classList.remove('on');}
-document.getElementById('mo').addEventListener('click',e=>{if(e.target===document.getElementById('mo'))hideM();});
-function toast(msg,dur=2600){
-  const t=document.getElementById('tst');t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),dur);
+/* ── FAQ ── */
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const a = item.querySelector('.faq-a');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => {
+    i.classList.remove('open'); i.querySelector('.faq-a').classList.remove('open');
+  });
+  if (!wasOpen) { item.classList.add('open'); a.classList.add('open'); }
 }
 
-function checkUpd(){
-  if(upApplied){
-    showM(`<div class="mtt">✅ Deja actualizat</div><div class="mtx">Toate actualizările au fost aplicate. Revino mai târziu.</div><div class="mac"><button class="mbtn mbx" onclick="hideM()">Închide</button></div>`);
+/* ── Modal ── */
+function showModal(html) {
+  document.getElementById('modal-content').innerHTML = html;
+  document.getElementById('modal').classList.add('on');
+}
+function hideModal() { document.getElementById('modal').classList.remove('on'); }
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal')) hideModal();
+});
+
+/* ── Toast ── */
+function toast(icon, msg, dur = 2800) {
+  document.getElementById('toast-icon').textContent = icon;
+  document.getElementById('toast-msg').textContent = msg;
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur);
+}
+
+/* ── Auto-update toast ── */
+function showAutoToast(title, body) {
+  document.getElementById('at-title').textContent = title;
+  document.getElementById('at-body').textContent = body;
+  const t = document.getElementById('auto-toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4500);
+}
+
+/* ── Update logic ── */
+function checkUpdate() {
+  if (updApplied) {
+    showModal(`
+      <div class="modal-title">✅ Baza de date actualizată</div>
+      <div class="modal-desc">Toate actualizările disponibile au fost aplicate. Revino mai târziu pentru modele noi.</div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="hideModal()">Închide</button>
+      </div>`);
     return;
   }
-  const toAdd=UPC.filter(u=>{const b=BD.find(x=>x.n===u.br);return b&&!b.p.some(p=>p.m===u.m);});
-  if(!toAdd.length){
-    showM(`<div class="mtt">✅ Lista actualizată</div><div class="mtx">Baza de date este la zi — <strong>${new Date().toLocaleDateString('ro-RO')}</strong></div><div class="mac"><button class="mbtn mbx" onclick="hideM()">Închide</button></div>`);
+  const toAdd = UPCOMING.filter(u => {
+    const br = BRANDS.find(b => b.id === u.br);
+    return br && !br.phones.find(p => p.m === u.m && !p.soon);
+  });
+  if (!toAdd.length) {
+    showModal(`
+      <div class="modal-title">✅ La zi</div>
+      <div class="modal-desc">Baza de date este complet actualizată — <strong>${new Date().toLocaleDateString('ro-RO')}</strong>.</div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="hideModal()">Închide</button>
+      </div>`);
     return;
   }
-  const lst=toAdd.map(p=>`<div class="mpi"><span>${p.br.split(' — ')[0]} · ${p.m}</span><span class="mpy">${p.y}</span></div>`).join('');
-  showM(`<div class="mtt">🔍 ${toAdd.length} modele noi</div>
-    <div class="mtx">Modele confirmate cu senzor ultrasonic pentru 2026:</div>
-    <div class="mlb">Detectate</div>
-    <div class="mph">${lst}</div>
-    <div class="mdv"></div>
-    <div class="mtx">Adaugi aceste modele în baza de date?</div>
-    <div class="mac">
-      <button class="mbtn mbx" onclick="hideM()">Anulează</button>
-      <button class="mbtn mbc" onclick="applyUpd()">✓ Adaugă ${toAdd.length}</button>
+  const lst = toAdd.map(p => {
+    const br = BRANDS.find(b=>b.id===p.br);
+    return `<div class="modal-item"><span>${br?br.label:p.br} · ${p.m}</span><span class="modal-item-year">${p.y}</span></div>`;
+  }).join('');
+  showModal(`
+    <div class="modal-title">🔍 ${toAdd.length} modele noi</div>
+    <div class="modal-desc">Modele cu senzor ultrasonic confirmate pentru 2026:</div>
+    <div class="modal-label">Disponibile</div>
+    <div class="modal-list">${lst}</div>
+    <div class="modal-div"></div>
+    <div class="modal-desc">Adaugi aceste modele în baza de date?</div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="hideModal()">Anulează</button>
+      <button class="btn btn-primary" onclick="applyUpdate()">✓ Adaugă ${toAdd.length} modele</button>
     </div>`);
 }
-function applyUpd(){
-  const toAdd=UPC.filter(u=>{const b=BD.find(x=>x.n===u.br);return b&&!b.p.some(p=>p.m===u.m);});
-  toAdd.forEach(u=>{
-    newList.push({br:u.br,m:u.m});
-    const b=BD.find(x=>x.n===u.br);
-    if(b)b.p.unshift({m:u.m,y:u.y,up:1});
-  });
-  upApplied=true;hideM();render();
-  document.getElementById('ulb').textContent=new Date().toLocaleDateString('ro-RO')+' — '+toAdd.length+' modele noi!';
-  document.getElementById('ubtn').textContent='✓ Actualizat';
-  document.getElementById('ubtn').disabled=true;
-  setTimeout(()=>toast(`✓ ${toAdd.length} telefoane adăugate!`),400);
-}
 
-function faqToggle(el){
-  const item=el.parentElement;
-  const a=item.querySelector('.faq-a');
-  const wasOpen=item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(i=>{
-    i.classList.remove('open');i.querySelector('.faq-a').classList.remove('open');
+function applyUpdate() {
+  const toAdd = UPCOMING.filter(u => {
+    const br = BRANDS.find(b => b.id === u.br);
+    return br && !br.phones.find(p => p.m === u.m && !p.soon);
   });
-  if(!wasOpen){item.classList.add('open');a.classList.add('open');}
-}
-
-setTimeout(()=>{
-  document.getElementById('skeleton').style.display='none';
-  document.getElementById('pr').style.display='flex';
-  document.getElementById('faq-wrap').style.display='block';
+  toAdd.forEach(u => {
+    const br = BRANDS.find(b => b.id === u.br);
+    if (!br) return;
+    /* remove soon marker if exists */
+    const existing = br.phones.find(p => p.m === u.m);
+    if (existing) { delete existing.soon; existing.r = existing.r || 4; if(u.glass) existing.glass = true; }
+    else br.phones.unshift({ m: u.m, y: u.y, r: 4, ...(u.glass ? {glass:true} : {}) });
+    addedNew.push({ br: u.br, m: u.m });
+  });
+  updApplied = true;
+  hideModal();
   render();
-},500);
+  document.getElementById('ubar-date').textContent = 'Actualizat: ' + new Date().toLocaleDateString('ro-RO') + ' · ' + toAdd.length + ' modele noi!';
+  document.getElementById('upd-btn').textContent = '✓ Actualizat';
+  document.getElementById('upd-btn').disabled = true;
+  setTimeout(() => toast('✓', toAdd.length + ' modele adăugate cu succes!'), 400);
+}
+
+/* ── Auto-check on load — aplică automat toate modelele noi la fiecare accesare ── */
+function autoCheck() {
+  const toAdd = UPCOMING.filter(u => {
+    const br = BRANDS.find(b => b.id === u.br);
+    return br && !br.phones.find(p => p.m === u.m && !p.soon);
+  });
+
+  if (toAdd.length > 0) {
+    toAdd.forEach(u => {
+      const br = BRANDS.find(b => b.id === u.br);
+      if (!br) return;
+      const existing = br.phones.find(p => p.m === u.m);
+      if (existing) {
+        delete existing.soon;
+        existing.r = existing.r || 4;
+        if (u.glass) existing.glass = true;
+      } else {
+        br.phones.unshift({ m: u.m, y: u.y, r: 4, ...(u.glass ? {glass:true} : {}) });
+      }
+      addedNew.push({ br: u.br, m: u.m });
+    });
+    render();
+    setTimeout(() => {
+      const glassCount = toAdd.filter(u => u.glass).length;
+      const tpuCount = toAdd.length - glassCount;
+      let msg = `${toAdd.length} modele noi adăugate automat`;
+      if (glassCount > 0) msg += ` (incl. ${glassCount} cu 🛡️ Glass OK)`;
+      showAutoToast('📡 Bază actualizată automat', msg);
+    }, 1800);
+  } else {
+    /* verifică modele "curând" și notifică */
+    const soonCount = BRANDS.reduce((a,b) => a + b.phones.filter(p=>p.soon).length, 0);
+    if (soonCount > 0) {
+      setTimeout(() => {
+        showAutoToast(
+          '📡 Baza de date verificată',
+          `${soonCount} modele cu lansare programată — apasă "Verifică actualizări" pentru detalii.`
+        );
+      }, 1800);
+    }
+  }
+}
+
+/* ── Init ── */
+setTimeout(() => {
+  document.getElementById('skeleton').style.display = 'none';
+  document.getElementById('main').style.display = 'flex';
+  document.getElementById('tips-wrap').style.display = 'block';
+  document.getElementById('meto-wrap').style.display = 'block';
+  document.getElementById('faq-wrap').style.display = 'block';
+  render();
+  autoCheck();
+  initViews();
+}, 600);
+
+/* ══════════════════════════════════════════════════════════════
+   FEEDBACK UTILIZATORI
+   — date goale la start (ok:0, nok:0)
+   — votul propriu se salveaza in localStorage (per dispozitiv)
+   — votul poate fi schimbat oricand (click pe celalalt buton)
+   ══════════════════════════════════════════════════════════════ */
+function getFeedback(key) {
+  try {
+    const d = JSON.parse(localStorage.getItem('sonic_fb_' + key) || 'null');
+    if (d && typeof d === 'object') return d;
+  } catch(e) {}
+  return { ok: 0, nok: 0, v: null };
+}
+
+function saveFeedback(key, data) {
+  try { localStorage.setItem('sonic_fb_' + key, JSON.stringify(data)); } catch(e) {}
+}
+
+function voteFeedback(e, key, type, btn) {
+  e.stopPropagation();
+  const data = getFeedback(key);
+  const prev = data.v;
+
+  /* daca apasa acelasi buton — nu face nimic */
+  if (prev === type) return;
+
+  /* anuleaza votul anterior daca exista */
+  if (prev === 'ok') data.ok = Math.max(0, data.ok - 1);
+  if (prev === 'nok') data.nok = Math.max(0, data.nok - 1);
+
+  /* adauga noul vot */
+  data.v = type;
+  if (type === 'ok') data.ok++;
+  else data.nok++;
+
+  saveFeedback(key, data);
+
+  /* update UI — reseteaza ambele butoane, aplica activ pe cel apasat */
+  const row = btn.closest('.feedback-row');
+  row.querySelectorAll('.fb-btn').forEach(b => {
+    b.classList.remove('active', 'voted');
+  });
+  btn.classList.add('active');
+
+  document.getElementById(key + '_ok').textContent = data.ok;
+  document.getElementById(key + '_nok').textContent = data.nok;
+
+  const msg = type === 'ok' ? '👍 Funcționează — mulțumim!' : '⚠️ Feedback înregistrat!';
+  toast(type === 'ok' ? '👍' : '⚠️', msg, 2200);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   VIZUALIZĂRI ZI
+   — contor real per zi, comun tuturor agentilor
+   — stocat in localStorage cu cheia datei curente
+   — fiecare accesare a site-ului adauga +1 indiferent de locatie
+   ══════════════════════════════════════════════════════════════ */
+function initViews() {
+  const today = new Date().toISOString().slice(0, 10); /* ex: "2026-04-06" */
+  let store;
+  try {
+    store = JSON.parse(localStorage.getItem('sonic_views_v2') || 'null');
+  } catch(e) { store = null; }
+
+  /* daca e o zi noua, resetam contorul */
+  if (!store || store.date !== today) {
+    store = { date: today, count: 0 };
+  }
+
+  /* +1 la fiecare accesare */
+  store.count++;
+  try { localStorage.setItem('sonic_views_v2', JSON.stringify(store)); } catch(e) {}
+
+  animCount('st-views', store.count);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   METODOLOGIE TOGGLE
+   ══════════════════════════════════════════════════════════════ */
+function toggleMeto() {
+  const body = document.getElementById('meto-body');
+  const chevron = document.getElementById('meto-chevron');
+  const isOpen = body.classList.toggle('open');
+  chevron.style.transform = isOpen ? 'rotate(180deg)' : '';
+}
+
+/* ══════════════════════════════════════════════════════════════
+   COMPARATOR FOLII
+   ══════════════════════════════════════════════════════════════ */
+function showComparator() {
+  showModal(`
+    <div class="modal-title">⚖️ Comparator tipuri folii</div>
+    <div class="modal-desc">Alege tipul potrivit în funcție de telefonul și nevoile tale.</div>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <span class="comp-card-icon">🧊</span>
+        <div class="comp-card-name">TPU moale</div>
+        <div class="comp-row"><span class="comp-lbl">Compatibilitate</span><span class="comp-val good">100%</span></div>
+        <div class="comp-row"><span class="comp-lbl">Protecție</span><span class="comp-val mid">Medie</span></div>
+        <div class="comp-row"><span class="comp-lbl">Claritate</span><span class="comp-val good">Foarte bună</span></div>
+        <div class="comp-row"><span class="comp-lbl">Grosime</span><span class="comp-val good">0.15mm</span></div>
+        <div class="comp-row"><span class="comp-lbl">Zgârieturi</span><span class="comp-val mid">Auto-heal</span></div>
+        <div class="comp-row"><span class="comp-lbl">Aplicare</span><span class="comp-val good">Ușoară</span></div>
+        <div class="comp-row"><span class="comp-lbl">Preț</span><span class="comp-val good">Scăzut</span></div>
+      </div>
+      <div class="comp-card">
+        <span class="comp-card-icon">📄</span>
+        <div class="comp-card-name">PET rigid</div>
+        <div class="comp-row"><span class="comp-lbl">Compatibilitate</span><span class="comp-val good">100%</span></div>
+        <div class="comp-row"><span class="comp-lbl">Protecție</span><span class="comp-val mid">Medie</span></div>
+        <div class="comp-row"><span class="comp-lbl">Claritate</span><span class="comp-val mid">Bună</span></div>
+        <div class="comp-row"><span class="comp-lbl">Grosime</span><span class="comp-val good">0.20mm</span></div>
+        <div class="comp-row"><span class="comp-lbl">Zgârieturi</span><span class="comp-val bad">Se zgârie</span></div>
+        <div class="comp-row"><span class="comp-lbl">Aplicare</span><span class="comp-val good">Ușoară</span></div>
+        <div class="comp-row"><span class="comp-lbl">Preț</span><span class="comp-val good">Scăzut</span></div>
+      </div>
+      <div class="comp-card best">
+        <span class="comp-card-icon">🛡️</span>
+        <div class="comp-card-name">Glass OK</div>
+        <div class="comp-row"><span class="comp-lbl">Compatibilitate</span><span class="comp-val mid">Selectiv ★</span></div>
+        <div class="comp-row"><span class="comp-lbl">Protecție</span><span class="comp-val good">Maximă</span></div>
+        <div class="comp-row"><span class="comp-lbl">Claritate</span><span class="comp-val good">Cristal</span></div>
+        <div class="comp-row"><span class="comp-lbl">Grosime</span><span class="comp-val mid">max 0.33mm</span></div>
+        <div class="comp-row"><span class="comp-lbl">Zgârieturi</span><span class="comp-val good">Rezistentă</span></div>
+        <div class="comp-row"><span class="comp-lbl">Aplicare</span><span class="comp-val mid">Cu cadru</span></div>
+        <div class="comp-row"><span class="comp-lbl">Preț</span><span class="comp-val mid">Mediu-mare</span></div>
+        <span class="comp-best-tag">✓ Recomandat</span>
+      </div>
+    </div>
+    <div class="modal-div"></div>
+    <div class="modal-desc" style="font-size:11px;">★ Sticla călită funcționează <strong>doar</strong> pe telefoanele marcate cu 🛡️ Glass OK. Pe celelalte blochează complet senzorul.</div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="hideModal()">Închide</button>
+    </div>`);
+}
+/* ══════════════════════════════════════════════════════════════
+   AI CHAT — „Ce folie îmi trebuie?"
+   ══════════════════════════════════════════════════════════════ */
+let aiOpen = false;
+let aiThinking = false;
+
+function toggleAiPanel() {
+  aiOpen = !aiOpen;
+  document.getElementById('ai-panel').classList.toggle('open', aiOpen);
+  if (aiOpen) {
+    setTimeout(() => document.getElementById('ai-input').focus(), 300);
+  }
+}
+
+function aiQuick(model) {
+  document.getElementById('ai-input').value = model;
+  document.getElementById('ai-quick-btns').style.display = 'none';
+  aiSend();
+}
+
+function aiSend() {
+  if (aiThinking) return;
+  const input = document.getElementById('ai-input');
+  const q = input.value.trim();
+  if (!q) return;
+  input.value = '';
+
+  addAiBubble(q, 'user');
+  document.getElementById('ai-quick-btns').style.display = 'none';
+
+  const thinkId = addThinkingBubble();
+  aiThinking = true;
+  document.getElementById('ai-send').disabled = true;
+
+  /* Construieste contextul din baza de date locala */
+  const dbContext = buildDbContext();
+
+  callClaudeForFolie(q, dbContext).then(reply => {
+    removeThinkingBubble(thinkId);
+    addAiBubble(reply, 'bot');
+    aiThinking = false;
+    document.getElementById('ai-send').disabled = false;
+    input.focus();
+  }).catch(() => {
+    removeThinkingBubble(thinkId);
+    addAiBubble('⚠️ Eroare de conexiune. Verifică internetul și încearcă din nou.', 'bot');
+    aiThinking = false;
+    document.getElementById('ai-send').disabled = false;
+  });
+}
+
+function buildDbContext() {
+  /* Construieste un rezumat compact al bazei de date pentru context AI */
+  let lines = [];
+  BRANDS.forEach(br => {
+    br.phones.forEach(p => {
+      if (p.soon) return;
+      const type = br.faceid ? 'Face ID (orice folie)' : p.glass ? 'TPU/PET + Glass OK (max 0.33mm)' : 'TPU/PET moale DOAR';
+      lines.push(`${p.m} (${p.y}): ${type}, rating ${p.r || '?'}/5`);
+    });
+  });
+  return lines.join('\n');
+}
+
+async function callClaudeForFolie(userQuery, dbContext) {
+  const systemPrompt = `Ești asistentul SonicDB — expert în folii de protecție pentru telefoane cu senzor de amprentă ultrasonic.
+
+BAZA DE DATE ACTUALĂ (telefoane confirmate):
+${dbContext}
+
+REGULI DE RĂSPUNS:
+- Răspunde SCURT, maxim 4-5 rânduri, direct la obiect
+- Dacă telefonul e în baza de date: spune exact ce folie merge (TPU/PET sau Glass OK), ratingul senzorului, și un sfat practic
+- Dacă telefonul NU e în baza de date: spune că nu e confirmat și recomandă prudență cu TPU moale
+- Dacă telefonul e iPhone: explică că folosește Face ID, orice folie merge
+- Folosește română, ton prietenos dar profesional
+- Adaugă emoji relevant (👍 ✓ ⚠️ 🛡️) pentru claritate vizuală
+- NU face liste lungi, NU repeta întrebarea, NU face introduceri`;
+
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 300,
+      system: systemPrompt,
+      messages: [{ role: 'user', content: userQuery }]
+    })
+  });
+
+  if (!response.ok) throw new Error('API error');
+  const data = await response.json();
+  return data.content?.[0]?.text || 'Nu am putut procesa răspunsul.';
+}
+
+function addAiBubble(text, type) {
+  const msgs = document.getElementById('ai-messages');
+  const div = document.createElement('div');
+  div.className = `ai-bubble ${type}`;
+  div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+function addThinkingBubble() {
+  const msgs = document.getElementById('ai-messages');
+  const id = 'think_' + Date.now();
+  const div = document.createElement('div');
+  div.className = 'ai-bubble thinking';
+  div.id = id;
+  div.innerHTML = '<span>Caut în baza de date</span><div class="ai-dots"><div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return id;
+}
+
+function removeThinkingBubble(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
+document.getElementById('ai-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); aiSend(); }
+});
+
+/* ══════════════════════════════════════════════════════════════
+   PWA — Service Worker Registration
+   ══════════════════════════════════════════════════════════════ */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+
+/* PWA Install prompt */
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  /* Arata banner install dupa 3 secunde */
+  setTimeout(showInstallBanner, 3000);
+});
+
+function showInstallBanner() {
+  if (!deferredPrompt) return;
+  if (localStorage.getItem('pwa_dismissed')) return;
+  showAutoToast('📲 Instalează SonicDB', 'Adaugă pe ecranul principal pentru acces rapid!');
+  /* Click pe toast declanseaza instalarea */
+  const t = document.getElementById('auto-toast');
+  t.style.cursor = 'pointer';
+  t.onclick = installPwa;
+}
+
+async function installPwa() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  if (outcome === 'dismissed') localStorage.setItem('pwa_dismissed', '1');
+}
 </script>
 </body>
 </html>
