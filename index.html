@@ -1980,7 +1980,7 @@ function showComparator() {
     </div>`);
 }
 /* ══════════════════════════════════════════════════════════════
-   AI CHAT — „Ce folie îmi trebuie?"
+   AI CHAT — „Ce folie îmi trebuie?" — motor local, fara API
    ══════════════════════════════════════════════════════════════ */
 let aiOpen = false;
 let aiThinking = false;
@@ -1988,9 +1988,7 @@ let aiThinking = false;
 function toggleAiPanel() {
   aiOpen = !aiOpen;
   document.getElementById('ai-panel').classList.toggle('open', aiOpen);
-  if (aiOpen) {
-    setTimeout(() => document.getElementById('ai-input').focus(), 300);
-  }
+  if (aiOpen) setTimeout(() => document.getElementById('ai-input').focus(), 300);
 }
 
 function aiQuick(model) {
@@ -2005,79 +2003,105 @@ function aiSend() {
   const q = input.value.trim();
   if (!q) return;
   input.value = '';
-
   addAiBubble(q, 'user');
   document.getElementById('ai-quick-btns').style.display = 'none';
-
-  const thinkId = addThinkingBubble();
   aiThinking = true;
   document.getElementById('ai-send').disabled = true;
-
-  /* Construieste contextul din baza de date locala */
-  const dbContext = buildDbContext();
-
-  callClaudeForFolie(q, dbContext).then(reply => {
+  const thinkId = addThinkingBubble();
+  /* mic delay pentru efect natural */
+  setTimeout(() => {
+    const reply = getLocalAnswer(q);
     removeThinkingBubble(thinkId);
     addAiBubble(reply, 'bot');
     aiThinking = false;
     document.getElementById('ai-send').disabled = false;
     input.focus();
-  }).catch(() => {
-    removeThinkingBubble(thinkId);
-    addAiBubble('⚠️ Eroare de conexiune. Verifică internetul și încearcă din nou.', 'bot');
-    aiThinking = false;
-    document.getElementById('ai-send').disabled = false;
-  });
+  }, 420);
 }
 
-function buildDbContext() {
-  /* Construieste un rezumat compact al bazei de date pentru context AI */
-  let lines = [];
+function getLocalAnswer(q) {
+  const raw = q.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').trim();
+
+  /* iPhone — raspuns special */
+  if (/iphone|apple|ios/.test(raw)) {
+    return '🍎 iPhone folosește Face ID (recunoaștere facială), nu senzor de amprentă în ecran. Orice folie merge fără restricții — TPU, PET sau sticlă călită, toate sunt compatibile.';
+  }
+
+  /* Cauta in baza de date */
+  let bestMatch = null;
+  let bestScore = 0;
+
   BRANDS.forEach(br => {
     br.phones.forEach(p => {
       if (p.soon) return;
-      const type = br.faceid ? 'Face ID (orice folie)' : p.glass ? 'TPU/PET + Glass OK (max 0.33mm)' : 'TPU/PET moale DOAR';
-      lines.push(`${p.m} (${p.y}): ${type}, rating ${p.r || '?'}/5`);
+      const name = p.m.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+      const score = matchScore(raw, name);
+      if (score > bestScore) { bestScore = score; bestMatch = { p, br }; }
     });
   });
-  return lines.join('\n');
+
+  if (bestScore >= 2 && bestMatch) {
+    const { p, br } = bestMatch;
+    const stars = '★'.repeat(p.r || 0) + '☆'.repeat(5 - (p.r || 0));
+    const ratingDesc = ['', 'slab', 'acceptabil', 'bun', 'foarte bun', 'excelent'][p.r] || '';
+
+    if (br.faceid) {
+      return `🍎 ${p.m} folosește Face ID — orice folie merge fără restricții.`;
+    }
+    if (p.glass) {
+      return `✅ ${p.m} (${p.y}) — compatibil cu:\n\n🛡️ Sticlă călită Glass OK (max 0.33mm, certificată in-display)\n✓ Folie TPU/PET moale\n\nSenzor: ${stars} ${ratingDesc}\n\n💡 Dacă alegi sticlă, verifică pe ambalaj „compatible with in-display fingerprint".`;
+    }
+    return `✅ ${p.m} (${p.y}) — compatibil cu:\n\n✓ Folie TPU sau PET moale DOAR\n⚠️ Sticla călită NU funcționează pe acest model\n\nSenzor: ${stars} ${ratingDesc}\n\n💡 Înregistrează amprenta din nou după aplicarea foliei.`;
+  }
+
+  /* Nicio potrivire exacta — incearca brand */
+  const brandHint = getBrandHint(raw);
+  if (brandHint) return brandHint;
+
+  return `🔍 Nu am găsit „${q}" în baza de date.\n\nPoate că:\n• Modelul nu are senzor ultrasonic (ci optic sau lateral)\n• Numele e ușor diferit — încearcă mai scurt (ex: „S24" în loc de „Galaxy S24 5G")\n\nPentru orice model neconfirmat, recomand folie TPU moale ca variantă sigură.`;
 }
 
-async function callClaudeForFolie(userQuery, dbContext) {
-  const systemPrompt = `Ești asistentul SonicDB — expert în folii de protecție pentru telefoane cu senzor de amprentă ultrasonic.
+function matchScore(query, name) {
+  if (name === query) return 10;
+  if (name.includes(query)) return 6;
+  if (query.includes(name)) return 5;
+  /* tokenizare — verifica cuvinte */
+  const qTokens = query.split(/\s+/).filter(t => t.length > 1);
+  const nTokens = name.split(/\s+/);
+  let hits = 0;
+  qTokens.forEach(t => { if (nTokens.some(n => n.includes(t) || t.includes(n))) hits++; });
+  if (hits >= 2) return hits + 1;
+  if (hits === 1 && qTokens.length === 1) return 2;
+  return 0;
+}
 
-BAZA DE DATE ACTUALĂ (telefoane confirmate):
-${dbContext}
-
-REGULI DE RĂSPUNS:
-- Răspunde SCURT, maxim 4-5 rânduri, direct la obiect
-- Dacă telefonul e în baza de date: spune exact ce folie merge (TPU/PET sau Glass OK), ratingul senzorului, și un sfat practic
-- Dacă telefonul NU e în baza de date: spune că nu e confirmat și recomandă prudență cu TPU moale
-- Dacă telefonul e iPhone: explică că folosește Face ID, orice folie merge
-- Folosește română, ton prietenos dar profesional
-- Adaugă emoji relevant (👍 ✓ ⚠️ 🛡️) pentru claritate vizuală
-- NU face liste lungi, NU repeta întrebarea, NU face introduceri`;
-
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 300,
-      system: systemPrompt,
-      messages: [{ role: 'user', content: userQuery }]
-    })
-  });
-
-  if (!response.ok) throw new Error('API error');
-  const data = await response.json();
-  return data.content?.[0]?.text || 'Nu am putut procesa răspunsul.';
+function getBrandHint(raw) {
+  const brandMap = {
+    samsung: 'Samsung', galaxy: 'Samsung',
+    xiaomi: 'Xiaomi', redmi: 'Xiaomi', poco: 'Xiaomi',
+    pixel: 'Google Pixel', google: 'Google Pixel',
+    oneplus: 'OnePlus',
+    vivo: 'Vivo', iqoo: 'iQOO',
+    oppo: 'Oppo', realme: 'Realme',
+    honor: 'Honor', huawei: 'Huawei',
+  };
+  for (const [key, label] of Object.entries(brandMap)) {
+    if (raw.includes(key)) {
+      const brand = BRANDS.find(b => b.label.toLowerCase().includes(label.toLowerCase()));
+      if (brand) {
+        const count = brand.phones.filter(p => !p.soon).length;
+        return `📱 Am găsit brandul ${label} în baza de date (${count} modele confirmate), dar nu modelul exact. Încearcă să scrii numărul seriei, ex: „${brand.phones[0]?.m || label}".`;
+      }
+    }
+  }
+  return null;
 }
 
 function addAiBubble(text, type) {
   const msgs = document.getElementById('ai-messages');
   const div = document.createElement('div');
   div.className = `ai-bubble ${type}`;
+  div.style.whiteSpace = 'pre-line';
   div.textContent = text;
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
@@ -2104,7 +2128,6 @@ function removeThinkingBubble(id) {
 document.getElementById('ai-input').addEventListener('keydown', function(e) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); aiSend(); }
 });
-
 /* ══════════════════════════════════════════════════════════════
    PWA — Service Worker Registration
    ══════════════════════════════════════════════════════════════ */
