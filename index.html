@@ -370,7 +370,7 @@ main{
 
 /* phone row — card style */
 .phone-row{
-  display:flex;align-items:flex-start;gap:12px;
+  display:block;
   padding:12px 14px 12px 14px;
   border:1.5px solid var(--border);
   border-radius:var(--r2);
@@ -380,7 +380,6 @@ main{
   position:relative;
   overflow:hidden;
 }
-.phone-row:last-child{border-bottom:1.5px solid var(--border);}
 .phone-row:hover{
   background:var(--surface);
   border-color:rgba(var(--brg),.45);
@@ -397,8 +396,15 @@ main{
 }
 .phone-row:hover::before{opacity:1;}
 @keyframes rowIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+/* top row: name + badge */
+.phone-top-row{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+  margin-bottom:4px;
+}
+.phone-top-row .phone-name{flex:1;min-width:0;}
+.phone-top-row .badge{flex-shrink:0;margin-top:1px;}
 
-.phone-info{flex:1;min-width:0;}
+.phone-info{width:100%;}
 .phone-name{
   font-size:15px;font-weight:700;color:var(--text);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
@@ -641,7 +647,7 @@ footer{
 
 /* ─── FEEDBACK BUTTONS ──────────────────────────────────────── */
 .feedback-row{
-  display:flex;align-items:center;gap:8px;margin-top:9px;flex-wrap:nowrap;
+  display:flex;align-items:center;gap:8px;margin-top:9px;flex-wrap:nowrap;width:100%;
 }
 .fb-btn{
   display:inline-flex;align-items:center;justify-content:center;gap:6px;
@@ -1548,7 +1554,7 @@ function render() {
       const fbKey = `fb_${br.id}_${p.m.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'')}`;
       const fbData = getFeedback(fbKey);
       const voted = fbData.v;
-      const feedbackHtml = p.soon ? '' : `
+      const feedbackHtml = (p.soon || br.faceid) ? '' : `
         <div class="feedback-row">
           <button class="fb-btn fb-btn-ok${voted==='ok'?' active':''}" onclick="voteFeedback(event,'${fbKey}','ok',this)">
             👍 Funcționează <span class="fb-count" id="${fbKey}_ok">${fbData.ok}</span>
@@ -1560,14 +1566,16 @@ function render() {
 
       return `<div class="phone-row" data-m="${p.m.toLowerCase()}" style="animation-delay:${pi*0.012}s">
         <div class="phone-info">
-          <div class="phone-name">${p.m}</div>
+          <div class="phone-top-row">
+            <div class="phone-name">${p.m}</div>
+            ${badgeHtml}
+          </div>
           <div class="phone-meta">
             <span class="phone-year">${p.y}${p.soon?' · Curând':''}</span>
             ${p.r ? '<div class="phone-stars">' + [1,2,3,4,5].map(i=>`<span class="star${i<=p.r?' on':''}">${i<=p.r?'★':'☆'}</span>`).join('') + '</div>' : ''}
           </div>
           ${feedbackHtml}
         </div>
-        ${badgeHtml}
       </div>`;
     }).join('');
 
