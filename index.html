@@ -868,6 +868,65 @@ footer{
 }
 .ai-quick:hover{border-color:var(--accent);color:var(--accent);background:var(--glow);}
 
+/* ─── INFO IMPORTANTE BANNER ─────────────────────────────────── */
+.info-important-banner{
+  position:relative;z-index:1;
+  display:flex;align-items:center;gap:12px;
+  padding:12px 20px;cursor:pointer;
+  background:linear-gradient(135deg,rgba(255,95,95,.10),rgba(255,184,48,.07));
+  border-bottom:1px solid rgba(255,95,95,.28);
+  border-top:1px solid rgba(255,95,95,.15);
+  transition:background .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.info-important-banner:hover{background:linear-gradient(135deg,rgba(255,95,95,.16),rgba(255,184,48,.10));}
+.info-important-icon{font-size:22px;flex-shrink:0;}
+.info-important-text{flex:1;min-width:0;}
+.info-important-title{
+  display:block;font-family:var(--display);font-size:13px;font-weight:700;
+  color:var(--red);letter-spacing:-.1px;margin-bottom:2px;
+}
+.info-important-sub{
+  display:block;font-family:var(--mono);font-size:9px;letter-spacing:.5px;
+  color:var(--text3);
+}
+.info-important-arrow{
+  font-size:20px;color:var(--red);opacity:.7;flex-shrink:0;font-weight:300;
+}
+
+/* ─── INFO IMPORTANTE MODAL ──────────────────────────────────── */
+.info-modal-section{margin-bottom:18px;}
+.info-modal-section:last-child{margin-bottom:0;}
+.info-section-label{
+  display:flex;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:8px;letter-spacing:2px;
+  color:var(--accent);text-transform:uppercase;font-weight:700;
+  margin-bottom:10px;
+  border-bottom:1px solid var(--border2);padding-bottom:7px;
+}
+.info-row{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:8px 10px;border-radius:var(--r3);
+  background:var(--bg3);border:1px solid var(--border2);
+  margin-bottom:6px;font-size:12.5px;line-height:1.55;color:var(--text2);
+}
+.info-row:last-child{margin-bottom:0;}
+.info-row-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+.info-row strong{color:var(--text);font-weight:600;}
+.info-row code{
+  font-family:var(--mono);font-size:11px;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:4px;padding:1px 6px;color:var(--amber);
+}
+.info-chip{
+  display:inline-block;
+  font-family:var(--mono);font-size:9px;letter-spacing:.5px;
+  padding:2px 8px;border-radius:10px;margin-top:4px;
+  background:var(--greenbg);border:1px solid var(--greenbdr);color:var(--green);
+}
+.info-chip.red{background:var(--redbg);border-color:rgba(255,95,95,.3);color:var(--red);}
+.info-chip.amber{background:var(--amberbg);border-color:var(--amberbdr);color:var(--amber);}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────────── */
 @media(max-width:500px){
   .nav-title,.nav-div{display:none;}
@@ -962,6 +1021,16 @@ footer{
 <div class="glass-banner">
   <span class="glass-banner-icon">🛡️</span>
   <span>Telefoanele marcate cu <strong>🛡️ Glass OK</strong> suportă și <strong>folii de sticlă călită (tempered glass privacy)</strong> — senzorul ultrasonic funcționează prin sticlă datorită tehnologiei speciale de ecran sau senzorilor de generație nouă. Verificați întotdeauna că folia este certificată pentru modelul dvs.</span>
+</div>
+
+<!-- ── INFO IMPORTANTE BANNER ── -->
+<div class="info-important-banner" onclick="showInfoImportante()">
+  <span class="info-important-icon">📋</span>
+  <div class="info-important-text">
+    <span class="info-important-title">Informații Importante — Aparat Urban</span>
+    <span class="info-important-sub">Setări, actualizări, întreținere cuțit · Apasă pentru detalii</span>
+  </div>
+  <span class="info-important-arrow">›</span>
 </div>
 
 <div class="search-wrap" id="search-wrap">
@@ -2038,6 +2107,86 @@ function showComparator() {
       <button class="btn btn-secondary" onclick="hideModal()">Închide</button>
     </div>`);
 }
+/* ══════════════════════════════════════════════════════════════
+   INFO IMPORTANTE — Aparat Urban
+   ══════════════════════════════════════════════════════════════ */
+function showInfoImportante() {
+  showModal(`
+    <div class="modal-handle"></div>
+    <div class="modal-title">📋 Informații Importante</div>
+    <div class="modal-desc" style="font-family:var(--mono);font-size:9px;letter-spacing:1.5px;color:var(--accent);text-transform:uppercase;margin-bottom:18px;">Aparat Urban — Ghid operațional pentru agenți</div>
+
+    <!-- ACTUALIZARI -->
+    <div class="info-modal-section">
+      <div class="info-section-label">🔄 Actualizări & Software</div>
+      <div class="info-row">
+        <span class="info-row-icon">💻</span>
+        <div><strong>Update soft aparat Urban</strong> — parola <code>1313</code>. Faceți update <strong>doar dacă la „Informații despre sistem" apare NEW scris cu roșu.</strong> Verificați înainte de a actualiza.<div><span class="info-chip amber">⚠ Verificare obligatorie</span></div></div>
+      </div>
+      <div class="info-row">
+        <span class="info-row-icon">📊</span>
+        <div><strong>Actualizare date</strong> — intrați la <strong>Gestionarea datelor → Actualizare date</strong> și faceți actualizarea <strong>cel puțin o dată pe săptămână.</strong> Dacă nu actualizați, nu veți găsi modele noi sau telefoane modificate.<div><span class="info-chip">✓ Săptămânal</span></div></div>
+      </div>
+    </div>
+
+    <!-- PARAMETRI -->
+    <div class="info-modal-section">
+      <div class="info-section-label">⚙️ Setări Parametri Aparat Urban</div>
+      <div class="info-row">
+        <span class="info-row-icon">✂️</span>
+        <div><strong>Viteză de tăiere:</strong> <code>4</code></div>
+      </div>
+      <div class="info-row">
+        <span class="info-row-icon">💪</span>
+        <div><strong>Forță de tăiere:</strong> <code>5</code> sau <code>50</code></div>
+      </div>
+    </div>
+
+    <!-- CUTIT -->
+    <div class="info-modal-section">
+      <div class="info-section-label">🔪 Setare Cuțit Aparat Urban</div>
+      <div class="info-row">
+        <span class="info-row-icon">5️⃣</span>
+        <div><strong>Cuțitul pe 5:</strong> Sky Clear Pro, Clear Pro G, Clear Pro Tablete, Matte Tablete, Matte, Sky Lite</div>
+      </div>
+      <div class="info-row">
+        <span class="info-row-icon">8️⃣</span>
+        <div><strong>Cuțitul pe 8:</strong> Foliile Ultra</div>
+      </div>
+    </div>
+
+    <!-- TABLETE -->
+    <div class="info-modal-section">
+      <div class="info-section-label">📱 Folii de Tabletă</div>
+      <div class="info-row">
+        <span class="info-row-icon">🖥️</span>
+        <div><strong>Folie tabletă pentru tablete</strong> — selectați întotdeauna <code>W:225</code> <code>L:320</code></div>
+      </div>
+      <div class="info-row">
+        <span class="info-row-icon">📲</span>
+        <div><strong>Folie tabletă pentru telefoane</strong> — <strong>NU selectați nimic</strong>, rămân setările prestabilite ale aparatului.<div><span class="info-chip red">✕ Fără selecție manuală</span></div></div>
+      </div>
+    </div>
+
+    <!-- INTRETINERE CUTIT -->
+    <div class="info-modal-section">
+      <div class="info-section-label">🧹 Întreținere Cuțit — Zilnic</div>
+      <div class="info-row">
+        <span class="info-row-icon">🌅</span>
+        <div><strong>Dimineața</strong> — verificați că nu are impurități sau resturi de folii pentru o tăiere corectă.</div>
+      </div>
+      <div class="info-row">
+        <span class="info-row-icon">🔍</span>
+        <div><strong>Verificați vârful cuțitului</strong> — dacă este tocit, solicitați ASM-ului un cuțit nou.<div><span class="info-chip amber">⚠ Cuțit tocit → ASM</span></div></div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="hideModal()">Închide</button>
+    </div>
+  `);
+}
+
 /* ══════════════════════════════════════════════════════════════
    AI CHAT — „Ce folie îmi trebuie?" — motor local, fara API
    ══════════════════════════════════════════════════════════════ */
