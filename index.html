@@ -3,17 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <meta name="theme-color" content="#0a0a0f">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="UrbanDatabase">
 <meta name="description" content="Baza de date telefoane cu senzor de amprentă ultrasonic — compatibilitate folii TPU, PET și Glass OK.">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
 <title>UrbanDatabase — Senzor Ultrasonic</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 <style>
@@ -2170,60 +2165,9 @@ document.getElementById('ai-input').addEventListener('keydown', function(e) {
 /* ══════════════════════════════════════════════════════════════
    PWA — Service Worker Registration
    ══════════════════════════════════════════════════════════════ */
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', async () => {
-    try {
-      const reg = await navigator.serviceWorker.register('sw.js');
-      
-      // Verifică imediat dacă există update
-      reg.update();
-      
-      // Când găsește un SW nou instalat, activează-l imediat
-      reg.addEventListener('updatefound', () => {
-        const newWorker = reg.installing;
-        newWorker.addEventListener('statechange', () => {
-          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-            // SW nou gata — reîncarcă pagina automat ca să ia versiunea nouă
-            window.location.reload();
-          }
-        });
-      });
-      
-      // Dacă SW-ul s-a schimbat între tab-uri, reîncarcă
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        window.location.reload();
-      });
-      
-    } catch(e) {}
-  });
-}
 
-/* PWA Install prompt */
-let deferredPrompt = null;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  /* Arata banner install dupa 3 secunde */
-  setTimeout(showInstallBanner, 3000);
-});
 
-function showInstallBanner() {
-  if (!deferredPrompt) return;
-  if (localStorage.getItem('pwa_dismissed')) return;
-  showAutoToast('📲 Instalează UrbanDatabase', 'Adaugă pe ecranul principal pentru acces rapid!');
-  /* Click pe toast declanseaza instalarea */
-  const t = document.getElementById('auto-toast');
-  t.style.cursor = 'pointer';
-  t.onclick = installPwa;
-}
 
-async function installPwa() {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  const { outcome } = await deferredPrompt.userChoice;
-  deferredPrompt = null;
-  if (outcome === 'dismissed') localStorage.setItem('pwa_dismissed', '1');
-}
 </script>
 </body>
 </html>
