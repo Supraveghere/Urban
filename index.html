@@ -1169,8 +1169,15 @@ footer{
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Sus">↑</button>
 
 <script>
-/* ── One-time SW + cache killer ── */
+/* ── Cache buster — schimbă V la fiecare update pe GitHub ── */
 (function(){
+  var V = '20260406'; // ← SCHIMBĂ ASTA la fiecare update (orice număr diferit)
+  var url = new URL(window.location.href);
+  if (url.searchParams.get('v') !== V) {
+    url.searchParams.set('v', V);
+    window.location.replace(url.toString());
+  }
+  // One-time SW killer
   if (!localStorage.getItem('sw_cleaned')) {
     localStorage.setItem('sw_cleaned', '1');
     if ('serviceWorker' in navigator) {
