@@ -2188,10 +2188,21 @@ document.getElementById('ai-input').addEventListener('keydown', function(e) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); aiSend(); }
 });
 /* ══════════════════════════════════════════════════════════════
-   PWA — Service Worker Registration
+   PWA — Service Worker Registration (auto-update)
    ══════════════════════════════════════════════════════════════ */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(regs => {
+    return Promise.all(regs.map(r => r.unregister()));
+  }).then(() => {
+    return navigator.serviceWorker.register('/sw.js?v=' + Date.now());
+  }).then(reg => {
+    reg.update();
+  });
 
-
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    window.location.reload();
+  });
+}
 
 </script>
 </body>
