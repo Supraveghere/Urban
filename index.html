@@ -6,8 +6,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#f8f9fc">
-<meta name="apple-mobile-web-app-title" content="UrbanStuff">
-<title>UrbanStuff</title>
+<meta name="apple-mobile-web-app-title" content="Urban-Contakt">
+<title>Urban-Contakt</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ===== PAGE SYSTEM ===== */
@@ -1698,7 +1698,9 @@ footer{text-align:center;padding:20px;font-size:.75rem;color:var(--muted);paddin
 
 <!-- ===== INDEX PAGE ===== -->
 <div id="page-index" class="page">
-<button onclick="showPage('home')" style="position:fixed;top:14px;left:16px;z-index:9999;background:rgba(79,70,229,.12);border:1px solid rgba(79,70,229,.25);color:#4f46e5;border-radius:20px;padding:6px 14px 6px 10px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">← Înapoi</button>
+<div style="position:sticky;top:0;z-index:100;padding:10px 16px;background:var(--white,#fff);border-bottom:1px solid rgba(0,0,0,.07);">
+<button onclick="showPage('home')" style="background:rgba(79,70,229,.12);border:1px solid rgba(79,70,229,.25);color:#4f46e5;border-radius:20px;padding:6px 14px 6px 10px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;">← Înapoi</button>
+</div>
 
 
 <!-- Modal -->
@@ -1722,7 +1724,7 @@ footer{text-align:center;padding:20px;font-size:.75rem;color:var(--muted);paddin
   <span class="nav-title">Folii Compatibile — Senzor Ultrasonic</span>
   <div class="live-badge"><span class="live-dot"></span>LIVE</div>
   <button id="comp-nav-btn" onclick="showComparator()">⚖️ Comparator</button>
-  <button id="dm" title="Schimbă tema" onclick="toggleDark()">🌙</button>
+
 </nav>
 
 <div class="hero">
@@ -2309,22 +2311,8 @@ const ICONS = {
 };
 
 /* ── Dark mode ── */
-function toggleDark() {
-  const isDark = document.documentElement.dataset.theme === 'dark';
-  document.documentElement.dataset.theme = isDark ? 'light' : 'dark';
-  document.getElementById('dm').textContent = isDark ? '🌙' : '☀️';
-  localStorage.setItem('urban_theme', isDark ? 'light' : 'dark');
-}
-(function () {
-  const saved = localStorage.getItem('urban_theme');
-  if (saved === 'dark') {
-    document.documentElement.dataset.theme = 'dark';
-    document.querySelector('#dm').textContent = '☀️';
-  } else {
-    document.documentElement.dataset.theme = 'light';
-    document.querySelector('#dm').textContent = '🌙';
-  }
-})();
+document.documentElement.dataset.theme = 'light';
+localStorage.removeItem('urban_theme');
 
 /* ── Scroll ── */
 window.addEventListener('scroll', () => {
@@ -3104,7 +3092,9 @@ if ('serviceWorker' in navigator) {
 
 <!-- ===== TRANSFER PAGE ===== -->
 <div id="page-transfer" class="page">
-<button onclick="showPage('home')" style="position:fixed;top:14px;left:16px;z-index:200;background:rgba(0,0,0,.07);border:1px solid rgba(0,0,0,.12);color:#111827;border-radius:20px;padding:6px 14px 6px 10px;font-size:13px;font-weight:700;font-family:Nunito,sans-serif;cursor:pointer;display:flex;align-items:center;gap:5px;">← Înapoi</button>
+<div style="position:sticky;top:0;z-index:100;padding:10px 16px;background:var(--white,#fff);border-bottom:1px solid rgba(0,0,0,.07);">
+<button onclick="showPage('home')" style="background:rgba(0,0,0,.07);border:1px solid rgba(0,0,0,.12);color:#111827;border-radius:20px;padding:6px 14px 6px 10px;font-size:13px;font-weight:700;font-family:Nunito,sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:5px;">← Înapoi</button>
+</div>
 
 
 <!-- SVG ICONS DEFS -->
