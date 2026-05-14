@@ -144,6 +144,10 @@ nav{
 @media(max-width:580px){
   .cards-wrap{grid-template-columns:1fr;padding:28px 16px 48px;}
 }
+.ghid-badge-secondary{display:flex;}
+@media(max-width:500px){
+  .ghid-badge-secondary{display:none;}
+}
 
 .card{
   background:var(--surface);
@@ -1364,6 +1368,7 @@ button,a{cursor:pointer;font-family:'Nunito',sans-serif;border:none;background:n
 .tab-aa.active{border-bottom-color:var(--android);background:#f0fdf4;}
 .tab-ai.active{border-bottom-color:#8b5cf6;background:#faf5ff;}
 .tab-ia.active{border-bottom-color:var(--ios);background:#eff6ff;}
+.tab-ii.active{border-bottom-color:var(--ios);background:#fff1f2;}
 .tab-icon{display:flex;align-items:center;gap:2px;}
 
 /* MAIN CONTENT */
@@ -1683,6 +1688,42 @@ footer{text-align:center;padding:20px;font-size:.75rem;color:var(--muted);paddin
     </div>
     <div class="card-cta">
       <span class="card-cta-text">Deschide ghidul →</span>
+      <span class="card-arrow">→</span>
+    </div>
+  </a>
+
+  <a class="card" href="#" onclick="showPage('ghid');return false;" style="--card-rgb:234,88,12;grid-column:1/-1;">
+    <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:200px;">
+        <div class="card-icon" style="font-size:28px;">🎓</div>
+        <div class="card-label">Formare profesională</div>
+        <h2 class="card-title">Ghidul Agentului Începător</h2>
+        <p class="card-desc">Tot ce trebuie să știi ca agent: tipuri de telefoane, branduri, folii, huse, baterii, upsell natural și scripturi complete pentru orice situație cu clientul.</p>
+        <div class="card-tags">
+          <span class="card-tag">🏷️ Branduri</span>
+          <span class="card-tag">🛡️ Folii</span>
+          <span class="card-tag">📦 Huse</span>
+          <span class="card-tag">🔋 Baterii</span>
+          <span class="card-tag">🔌 Conectori</span>
+          <span class="card-tag">💧 Rezistență IP</span>
+          <span class="card-tag">📶 5G vs 4G</span>
+          <span class="card-tag">🔍 Identificare model</span>
+          <span class="card-tag">💬 Vânzări</span>
+          <span class="card-tag">😤 Clienți dificili</span>
+          <span class="card-tag">🧠 Quiz-uri</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:140px;padding-top:4px;flex-shrink:0;">
+        <div style="background:rgba(234,88,12,.08);border:1px solid rgba(234,88,12,.2);border-radius:12px;padding:10px 14px;font-size:12px;font-weight:600;color:rgba(234,88,12,1);">📚 19 secțiuni</div>
+        <div style="background:rgba(234,88,12,.08);border:1px solid rgba(234,88,12,.2);border-radius:12px;padding:10px 14px;font-size:12px;font-weight:600;color:rgba(234,88,12,1);">🧠 8 quiz-uri</div>
+        <div style="background:rgba(234,88,12,.08);border:1px solid rgba(234,88,12,.2);border-radius:12px;padding:10px 14px;font-size:12px;font-weight:600;color:rgba(234,88,12,1);">📞 Scripturi gata de folosit</div>
+        <div class="ghid-badge-secondary" style="background:rgba(234,88,12,.08);border:1px solid rgba(234,88,12,.2);border-radius:12px;padding:10px 14px;font-size:12px;font-weight:600;color:rgba(234,88,12,1);">⏱️ ~45 min lectură</div>
+        <div style="background:rgba(234,88,12,.08);border:1px solid rgba(234,88,12,.2);border-radius:12px;padding:10px 14px;font-size:12px;font-weight:600;color:rgba(234,88,12,1);">⚠️ Greșeli frecvente</div>
+        <div class="ghid-badge-secondary" style="background:rgba(234,88,12,.08);border:1px solid rgba(234,88,12,.2);border-radius:12px;padding:10px 14px;font-size:12px;font-weight:600;color:rgba(234,88,12,1);">🏆 Certificat la final</div>
+      </div>
+    </div>
+    <div class="card-cta">
+      <span class="card-cta-text">Deschide ghidul complet →</span>
       <span class="card-arrow">→</span>
     </div>
   </a>
@@ -3210,6 +3251,10 @@ if ('serviceWorker' in navigator) {
         <span class="tab-icon"><svg width="14" height="14"><use href="#ii"/></svg><span>→</span><svg width="16" height="16"><use href="#ia"/></svg></span>
         <span>iPhone→Android</span>
       </button>
+      <button class="tab tab-ii" onclick="showTab('ii');document.getElementById('hdr-title-text').textContent='iPhone → iPhone';document.getElementById('hdr-title-sub').textContent='Quick Start — apropiați telefoanele';" id="tab-btn-ii">
+        <span class="tab-icon"><svg width="14" height="14"><use href="#ii"/></svg><span>→</span><svg width="14" height="14"><use href="#ii"/></svg></span>
+        <span>iPhone→iPhone</span>
+      </button>
     </div>
   </div>
 
@@ -3907,6 +3952,126 @@ if ('serviceWorker' in navigator) {
     </div>
   </div><!-- end ia -->
 
+  <!-- ══════════════════════════════
+       iPhone → iPhone
+  ══════════════════════════════ -->
+  <div id="tab-ii" class="sec">
+    <div class="intro">
+      <div class="intro-phones">
+        <div class="ph i"><svg width="18" height="18"><use href="#ii"/></svg></div>
+        <span style="color:var(--muted);font-size:1.2rem;font-weight:900">→</span>
+        <div class="ph i"><svg width="18" height="18"><use href="#ii"/></svg></div>
+      </div>
+      <div>
+        <h2>iPhone → iPhone</h2>
+        <p>Cel mai simplu transfer Apple — <strong>Quick Start</strong> face totul automat.</p>
+      </div>
+    </div>
+
+    <div class="meth open">
+      <div class="mhead" onclick="tM(this)">
+        <div class="bdg b">1</div>
+        <div class="minfo">
+          <h3>✅ Quick Start — apropiați telefoanele</h3>
+          <p>Apple transferă totul automat — cea mai ușoară metodă</p>
+        </div>
+        <span class="tog">▼</span>
+      </div>
+      <div class="mbody">
+        <div class="needs">
+          <div class="nt">Ce îți trebuie</div>
+          <div class="nr"><span class="ni">📶</span> WiFi de acasă</div>
+          <div class="nr"><span class="ni">🔋</span> Ambele iPhone-uri &gt;50% baterie</div>
+          <div class="nr"><span class="ni">📱</span> Ambele iPhone-uri lângă tine</div>
+          <div class="nr"><span class="ni">🔑</span> Parola Apple ID (contul tău Apple)</div>
+        </div>
+        <div class="step">
+          <div class="step-head">
+            <div class="sn">1</div>
+            <div class="sc">
+              <h4>Pornește iPhone-ul NOU lângă cel vechi</h4>
+              <p>Ține-le aproape (câțiva cm). Pe iPhone-ul vechi apare automat un ecran albastru <strong>„Quick Start"</strong>. Apasă <strong>Continuă</strong>.</p>
+            </div>
+            <button class="step-check" onclick="toggleCheck(this)">○</button>
+          </div>
+          <button class="nu-merge-btn" onclick="toggleNM(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Nu merge? Apasă aici
+          </button>
+          <div class="nu-merge-panel">
+            <div class="nm-header"><span>🔧 Soluții posibile</span><button class="nm-close" onclick="closeNM(this)">✕</button></div>
+            <div class="nm-list">
+              <div class="nm-item"><span class="nm-icon">📵</span><div class="nm-text"><strong>Nu apare ecranul Quick Start</strong>Asigură-te că Bluetooth este activat pe iPhone-ul vechi. Ține telefoanele la maxim 5 cm distanță.</div></div>
+              <div class="nm-item"><span class="nm-icon">🔋</span><div class="nm-text"><strong>iPhone-ul nou nu pornește</strong>Conectează-l la curent cel puțin 10 minute înainte să începi.</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-head">
+            <div class="sn">2</div>
+            <div class="sc">
+              <h4>Scanează animația de pe iPhone-ul nou cu cel vechi</h4>
+              <p>Pe iPhone-ul vechi apare camera cu un <strong>cerc albastru animat</strong> — îndreaptă-o spre ecranul iPhone-ului nou până se sincronizează.</p>
+            </div>
+            <button class="step-check" onclick="toggleCheck(this)">○</button>
+          </div>
+          <button class="nu-merge-btn" onclick="toggleNM(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Nu merge? Apasă aici
+          </button>
+          <div class="nu-merge-panel">
+            <div class="nm-header"><span>🔧 Soluții posibile</span><button class="nm-close" onclick="closeNM(this)">✕</button></div>
+            <div class="nm-list">
+              <div class="nm-item"><span class="nm-icon">📷</span><div class="nm-text"><strong>Camera nu scanează / nu recunoaște animația</strong>Apasă „Autentifică manual" și introdu codul din 6 cifre afișat pe iPhone-ul nou.</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-head">
+            <div class="sn">3</div>
+            <div class="sc">
+              <h4>Introdu parola iPhone-ului vechi pe cel nou → Alege „Transfer de pe iPhone"</h4>
+              <p>Pe iPhone-ul nou introdu codul PIN al celui vechi. Apoi alege <strong>„Transfer de pe iPhone"</strong> (nu restaurare din iCloud).</p>
+            </div>
+            <button class="step-check" onclick="toggleCheck(this)">○</button>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-head">
+            <div class="sn">4</div>
+            <div class="sc">
+              <h4>Așteaptă — nu deconecta WiFi și nu opri telefoanele</h4>
+              <p>Transferul durează <strong>30 min – 2 ore</strong> în funcție de cât ai pe telefon. Lasă ambele telefoane conectate la curent și WiFi.</p>
+              <div class="ok">✅ Totul se copiază: poze, aplicații, setări, mesaje, parole WiFi, contacte.</div>
+            </div>
+            <button class="step-check" onclick="toggleCheck(this)">○</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="meth">
+      <div class="mhead" onclick="tM(this)">
+        <div class="bdg p">2</div>
+        <div class="minfo">
+          <h3>☁️ Restaurare din iCloud Backup</h3>
+          <p>Dacă nu ai iPhone-ul vechi la îndemână</p>
+        </div>
+        <span class="tog">▼</span>
+      </div>
+      <div class="mbody">
+        <div class="needs">
+          <div class="nt">Ce îți trebuie</div>
+          <div class="nr"><span class="ni">☁️</span> Backup iCloud recent pe iPhone-ul vechi</div>
+          <div class="nr"><span class="ni">🔑</span> Apple ID și parola</div>
+          <div class="nr"><span class="ni">📶</span> WiFi</div>
+        </div>
+        <div class="step"><div class="step-head"><div class="sn">1</div><div class="sc"><h4>Pe iPhone-ul vechi: Setări → [Numele tău] → iCloud → Backup iCloud → Backup acum</h4><p>Asigură-te că ai un backup recent (din ultimele 24 ore).</p></div><button class="step-check" onclick="toggleCheck(this)">○</button></div></div>
+        <div class="step"><div class="step-head"><div class="sn">2</div><div class="sc"><h4>Pe iPhone-ul NOU: la configurare, alege „Restaurare din Backup iCloud"</h4><p>Loghează-te cu Apple ID → alege cel mai recent backup → Așteaptă.</p><div class="ok">✅ Toate datele se copiază din cloud pe noul telefon.</div></div><button class="step-check" onclick="toggleCheck(this)">○</button></div></div>
+      </div>
+    </div>
+  </div><!-- end ii -->
+
   </main>
   <footer>Ghid pentru utilizatori începători · Toate metodele sunt gratuite</footer>
 </div><!-- end app -->
@@ -3933,8 +4098,7 @@ function wizSelect(step, os) {
     else if (from === 'android' && to === 'ios') tab = 'ai';
     else if (from === 'ios' && to === 'android') tab = 'ia';
     else if (from === 'ios' && to === 'ios') {
-      // ios to ios — show aa as placeholder with message
-      tab = 'aa'; // fallback
+      tab = 'ii';
     }
     launchApp(tab, from, to);
   }
@@ -3957,6 +4121,7 @@ function launchApp(tab, from, to) {
     aa: { title: 'Android → Android', sub: 'Transfer automat — simplu și complet' },
     ai: { title: 'Android → iPhone', sub: 'Folosește aplicația Move to iOS' },
     ia: { title: 'iPhone → Android', sub: 'Google Drive + Google Foto' },
+    ii: { title: 'iPhone → iPhone', sub: 'Quick Start — apropiați telefoanele' },
   };
   document.getElementById('hdr-title-text').textContent = labels[tab].title;
   document.getElementById('hdr-title-sub').textContent = labels[tab].sub;
@@ -3986,43 +4151,7 @@ function goWizard() {
 }
 
 function showIosIos() {
-  // inject a simple message for iPhone→iPhone
-  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-  const main = document.querySelector('main');
-  let el = document.getElementById('ios-ios-msg');
-  if (!el) {
-    el = document.createElement('div');
-    el.id = 'ios-ios-msg';
-    el.className = 'sec active';
-    el.innerHTML = `
-      <div class="intro" style="flex-direction:column;text-align:center;padding:24px">
-        <div style="font-size:3rem;margin-bottom:12px">🍎→🍎</div>
-        <h2 style="font-size:1.1rem;margin-bottom:8px">iPhone → iPhone</h2>
-        <p style="font-size:.85rem;color:var(--muted)">Cel mai simplu transfer Apple.</p>
-      </div>
-      <div class="meth open">
-        <div class="mhead" onclick="tM(this)">
-          <div class="bdg b">1</div>
-          <div class="minfo"><h3>✅ Quick Start — apropiați telefoanele</h3><p>Apple transferă totul automat</p></div>
-          <span class="tog">▼</span>
-        </div>
-        <div class="mbody">
-          <div class="needs">
-            <div class="nt">Ce îți trebuie</div>
-            <div class="nr"><span class="ni">📶</span> WiFi</div>
-            <div class="nr"><span class="ni">🔋</span> Ambele iPhone-uri &gt;50%</div>
-            <div class="nr"><span class="ni">📱</span> Ambele iPhone-uri lângă tine</div>
-          </div>
-          <div class="step"><div class="step-head"><div class="sn">1</div><div class="sc"><h4>Pornește iPhone-ul NOU lângă cel vechi</h4><p>Pe iPhone-ul vechi apare automat un ecran „Quick Start". Apasă <strong>Continuă</strong>.</p></div><button class="step-check" onclick="toggleCheck(this)">○</button></div></div>
-          <div class="step"><div class="step-head"><div class="sn">2</div><div class="sc"><h4>Scanează animația de pe iPhone-ul nou cu cel vechi</h4><p>Pe iPhone-ul vechi apare camera cu un cerc albastru — îndreaptă-o spre iPhone-ul nou.</p></div><button class="step-check" onclick="toggleCheck(this)">○</button></div></div>
-          <div class="step"><div class="step-head"><div class="sn">3</div><div class="sc"><h4>Introdu codul iPhone-ului vechi pe cel nou → Așteaptă</h4><p>Urmează pașii de pe ecran. Transferul durează 30 min – 2 ore.<br><strong>Nu deconecta WiFi-ul și nu opri telefoanele.</strong></p><div class="ok">✅ Totul se copiază: poze, aplicații, setări, mesaje, parole.</div></div><button class="step-check" onclick="toggleCheck(this)">○</button></div></div>
-        </div>
-      </div>`;
-    main.prepend(el);
-  } else {
-    el.classList.add('active');
-  }
+  showTab('ii');
 }
 
 // ── TABS ──
@@ -4278,6 +4407,1957 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 </div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PAGINA: GHIDUL AGENTULUI ÎNCEPĂTOR
+══════════════════════════════════════════════════════════════ -->
+<div id="page-ghid" class="page">
+<style>
+/* ─── GHID PAGE TOKENS ─── */
+.ghid-wrap{max-width:860px;margin:0 auto;padding:28px 18px 80px;}
+
+/* NAV BACK */
+.ghid-nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid #e2e5ef;
+  padding:0 20px;height:56px;
+  display:flex;align-items:center;gap:12px;
+}
+.ghid-nav-back{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(79,70,229,.08);border:1px solid rgba(79,70,229,.2);
+  color:#4f46e5;border-radius:20px;padding:6px 14px;
+  font-size:13px;font-weight:600;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+  transition:background .15s;
+}
+.ghid-nav-back:hover{background:rgba(79,70,229,.16);}
+.ghid-nav-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#1a1d2e;letter-spacing:-.3px;}
+.ghid-nav-badge{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#ea580c;background:rgba(234,88,12,.1);border:1px solid rgba(234,88,12,.25);padding:4px 10px;border-radius:12px;}
+
+/* HERO GHID */
+.ghid-hero{
+  padding:44px 0 36px;
+  text-align:center;
+}
+.ghid-hero-eye{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;letter-spacing:2px;color:#ea580c;
+  background:rgba(234,88,12,.08);border:1px solid rgba(234,88,12,.2);
+  padding:5px 14px;border-radius:20px;margin-bottom:18px;
+  text-transform:uppercase;font-weight:600;
+}
+.ghid-hero-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(28px,7vw,52px);
+  font-weight:800;letter-spacing:-1.5px;line-height:1.1;
+  color:#1a1d2e;margin-bottom:12px;
+}
+.ghid-hero-title span{color:#ea580c;}
+.ghid-hero-sub{font-size:15px;color:#4a4f6e;max-width:480px;margin:0 auto 24px;line-height:1.7;}
+.ghid-progress-bar{
+  width:100%;max-width:380px;margin:0 auto;
+  height:8px;background:#e2e5ef;border-radius:8px;overflow:hidden;
+}
+.ghid-progress-fill{
+  height:100%;width:0%;border-radius:8px;
+  background:linear-gradient(90deg,#ea580c,#f97316);
+  transition:width .5s ease;
+}
+.ghid-progress-label{font-size:12px;color:#8a90b0;margin-top:8px;font-weight:500;}
+
+/* TOC */
+.ghid-toc{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+  gap:10px;margin-bottom:40px;
+}
+.ghid-toc-item{
+  background:#fff;border:1px solid #e2e5ef;border-radius:14px;
+  padding:14px 12px;text-align:center;cursor:pointer;
+  transition:border-color .15s,transform .15s,box-shadow .15s;
+  text-decoration:none;
+}
+.ghid-toc-item:hover{border-color:rgba(234,88,12,.4);transform:translateY(-2px);box-shadow:0 6px 20px rgba(234,88,12,.12);}
+.ghid-toc-item.done{border-color:#059669;background:rgba(5,150,105,.04);}
+.ghid-toc-emoji{font-size:22px;margin-bottom:6px;display:block;}
+.ghid-toc-label{font-size:11px;font-weight:700;color:#1a1d2e;letter-spacing:-.2px;}
+.ghid-toc-sub{font-size:10px;color:#8a90b0;margin-top:2px;}
+
+/* SECTION */
+.ghid-section{
+  background:#fff;border:1px solid #e2e5ef;border-radius:20px;
+  margin-bottom:24px;overflow:hidden;
+}
+.ghid-section-head{
+  padding:22px 24px 18px;
+  border-bottom:1px solid #f2f4f8;
+  display:flex;align-items:center;gap:14px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.ghid-section-head:hover{background:#fafbfd;}
+.ghid-section-icon{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+}
+.ghid-section-meta{flex:1;}
+.ghid-section-num{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8a90b0;margin-bottom:3px;}
+.ghid-section-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#1a1d2e;letter-spacing:-.3px;}
+.ghid-section-desc{font-size:13px;color:#4a4f6e;margin-top:3px;}
+.ghid-section-tog{font-size:20px;color:#8a90b0;transition:transform .25s;}
+.ghid-section.open .ghid-section-tog{transform:rotate(180deg);}
+.ghid-section-body{display:none;padding:24px;}
+.ghid-section.open .ghid-section-body{display:block;}
+
+/* INFO CARDS inside sections */
+.ghid-info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:20px;}
+.ghid-info-card{
+  border-radius:14px;padding:16px;
+  border:1px solid #e2e5ef;background:#fafbfd;
+}
+.ghid-info-card-icon{font-size:26px;margin-bottom:8px;}
+.ghid-info-card-title{font-size:13px;font-weight:700;color:#1a1d2e;margin-bottom:6px;}
+.ghid-info-card-text{font-size:12.5px;color:#4a4f6e;line-height:1.6;}
+
+/* COMPARISON TABLE */
+.ghid-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:20px;border-radius:12px;border:1px solid #e2e5ef;}
+.ghid-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:0;}
+.ghid-table th{background:#f2f4f8;padding:10px 14px;font-weight:700;color:#1a1d2e;text-align:left;border-bottom:2px solid #e2e5ef;white-space:nowrap;}
+.ghid-table td{padding:10px 14px;border-bottom:1px solid #f2f4f8;color:#4a4f6e;vertical-align:top;}
+.ghid-table tr:last-child td{border-bottom:none;}
+.ghid-table tr:hover td{background:#fafbfd;}
+.ghid-td-good{color:#059669;font-weight:600;}
+.ghid-td-bad{color:#dc2626;font-weight:600;}
+.ghid-td-mid{color:#d97706;font-weight:600;}
+
+/* TIPS LIST */
+.ghid-tip{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:12px 14px;border-radius:12px;
+  background:#f8f9fc;border:1px solid #e2e5ef;
+  margin-bottom:10px;
+}
+.ghid-tip-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.ghid-tip-text{font-size:13.5px;color:#1a1d2e;line-height:1.6;}
+.ghid-tip-text strong{color:#1a1d2e;}
+.ghid-tip.warn{background:rgba(217,119,6,.05);border-color:rgba(217,119,6,.25);}
+.ghid-tip.good{background:rgba(5,150,105,.05);border-color:rgba(5,150,105,.25);}
+.ghid-tip.bad{background:rgba(220,38,38,.05);border-color:rgba(220,38,38,.2);}
+
+/* FRAZE BOX */
+.ghid-fraze{
+  background:linear-gradient(135deg,#f8f9fc 0%,#fff 100%);
+  border:1px solid #e2e5ef;border-radius:14px;
+  padding:16px 18px;margin-bottom:12px;
+}
+.ghid-fraze-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#ea580c;margin-bottom:8px;}
+.ghid-fraze-q{font-size:12.5px;color:#8a90b0;margin-bottom:6px;font-style:italic;}
+.ghid-fraze-a{font-size:13.5px;color:#1a1d2e;line-height:1.6;font-weight:500;}
+
+/* QUIZ */
+.ghid-quiz{
+  background:linear-gradient(135deg,rgba(234,88,12,.06) 0%,rgba(249,115,22,.04) 100%);
+  border:2px solid rgba(234,88,12,.2);
+  border-radius:16px;padding:20px;margin-top:24px;
+}
+.ghid-quiz-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#1a1d2e;margin-bottom:4px;}
+.ghid-quiz-sub{font-size:12.5px;color:#8a90b0;margin-bottom:18px;}
+.ghid-quiz-q{font-size:14px;font-weight:600;color:#1a1d2e;margin-bottom:14px;line-height:1.5;}
+.ghid-quiz-opts{display:flex;flex-direction:column;gap:8px;}
+.ghid-quiz-opt{
+  background:#fff;border:1.5px solid #e2e5ef;border-radius:10px;
+  padding:11px 14px;font-size:13.5px;color:#4a4f6e;
+  cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;
+  transition:border-color .15s,background .15s;display:flex;align-items:center;gap:10px;
+}
+.ghid-quiz-opt:hover{border-color:rgba(234,88,12,.4);background:rgba(234,88,12,.04);}
+.ghid-quiz-opt.correct{border-color:#059669;background:rgba(5,150,105,.07);color:#059669;}
+.ghid-quiz-opt.wrong{border-color:#dc2626;background:rgba(220,38,38,.06);color:#dc2626;}
+.ghid-quiz-opt.disabled{cursor:default;pointer-events:none;}
+.ghid-quiz-result{display:none;margin-top:14px;padding:12px 14px;border-radius:10px;font-size:13.5px;font-weight:600;line-height:1.5;}
+.ghid-quiz-result.show{display:block;}
+.ghid-quiz-result.ok{background:rgba(5,150,105,.08);border:1px solid rgba(5,150,105,.25);color:#059669;}
+.ghid-quiz-result.nok{background:rgba(220,38,38,.07);border:1px solid rgba(220,38,38,.2);color:#dc2626;}
+.ghid-quiz-next{
+  display:none;margin-top:12px;
+  background:#ea580c;color:#fff;border:none;border-radius:10px;
+  padding:10px 18px;font-size:13.5px;font-weight:700;cursor:pointer;
+  font-family:'DM Sans',sans-serif;transition:background .15s;
+}
+.ghid-quiz-next.show{display:inline-flex;align-items:center;gap:6px;}
+.ghid-quiz-next:hover{background:#c2410c;}
+.ghid-quiz-score{
+  text-align:center;padding:20px 16px;
+  background:linear-gradient(135deg,rgba(234,88,12,.08),rgba(249,115,22,.04));
+  border-radius:14px;border:2px solid rgba(234,88,12,.2);
+  display:none;
+}
+.ghid-quiz-score.show{display:block;}
+.ghid-quiz-score-num{font-family:'Syne',sans-serif;font-size:42px;font-weight:800;color:#ea580c;}
+.ghid-quiz-score-txt{font-size:14px;color:#4a4f6e;margin-top:4px;}
+.ghid-quiz-retry{
+  margin-top:12px;background:transparent;border:1.5px solid #ea580c;
+  color:#ea580c;border-radius:10px;padding:8px 18px;
+  font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;
+}
+
+/* BRAND CHIPS */
+.ghid-brand-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+.ghid-brand{
+  display:inline-flex;align-items:center;gap:7px;
+  background:#fff;border:1.5px solid #e2e5ef;border-radius:12px;
+  padding:8px 14px;font-size:12.5px;font-weight:600;color:#1a1d2e;
+  cursor:pointer;transition:border-color .15s,background .15s,transform .1s;
+  user-select:none;
+}
+.ghid-brand:hover{border-color:rgba(79,70,229,.4);background:rgba(79,70,229,.04);transform:translateY(-1px);}
+.ghid-brand svg{flex-shrink:0;display:block;}
+.ghid-brand-dot{width:10px;height:10px;border-radius:50%;}
+.ghid-brand-popup{
+  display:none;background:#fff;border:1.5px solid #e2e5ef;border-radius:14px;
+  padding:18px;margin-top:10px;margin-bottom:4px;
+}
+.ghid-brand-popup.show{display:block;}
+.ghid-brand-popup-title{font-size:15px;font-weight:700;color:#1a1d2e;margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.ghid-brand-popup-row{display:flex;gap:8px;margin-bottom:7px;align-items:flex-start;}
+.ghid-brand-popup-lbl{font-size:11px;font-weight:700;color:#8a90b0;min-width:90px;flex-shrink:0;text-transform:uppercase;letter-spacing:.5px;margin-top:1px;}
+.ghid-brand-popup-val{font-size:13px;color:#4a4f6e;line-height:1.5;}
+
+/* SECTIUNE COMPLETATA */
+.ghid-done-strip{
+  display:none;margin-top:16px;
+  background:rgba(5,150,105,.07);border:1.5px solid rgba(5,150,105,.25);
+  border-radius:10px;padding:10px 14px;
+  font-size:13px;font-weight:600;color:#059669;
+  align-items:center;gap:8px;
+}
+.ghid-done-strip.show{display:flex;}
+
+/* BADGE SECTIUNE */
+.ghid-section-badge{
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:3px 9px;border-radius:8px;margin-left:8px;
+}
+.badge-new{background:rgba(234,88,12,.1);color:#ea580c;}
+.badge-done{background:rgba(5,150,105,.1);color:#059669;}
+
+/* RESPONSIVE */
+@media(max-width:580px){
+  .ghid-wrap{padding:20px 14px 60px;}
+  .ghid-info-grid{grid-template-columns:1fr;}
+  .ghid-section-body{padding:16px;}
+  .ghid-table{font-size:12px;}
+  .ghid-table th,.ghid-table td{padding:8px 10px;}
+  .ghid-toc{grid-template-columns:repeat(3,1fr);}
+  .ghid-brand-popup-row{flex-direction:column;gap:2px;}
+  .ghid-brand-popup-lbl{min-width:unset;}
+  .ghid-brand{padding:7px 11px;font-size:12px;}
+}
+</style>
+
+<div class="ghid-nav">
+  <button class="ghid-nav-back" onclick="showPage('home')">← Înapoi</button>
+  <span class="ghid-nav-title">Ghidul Agentului</span>
+  <span class="ghid-nav-badge">🎓 Formare</span>
+</div>
+
+<div class="ghid-wrap">
+
+  <!-- HERO -->
+  <div class="ghid-hero">
+    <div class="ghid-hero-eye">🎓 Formare profesională · Urban-Contakt</div>
+    <h1 class="ghid-hero-title">Ghidul Agentului<br><span>Începător</span></h1>
+    <p class="ghid-hero-sub">Tot ce trebuie să știi despre telefoane, folii, huse și vânzare. Parcurge toate secțiunile și testează-ți cunoștințele.</p>
+    <div class="ghid-progress-bar">
+      <div class="ghid-progress-fill" id="ghid-pfill"></div>
+    </div>
+    <p class="ghid-progress-label" id="ghid-plabel">0 din 19 secțiuni parcurse</p>
+  </div>
+
+  <!-- TOC -->
+  <div class="ghid-toc">
+    <div class="ghid-toc-item" onclick="openGhidSection(0)">
+      <span class="ghid-toc-emoji">📱</span>
+      <div class="ghid-toc-label">Tipuri Telefoane</div>
+      <div class="ghid-toc-sub">Android vs iPhone</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(1)">
+      <span class="ghid-toc-emoji">🏷️</span>
+      <div class="ghid-toc-label">Branduri</div>
+      <div class="ghid-toc-sub">Samsung, Xiaomi…</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(2)">
+      <span class="ghid-toc-emoji">🛡️</span>
+      <div class="ghid-toc-label">Folii</div>
+      <div class="ghid-toc-sub">TPU, Glass, Mat…</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(3)">
+      <span class="ghid-toc-emoji">📦</span>
+      <div class="ghid-toc-label">Huse</div>
+      <div class="ghid-toc-sub">Tipuri & sfaturi</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(4)">
+      <span class="ghid-toc-emoji">🔋</span>
+      <div class="ghid-toc-label">Baterie & Încărcare</div>
+      <div class="ghid-toc-sub">mAh, fast charge</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(5)">
+      <span class="ghid-toc-emoji">💬</span>
+      <div class="ghid-toc-label">Fraze Utile</div>
+      <div class="ghid-toc-sub">Răspunsuri rapide</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(6)">
+      <span class="ghid-toc-emoji">⚠️</span>
+      <div class="ghid-toc-label">Greșeli Frecvente</div>
+      <div class="ghid-toc-sub">Ce să eviți</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(7)">
+      <span class="ghid-toc-emoji">🔍</span>
+      <div class="ghid-toc-label">Citește Telefonul</div>
+      <div class="ghid-toc-sub">Identificare rapidă</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(8)">
+      <span class="ghid-toc-emoji">💰</span>
+      <div class="ghid-toc-label">Prețuri & Argumente</div>
+      <div class="ghid-toc-sub">Justificare & costuri</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(9)">
+      <span class="ghid-toc-emoji">📈</span>
+      <div class="ghid-toc-label">Upsell Natural</div>
+      <div class="ghid-toc-sub">Folie → pachet complet</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(10)">
+      <span class="ghid-toc-emoji">🔌</span>
+      <div class="ghid-toc-label">Conectori & Cabluri</div>
+      <div class="ghid-toc-sub">USB-C, Lightning, micro</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(11)">
+      <span class="ghid-toc-emoji">💧</span>
+      <div class="ghid-toc-label">Rezistență la Apă</div>
+      <div class="ghid-toc-sub">IP67, IP68, IP69</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(12)">
+      <span class="ghid-toc-emoji">📶</span>
+      <div class="ghid-toc-label">5G vs 4G</div>
+      <div class="ghid-toc-sub">Merită upgrade-ul?</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(13)">
+      <span class="ghid-toc-emoji">😤</span>
+      <div class="ghid-toc-label">Client Nemulțumit</div>
+      <div class="ghid-toc-sub">Scripturi reclamații</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(14)">
+      <span class="ghid-toc-emoji">📋</span>
+      <div class="ghid-toc-label">Ce NU Garantezi</div>
+      <div class="ghid-toc-sub">Limite clare</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(15)">
+      <span class="ghid-toc-emoji">🚨</span>
+      <div class="ghid-toc-label">Probleme Comune</div>
+      <div class="ghid-toc-sub">Modele cu issues</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(16)">
+      <span class="ghid-toc-emoji">🔄</span>
+      <div class="ghid-toc-label">Ciclul de Viață</div>
+      <div class="ghid-toc-sub">Când e momentul</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(17)">
+      <span class="ghid-toc-emoji">🔐</span>
+      <div class="ghid-toc-label">Protecție Date</div>
+      <div class="ghid-toc-sub">Ștergere înainte vânzare</div>
+    </div>
+    <div class="ghid-toc-item" onclick="openGhidSection(18)">
+      <span class="ghid-toc-emoji">🎒</span>
+      <div class="ghid-toc-label">Accesorii Complementare</div>
+      <div class="ghid-toc-sub">Power bank, căști, încărcătoare</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 1 — TIPURI TELEFOANE ════════ -->
+  <div class="ghid-section" id="ghid-s0">
+    <div class="ghid-section-head" onclick="toggleGhidSection(0)">
+      <div class="ghid-section-icon" style="background:rgba(79,70,229,.1);">📱</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 1</div>
+        <div class="ghid-section-title">Tipuri de Telefoane</div>
+        <div class="ghid-section-desc">Android vs iPhone · Flagship, mid-range, buget · Cum citești specificațiile</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+
+      <div class="ghid-info-grid">
+        <div class="ghid-info-card" style="border-top:3px solid #3ddc84;">
+          <div class="ghid-info-card-icon">🤖</div>
+          <div class="ghid-info-card-title">Android</div>
+          <div class="ghid-info-card-text">Sistem de operare creat de Google. Folosit de Samsung, Xiaomi, Motorola, Huawei, Realme etc. Permite mai multă personalizare și vine în game largi de prețuri.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #555;">
+          <div class="ghid-info-card-icon">🍎</div>
+          <div class="ghid-info-card-title">iPhone (iOS)</div>
+          <div class="ghid-info-card-text">Sistem creat de Apple, disponibil exclusiv pe telefoane Apple. Interfață simplă, actualizări lungi (5-6 ani), ecosistem Apple (iCloud, AirDrop). Prețuri mai ridicate.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #ea580c;">
+          <div class="ghid-info-card-icon">🥇</div>
+          <div class="ghid-info-card-title">Flagship</div>
+          <div class="ghid-info-card-text">Cel mai performant model al unui brand. Exemplu: Samsung S26 Ultra, iPhone 17 Pro Max. Preț 4.000–10.000 lei. Cel mai bun procesor, cameră și ecran al brandului.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #7c75f0;">
+          <div class="ghid-info-card-icon">🥈</div>
+          <div class="ghid-info-card-title">Mid-Range</div>
+          <div class="ghid-info-card-text">Telefoane echilibrate ca preț/performanță. Exemplu: Samsung A56, Xiaomi Redmi Note 14 Pro. Preț 1.200–2.500 lei. Bune pentru marea majoritate a utilizatorilor.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #059669;">
+          <div class="ghid-info-card-icon">🥉</div>
+          <div class="ghid-info-card-title">Buget / Entry</div>
+          <div class="ghid-info-card-text">Telefoane pentru nevoi de bază. Exemplu: Motorola E14, Xiaomi Redmi A4. Preț sub 800 lei. Apeluri, mesaje, WhatsApp, foto simple. Nu pentru gaming intens.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #0ea5e9;">
+          <div class="ghid-info-card-icon">📊</div>
+          <div class="ghid-info-card-title">Cum citești spec-urile</div>
+          <div class="ghid-info-card-text"><strong>RAM</strong> = memorie de lucru (mai mult = mai fluid). <strong>Stocare</strong> = spațiu pentru poze/apps. <strong>mAh</strong> = capacitate baterie. <strong>MP</strong> = megapixeli cameră.</div>
+        </div>
+      </div>
+
+      <div class="ghid-tip good">
+        <span class="ghid-tip-icon">💡</span>
+        <div class="ghid-tip-text"><strong>Sfat vânzare:</strong> Întreabă mereu clientul CE face cu telefonul: fotografii? gaming? social media? Răspunsul îți arată ce categorie să recomanzi.</div>
+      </div>
+      <div class="ghid-tip warn">
+        <span class="ghid-tip-icon">⚠️</span>
+        <div class="ghid-tip-text"><strong>Nu confunda</strong> RAM cu stocarea! RAM = 8GB (memorie de lucru), Stocare = 128GB (spațiu pe telefon). Clienții confundă des aceste concepte.</div>
+      </div>
+
+      <!-- QUIZ 1 -->
+      <div class="ghid-quiz" id="quiz-0" data-q="0" data-section="0">
+        <div class="ghid-quiz-title">🧠 Mini Quiz · Secțiunea 1</div>
+        <div class="ghid-quiz-sub">Testează ce ai învățat</div>
+        <div class="ghid-quiz-questions"></div>
+        <div class="ghid-quiz-score" id="qs-0"></div>
+      </div>
+
+      <div class="ghid-done-strip" id="done-0">
+        <span>✅</span> Secțiunea 1 parcursă — progres salvat!
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 2 — BRANDURI ════════ -->
+  <div class="ghid-section" id="ghid-s1">
+    <div class="ghid-section-head" onclick="toggleGhidSection(1)">
+      <div class="ghid-section-icon" style="background:rgba(234,88,12,.1);">🏷️</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 2</div>
+        <div class="ghid-section-title">Branduri Principale</div>
+        <div class="ghid-section-desc">Samsung, Apple, Xiaomi, Motorola, Huawei, Realme · Puncte forte & slabe</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+      <p style="font-size:13.5px;color:#4a4f6e;margin-bottom:16px;line-height:1.6;">Apasă pe un brand pentru detalii despre el. Cunoașterea brandurilor îți ajută să răspunzi rapid la întrebările clienților.</p>
+
+      <div class="ghid-brand-row" id="brand-row">
+        <!-- Samsung -->
+        <div class="ghid-brand" onclick="showBrand('samsung')" style="border-color:#1428a0;">
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="16" fill="#1428a0"/><text x="50" y="67" font-size="48" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="700">S</text></svg>
+          Samsung
+        </div>
+        <!-- Apple -->
+        <div class="ghid-brand" onclick="showBrand('apple')" style="border-color:#555;">
+          <svg width="16" height="18" viewBox="0 0 814 1000" fill="#333"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 612 0 510.7 0 413.4c0-199.3 130.4-304.7 258.4-304.7 69.1 0 126.4 45.7 169.4 45.7 41.3 0 106.1-48.3 183.1-48.3 27.9 0 143.2 2.6 219.3 97.9zm-158.9-217.7c30.8-36.8 52.6-88.2 52.6-139.6 0-7.1-.6-14.3-1.9-20.1-49.9 1.9-110.8 33.4-147.1 75.8-28.5 32.4-55.1 83.8-55.1 135.9 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 136-71.4z"/></svg>
+          Apple
+        </div>
+        <!-- Xiaomi -->
+        <div class="ghid-brand" onclick="showBrand('xiaomi')" style="border-color:#ff6900;">
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="16" fill="#ff6900"/><text x="50" y="67" font-size="42" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="900">Mi</text></svg>
+          Xiaomi
+        </div>
+        <!-- Motorola -->
+        <div class="ghid-brand" onclick="showBrand('motorola')" style="border-color:#006ec7;">
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="50" fill="#006ec7"/><text x="50" y="67" font-size="44" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="700">M</text></svg>
+          Motorola
+        </div>
+        <!-- Huawei -->
+        <div class="ghid-brand" onclick="showBrand('huawei')" style="border-color:#cf0a2c;">
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="50" fill="#cf0a2c"/><g fill="white"><path d="M50 18 L50 50 L28 62 Z" opacity="0.9"/><path d="M50 18 L50 50 L72 62 Z" opacity="0.7"/><path d="M28 62 L50 50 L50 82 Z" opacity="0.8"/><path d="M72 62 L50 50 L50 82 Z" opacity="0.6"/></g></svg>
+          Huawei
+        </div>
+        <!-- Realme -->
+        <div class="ghid-brand" onclick="showBrand('realme')" style="border-color:#e9a800;">
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="16" fill="#e9a800"/><text x="50" y="65" font-size="38" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="900">rlme</text></svg>
+          Realme
+        </div>
+        <!-- OPPO -->
+        <div class="ghid-brand" onclick="showBrand('oppo')" style="border-color:#1d4c9e;">
+          <svg width="18" height="18" viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="16" fill="#1d4c9e"/><circle cx="50" cy="50" r="26" fill="none" stroke="white" stroke-width="10"/><circle cx="50" cy="50" r="10" fill="white"/></svg>
+          OPPO
+        </div>
+      </div>
+
+      <div class="ghid-brand-popup" id="brand-popup">
+        <div class="ghid-brand-popup-title" id="bp-title">—</div>
+        <div id="bp-content"></div>
+      </div>
+
+      <div class="ghid-table-wrap">
+      <table class="ghid-table" style="margin-top:0;">
+        <thead><tr><th>Brand</th><th>Piață țintă</th><th>Punct forte</th><th>De știut</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Samsung</strong></td><td>Toate segmentele</td><td class="ghid-td-good">Gama largă, service bun</td><td>S26 Ultra flagship 2026; A = mid; One UI 8.5</td></tr>
+          <tr><td><strong>Apple</strong></td><td>Premium</td><td class="ghid-td-good">Ecosistem, AI Intelligence</td><td>iPhone 17 Pro Max = cel mai nou (2025); iOS 26</td></tr>
+          <tr><td><strong>Xiaomi</strong></td><td>Mid-range, buget</td><td class="ghid-td-good">Preț/performanță excelent</td><td>HyperOS 2 are mai puțină publicitate față de MIUI</td></tr>
+          <tr><td><strong>Motorola</strong></td><td>Buget, entry</td><td class="ghid-td-good">Android curat, durabil</td><td>Baterie mare la prețuri mici; Edge 50 = mid-premium</td></tr>
+          <tr><td><strong>Huawei</strong></td><td>Mid-premium</td><td class="ghid-td-good">Cameră Leica, baterie mare</td><td class="ghid-td-bad">Fără Google Apps (Play Store, Maps, Gmail)</td></tr>
+          <tr><td><strong>Realme</strong></td><td>Tineri, buget-mid</td><td class="ghid-td-good">Design, fast charge 120W</td><td>GT 7 Pro = 6500 mAh + 120W; servicii limitate RO</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="ghid-quiz" id="quiz-1" data-q="1" data-section="1">
+        <div class="ghid-quiz-title">🧠 Mini Quiz · Secțiunea 2</div>
+        <div class="ghid-quiz-sub">Testează ce știi despre branduri</div>
+        <div class="ghid-quiz-questions"></div>
+        <div class="ghid-quiz-score" id="qs-1"></div>
+      </div>
+      <div class="ghid-done-strip" id="done-1"><span>✅</span> Secțiunea 2 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 3 — FOLII ════════ -->
+  <div class="ghid-section" id="ghid-s2">
+    <div class="ghid-section-head" onclick="toggleGhidSection(2)">
+      <div class="ghid-section-icon" style="background:rgba(5,150,105,.1);">🛡️</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 3</div>
+        <div class="ghid-section-title">Folii de Protecție</div>
+        <div class="ghid-section-desc">TPU, PET, Glass, Mat, Privacy, Hidrogel · Compatibilitate senzor ultrasonic</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+
+      <div class="ghid-info-grid">
+        <div class="ghid-info-card" style="border-top:3px solid #0ea5e9;">
+          <div class="ghid-info-card-icon">🧊</div>
+          <div class="ghid-info-card-title">TPU (Silicon moale)</div>
+          <div class="ghid-info-card-text">Cel mai flexibil tip. Se mulează perfect pe ecran, inclusiv pe colțuri curbate. <strong>Compatibil 100% cu senzorul ultrasonic.</strong> Auto-healing la zgârieturi mici.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #8b5cf6;">
+          <div class="ghid-info-card-icon">📄</div>
+          <div class="ghid-info-card-title">PET (Plastic rigid)</div>
+          <div class="ghid-info-card-text">Mai rigid ca TPU. Aplicare simplă, nu se lasă bule. Compatibil cu senzor ultrasonic. Se zgârie mai ușor decât sticla dar nu blochează senzorul.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #f59e0b;border:2px solid #f59e0b;">
+          <div class="ghid-info-card-icon">🛡️</div>
+          <div class="ghid-info-card-title">Glass OK (Sticlă)</div>
+          <div class="ghid-info-card-text">Sticlă călită subțire (&lt;0.33mm), specială pentru telefoane cu ultrasonic. <strong>Verifică OBLIGATORIU în SonicDB</strong> că telefonul e marcat Glass OK înainte de montare.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #dc2626;">
+          <div class="ghid-info-card-icon">🚫</div>
+          <div class="ghid-info-card-title">Sticlă Standard (INTERZIS)</div>
+          <div class="ghid-info-card-text">Sticla călită normală blochează <strong>complet</strong> senzorul de amprentă ultrasonic. Clientul nu va putea folosi amprenta. Nu montați pe telefoane cu ultrasonic!</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #64748b;">
+          <div class="ghid-info-card-icon">🌫️</div>
+          <div class="ghid-info-card-title">Mat (Antireflex)</div>
+          <div class="ghid-info-card-text">Reduce reflexiile luminii pe ecran. Ideal pentru cei care lucrează în exterior sau sub lumini puternice. Compatibil cu ultrasonic în varianta TPU mat.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #7c75f0;">
+          <div class="ghid-info-card-icon">🔐</div>
+          <div class="ghid-info-card-title">Privacy (Confidențialitate)</div>
+          <div class="ghid-info-card-text">Limitează unghiul de vizualizare — nu se vede ecranul din lateral. Perfect pentru bancheri, medici, persoane care lucrează în transport public.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #06b6d4;">
+          <div class="ghid-info-card-icon">💧</div>
+          <div class="ghid-info-card-title">Hidrogel</div>
+          <div class="ghid-info-card-text">Folie ultra-subțire, regenerativă. Se auto-repară la zgârieturi. Compatibilă cu toate ecranele curbate. Aplicare mai dificilă (necesită soluție de montaj).</div>
+        </div>
+      </div>
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">🚨</span>
+        <div class="ghid-tip-text"><strong>REGULĂ CRITICĂ:</strong> Înainte de orice folie de sticlă — verifică în aplicație (SonicDB) dacă telefonul are senzor ultrasonic! Dacă are și nu e Glass OK → montezi DOAR TPU/PET!</div>
+      </div>
+      <div class="ghid-tip good">
+        <span class="ghid-tip-icon">✅</span>
+        <div class="ghid-tip-text"><strong>Recomandare generală:</strong> Dacă nu ești sigur ce tip de senzor are telefonul, pune TPU — funcționează mereu și nu blochează niciodată amprenta.</div>
+      </div>
+
+      <div class="ghid-quiz" id="quiz-2" data-q="2" data-section="2">
+        <div class="ghid-quiz-title">🧠 Mini Quiz · Secțiunea 3</div>
+        <div class="ghid-quiz-sub">Testează cunoștințele despre folii</div>
+        <div class="ghid-quiz-questions"></div>
+        <div class="ghid-quiz-score" id="qs-2"></div>
+      </div>
+      <div class="ghid-done-strip" id="done-2"><span>✅</span> Secțiunea 3 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 4 — HUSE ════════ -->
+  <div class="ghid-section" id="ghid-s3">
+    <div class="ghid-section-head" onclick="toggleGhidSection(3)">
+      <div class="ghid-section-icon" style="background:rgba(124,117,240,.1);">📦</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 4</div>
+        <div class="ghid-section-title">Huse de Protecție</div>
+        <div class="ghid-section-desc">Silicon, plastic, armored, flip, transparente · Cui recomanzi ce tip</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+      <div class="ghid-info-grid">
+        <div class="ghid-info-card" style="border-top:3px solid #3b82f6;">
+          <div class="ghid-info-card-icon">🫙</div>
+          <div class="ghid-info-card-title">Silicon (Soft Case)</div>
+          <div class="ghid-info-card-text">Flexibilă, aderentă la mână, protecție bună la căderi mici. <strong>Recomandată pentru:</strong> utilizatori activi, elevi, vârstnici. Dezavantaj: atrage scame și praf.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #64748b;">
+          <div class="ghid-info-card-icon">🪨</div>
+          <div class="ghid-info-card-title">Plastic Dur (Hard Case)</div>
+          <div class="ghid-info-card-text">Protecție bună, slim, nu atrage scame. <strong>Recomandată pentru:</strong> persoane care vor husă subțire, design conservat. Poate crăpa la căderi puternice.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #f59e0b;">
+          <div class="ghid-info-card-icon">🦺</div>
+          <div class="ghid-info-card-title">Armored / Shockproof</div>
+          <div class="ghid-info-card-text">Protecție maximă, colțuri întărite, rezistentă la căderi mari. <strong>Recomandată pentru:</strong> muncitori pe șantier, sportivi, persoane care scapă des telefonul.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #8b5cf6;">
+          <div class="ghid-info-card-icon">💼</div>
+          <div class="ghid-info-card-title">Flip / Wallet</div>
+          <div class="ghid-info-card-text">Acoperă și ecranul. Unele au buzunare pentru card/bani. <strong>Recomandată pentru:</strong> vârstnici (ecran protejat), persoane care vor să scape de portofel.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #06b6d4;">
+          <div class="ghid-info-card-icon">🔍</div>
+          <div class="ghid-info-card-title">Transparentă</div>
+          <div class="ghid-info-card-text">Arată designul original al telefonului. <strong>Recomandată pentru:</strong> cei cu telefoane frumoase (iPhone 17 Pro aluminiu, Samsung S26 colorat) care vor protecție fără să ascundă estetica.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #ec4899;">
+          <div class="ghid-info-card-icon">✨</div>
+          <div class="ghid-info-card-title">Fashion / Decorated</div>
+          <div class="ghid-info-card-text">Cu modele, glitter, personaje etc. <strong>Recomandată pentru:</strong> tinere, adolescente, persoane care vor să personalizeze. Protecție medie.</div>
+        </div>
+      </div>
+
+      <div class="ghid-tip good">
+        <span class="ghid-tip-icon">🎯</span>
+        <div class="ghid-tip-text"><strong>Tehnică de vânzare husă:</strong> Întreabă „Ce faceți în general cu telefonul — lucrați, faceți sport, sau mai mult birou?" — răspunsul îți arată direct ce tip să oferi.</div>
+      </div>
+      <div class="ghid-tip warn">
+        <span class="ghid-tip-icon">📏</span>
+        <div class="ghid-tip-text"><strong>Atenție la compatibilitate:</strong> Verifică mereu că husa e pentru modelul exact (ex: Samsung A55 5G ≠ Samsung A54). Modelele diferă ca dimensiuni!</div>
+      </div>
+      <div class="ghid-done-strip" id="done-3"><span>✅</span> Secțiunea 4 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 5 — BATERIE ════════ -->
+  <div class="ghid-section" id="ghid-s4">
+    <div class="ghid-section-head" onclick="toggleGhidSection(4)">
+      <div class="ghid-section-icon" style="background:rgba(5,150,105,.1);">🔋</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 5</div>
+        <div class="ghid-section-title">Baterie & Încărcare</div>
+        <div class="ghid-section-desc">Ce înseamnă mAh · Fast charge · Sfaturi pentru clienți</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+      <div class="ghid-info-grid">
+        <div class="ghid-info-card" style="border-top:3px solid #059669;">
+          <div class="ghid-info-card-icon">⚡</div>
+          <div class="ghid-info-card-title">Ce înseamnă mAh</div>
+          <div class="ghid-info-card-text">Miliamperi-oră = capacitatea bateriei. Cu cât mai mare, cu atât mai multă autonomie. <strong>4000–5000 mAh</strong> = o zi bună. <strong>6000+ mAh</strong> = două zile cu utilizare normală. Flagship 2025: S26 Ultra = 5000 mAh, iPhone 17 Pro Max = 5088 mAh.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #f59e0b;">
+          <div class="ghid-info-card-icon">🔌</div>
+          <div class="ghid-info-card-title">Fast Charge (Încărcare rapidă)</div>
+          <div class="ghid-info-card-text">Tehnologie care mărește puterea de încărcare. Se măsoară în <strong>Wați (W)</strong>. 25W = rapid, 45W = foarte rapid, 60-120W+ = super rapid (15–25 min la 75%). <strong>2025:</strong> S26 Ultra = 60W, iPhone 17 Pro Max = 25W MagSafe. Realme/Xiaomi ajung la 120W!</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #7c75f0;">
+          <div class="ghid-info-card-icon">📡</div>
+          <div class="ghid-info-card-title">Încărcare Wireless</div>
+          <div class="ghid-info-card-text">Fără cablu, prin inducție electromagnetică. Standard <strong>Qi2</strong> = cel mai nou (2025). iPhones MagSafe 25W, Samsung Qi2.2 = 25W. <strong>Dezavantaj:</strong> mai lentă decât cablu și mai multă căldură pe baterie.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #dc2626;">
+          <div class="ghid-info-card-icon">🧯</div>
+          <div class="ghid-info-card-title">Sfaturi sănătate baterie</div>
+          <div class="ghid-info-card-text">Spune clienților: nu lăsa la 0% complet, nu ține conectat toată noaptea zilnic, evită căldura excesivă. Ideal să ai bateria între 20–80%.</div>
+        </div>
+      </div>
+
+      <div class="ghid-table-wrap">
+      <table class="ghid-table">
+        <thead><tr><th>Capacitate</th><th>Exemple reale 2025</th><th>Autonomie estimată</th></tr></thead>
+        <tbody>
+          <tr><td><strong>3000–3500 mAh</strong></td><td>iPhone Air (3149), utilizare ușoară</td><td class="ghid-td-mid">~16–20 ore utilizare normală</td></tr>
+          <tr><td><strong>3500–4300 mAh</strong></td><td>iPhone 17 (3692), Samsung S26 (4300)</td><td class="ghid-td-mid">~20–26 ore (o zi)</td></tr>
+          <tr><td><strong>4500–5100 mAh</strong></td><td>S26 Ultra (5000), iPhone 17 Pro Max (5088)</td><td class="ghid-td-good">~30–39 ore (1.5 zile)</td></tr>
+          <tr><td><strong>5500–6500 mAh</strong></td><td>Realme GT 7 Pro (6500), Xiaomi flagship</td><td class="ghid-td-good">~40–50 ore (2+ zile)</td></tr>
+          <tr><td><strong>6000+ mAh</strong></td><td>Telefoane buget/mid Xiaomi, Motorola teren</td><td class="ghid-td-good">~48+ ore (două zile)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="ghid-done-strip" id="done-4"><span>✅</span> Secțiunea 5 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 6 — FRAZE UTILE ════════ -->
+  <div class="ghid-section" id="ghid-s5">
+    <div class="ghid-section-head" onclick="toggleGhidSection(5)">
+      <div class="ghid-section-icon" style="background:rgba(14,165,233,.1);">💬</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 6</div>
+        <div class="ghid-section-title">Fraze Utile pentru Clienți</div>
+        <div class="ghid-section-desc">Cum explici diferențe tehnice simplu · Răspunsuri la obiecții frecvente</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Întrebare frecventă</div>
+        <div class="ghid-fraze-q">🗣️ „De ce nu pot pune sticlă pe telefonul meu nou?"</div>
+        <div class="ghid-fraze-a">„Telefonul dumneavoastră are un senzor de amprentă special, sub ecran, care funcționează prin unde ultrasonice. Sticla normală blochează aceste unde și amprenta nu mai funcționează. De aceea vă recomand o folie TPU, care e la fel de protectoare și lasă senzorul să funcționeze perfect."</div>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Întrebare frecventă</div>
+        <div class="ghid-fraze-q">🗣️ „Care-i diferența dintre iPhone și Samsung?"</div>
+        <div class="ghid-fraze-a">„iPhone folosește iOS — un sistem mai simplu, mai securizat, cu actualizări timp de 5-6 ani. Samsung folosește Android — mai flexibil, gama mai largă de prețuri, mai ușor de personalizat. Dacă aveți deja alte dispozitive Apple (iPad, Mac), iPhone se integrează perfect. Dacă vreți mai mult control și mai multe opțiuni, Samsung/Android este alegerea mai bună."</div>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Întrebare frecventă</div>
+        <div class="ghid-fraze-q">🗣️ „Am 64GB, e suficient?"</div>
+        <div class="ghid-fraze-a">„Depinde ce faceți cu telefonul. Dacă faceți multe poze și video-uri sau aveți multe aplicații — 128GB e mai sigur. La 64GB veți ajunge la limită după 1-2 ani. Dacă folosiți clouduri (Google Foto, iCloud) — 64GB poate fi suficient."</div>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Întrebare frecventă</div>
+        <div class="ghid-fraze-q">🗣️ „Îmi puteți transfera datele de pe vechiul telefon?"</div>
+        <div class="ghid-fraze-a">„Da, bineînțeles! Înainte să începem, aveți parola contului Google (sau Apple ID) la îndemână? Și știți dacă aveți un backup recent? Transferul durează între 20 de minute și 2 ore, în funcție de cât aveți pe telefon. Recomand să ne asigurăm că ambele telefoane sunt la curent înainte."</div>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Obiecție de vânzare</div>
+        <div class="ghid-fraze-q">🗣️ „E prea scump, nu am nevoie de husă."</div>
+        <div class="ghid-fraze-a">„Înțeleg, dar gândiți-vă: o husă de 30-50 lei poate economisi 500-2000 lei pe un ecran spart. E ca asigurarea pentru telefon. Mai ales că ecranele la telefoanele noi sunt din ce în ce mai scumpe de înlocuit."</div>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Situație dificilă</div>
+        <div class="ghid-fraze-q">🗣️ „Nu merge amprenta cu folia pusă de voi!"</div>
+        <div class="ghid-fraze-a">„Îmi pare rău pentru inconveniență. Hai să verificăm împreună — pe unele telefoane amprenta trebuie re-înregistrată după ce pui folia. Mergeți la Setări → Biometrice → Amprentă și adăugați-o din nou cu folia pusă. Dacă tot nu merge, revenim și găsim o soluție."</div>
+      </div>
+
+      <div class="ghid-quiz" id="quiz-3" data-q="3" data-section="5">
+        <div class="ghid-quiz-title">🧠 Mini Quiz · Secțiunea 6</div>
+        <div class="ghid-quiz-sub">Testează abilitățile de comunicare</div>
+        <div class="ghid-quiz-questions"></div>
+        <div class="ghid-quiz-score" id="qs-3"></div>
+      </div>
+      <div class="ghid-done-strip" id="done-5"><span>✅</span> Secțiunea 6 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 7 — GREȘELI FRECVENTE ════════ -->
+  <div class="ghid-section" id="ghid-s6">
+    <div class="ghid-section-head" onclick="toggleGhidSection(6)">
+      <div class="ghid-section-icon" style="background:rgba(220,38,38,.1);">⚠️</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 7</div>
+        <div class="ghid-section-title">Greșeli Frecvente ale Agenților Noi</div>
+        <div class="ghid-section-desc">Ce să eviți · Situații reale · Cum procedezi corect</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">❌</span>
+        <div class="ghid-tip-text"><strong>Greșeala #1: Montezi sticlă fără să verifici tipul senzorului.</strong><br>✅ Corect: Înainte de orice folie de sticlă — deschide aplicația și verifică dacă telefonul are senzor ultrasonic. Dacă DA și nu e Glass OK → TPU obligatoriu.</div>
+      </div>
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">❌</span>
+        <div class="ghid-tip-text"><strong>Greșeala #2: Începi transferul fără să întrebi de backup.</strong><br>✅ Corect: Spune mereu: „Aveți un backup recent al datelor? Contactele sunt salvate pe contul Google/Apple?" Dacă nu — ajuți clientul să facă backup ÎNAINTE.</div>
+      </div>
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">❌</span>
+        <div class="ghid-tip-text"><strong>Greșeala #3: Confunzi RAM cu stocarea.</strong><br>✅ Corect: RAM = memorie de lucru (cât poate face simultan), Stocare = spațiu pe disc (cât salvezi). Un telefon cu 8GB RAM / 128GB stocare are memorie rapidă și spațiu pentru fișiere.</div>
+      </div>
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">❌</span>
+        <div class="ghid-tip-text"><strong>Greșeala #4: Nu verifici compatibilitatea huselor după model exact.</strong><br>✅ Corect: Samsung A55 5G ≠ Samsung A54 ≠ Samsung A53. Modelele par similare dar dimensiunile diferă. Verifică modelul exact de pe cutie sau din Setări → Despre telefon.</div>
+      </div>
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">❌</span>
+        <div class="ghid-tip-text"><strong>Greșeala #5: Spui clientului că transferul durează „10 minute".</strong><br>✅ Corect: Transferul poate dura între 20 minute și 3 ore, în funcție de cantitatea de date. Spune mereu un interval: „Între 30 minute și 2 ore — depinde cât aveți pe telefon."</div>
+      </div>
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">❌</span>
+        <div class="ghid-tip-text"><strong>Greșeala #6: Nu ții telefonul clientului conectat la curent în timpul transferului.</strong><br>✅ Corect: Dacă bateria se termină în timpul transferului datele pot fi corupte sau pierdute parțial. Ambele telefoane trebuie conectate la curent!</div>
+      </div>
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">❌</span>
+        <div class="ghid-tip-text"><strong>Greșeala #7: Recomanzi cea mai scumpă husă fără să asculți nevoia clientului.</strong><br>✅ Corect: Întreabă mai întâi stilul de viață. Un client care lucrează la birou nu are nevoie de husă armored. Un muncitor pe șantier nu va fi mulțumit cu o husă subțire fashion.</div>
+      </div>
+
+      <div class="ghid-tip warn">
+        <span class="ghid-tip-icon">💡</span>
+        <div class="ghid-tip-text"><strong>Regula de aur:</strong> Dacă nu știi ceva — nu inventa! Spune „Hai să verific pentru tine" și caută în aplicație sau întreabă un coleg. Clienții apreciază onestitatea mai mult decât un răspuns greșit dat cu încredere.</div>
+      </div>
+
+      <div class="ghid-done-strip" id="done-6"><span>✅</span> Secțiunea 7 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 8 — CUM CITEȘTI UN TELEFON DIN MÂNĂ ════════ -->
+  <div class="ghid-section" id="ghid-s7">
+    <div class="ghid-section-head" onclick="toggleGhidSection(7)">
+      <div class="ghid-section-icon" style="background:rgba(14,165,233,.1);">🔍</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 8</div>
+        <div class="ghid-section-title">Cum Citești un Telefon din Mână</div>
+        <div class="ghid-section-desc">Identificare rapidă model exact · Setări, carcasă, cutie</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+      <p style="font-size:13.5px;color:#4a4f6e;margin-bottom:16px;line-height:1.6;">Clientul nu știe mereu ce telefon are. Trebuie să identifici rapid modelul exact pentru a alege folia sau husa corectă.</p>
+
+      <div class="ghid-info-grid">
+        <div class="ghid-info-card" style="border-top:3px solid #4f46e5;">
+          <div class="ghid-info-card-icon">⚙️</div>
+          <div class="ghid-info-card-title">Metoda 1 — Setări</div>
+          <div class="ghid-info-card-text"><strong>Android:</strong> Setări → Despre telefon → Număr model<br><strong>iPhone:</strong> Setări → General → Informații → Model<br>Exemplu: „SM-A556B" = Samsung A55 5G.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #059669;">
+          <div class="ghid-info-card-icon">📦</div>
+          <div class="ghid-info-card-title">Metoda 2 — Cutia</div>
+          <div class="ghid-info-card-text">Pe cutie apare numele complet și numărul de model (sub cod de bare). Cel mai sigur mod dacă clientul a păstrat-o. Verifică și volumul de stocare (64/128/256GB).</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #f59e0b;">
+          <div class="ghid-info-card-icon">📱</div>
+          <div class="ghid-info-card-title">Metoda 3 — Spatele Carcasei</div>
+          <div class="ghid-info-card-text">Pe spatele telefonului (uneori mic, lângă serial) sau sub bateria scoasă. iPhone: numărul model (ex: A2896) gravat pe spate lângă jos. Pe Android apare mai rar vizibil.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #dc2626;">
+          <div class="ghid-info-card-icon">⚠️</div>
+          <div class="ghid-info-card-title">Capcane Frecvente</div>
+          <div class="ghid-info-card-text"><strong>„Samsung A5"</strong> poate fi A50, A51, A52, A53, A54, A55 — modele complet diferite ca dimensiuni! <strong>Nu presupune</strong> — verifică întotdeauna codul exact din Setări.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #8b5cf6;">
+          <div class="ghid-info-card-icon">🍎</div>
+          <div class="ghid-info-card-title">iPhone — Identificare Rapidă</div>
+          <div class="ghid-info-card-text">iPhone 15/16 Pro: titaniu + Dynamic Island rotund în colț. iPhone 16 standard: Dynamic Island + buton Acțiune. iPhone 14 și mai vechi: notch (U). Fără mufa jack de la iPhone 7.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #06b6d4;">
+          <div class="ghid-info-card-icon">🤖</div>
+          <div class="ghid-info-card-title">Samsung — Identificare Rapidă</div>
+          <div class="ghid-info-card-text">S = flagship (ecran curbat, S Pen la Ultra). A = literă medie (mid-range). M/F = buget. Numărul mai mare = mai nou: A55 > A54 > A53. Verifică „5G" în model pentru versiunea cu 5G.</div>
+        </div>
+      </div>
+
+      <div class="ghid-tip good">
+        <span class="ghid-tip-icon">💡</span>
+        <div class="ghid-tip-text"><strong>Cod rapid:</strong> Dacă ai acces la telefon, dial *#*#4636#*#* pe Android pentru informații detaliate despre hardware. Pe iPhone, Setări → General → Informații afișează tot.</div>
+      </div>
+      <div class="ghid-tip warn">
+        <span class="ghid-tip-icon">⚠️</span>
+        <div class="ghid-tip-text"><strong>Atenție la „5G" vs standard:</strong> Samsung A55 5G și Samsung A55 4G pot diferi ușor ca dimensiuni sau ca design al camerei. Verifică codul model complet!</div>
+      </div>
+
+      <div class="ghid-quiz" id="quiz-4" data-q="4" data-section="7">
+        <div class="ghid-quiz-title">🧠 Mini Quiz · Secțiunea 8</div>
+        <div class="ghid-quiz-sub">Testează identificarea modelelor</div>
+        <div class="ghid-quiz-questions"></div>
+        <div class="ghid-quiz-score" id="qs-4"></div>
+      </div>
+      <div class="ghid-done-strip" id="done-7"><span>✅</span> Secțiunea 8 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 9 — PREȚURI & ARGUMENTE ════════ -->
+  <div class="ghid-section" id="ghid-s8">
+    <div class="ghid-section-head" onclick="toggleGhidSection(8)">
+      <div class="ghid-section-icon" style="background:rgba(5,150,105,.1);">💰</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 9</div>
+        <div class="ghid-section-title">Prețuri Orientative & Argumente de Vânzare</div>
+        <div class="ghid-section-desc">Cum justifici prețul foliei vs ecran spart · Costuri reparații pe branduri</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+      <p style="font-size:13.5px;color:#4a4f6e;margin-bottom:16px;line-height:1.6;">Clientul trebuie să înțeleagă că o folie sau husă este o investiție, nu o cheltuială. Arată-i concret cât costă un ecran spart vs cât costă protecția preventivă.</p>
+
+      <div class="ghid-table-wrap">
+      <table class="ghid-table">
+        <thead><tr><th>Brand / Model</th><th>Ecran original (lei)</th><th>Ecran compatibil (lei)</th><th>Folie protecție (lei)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>iPhone 17 Pro Max</strong></td><td class="ghid-td-bad">3.500–4.500</td><td class="ghid-td-mid">N/A (Apple autorizat)</td><td class="ghid-td-good">50–120</td></tr>
+          <tr><td><strong>iPhone 16 / 16 Plus</strong></td><td class="ghid-td-bad">2.500–3.500</td><td class="ghid-td-mid">N/A (Apple autorizat)</td><td class="ghid-td-good">40–100</td></tr>
+          <tr><td><strong>Samsung S26 Ultra</strong></td><td class="ghid-td-bad">2.000–3.000</td><td class="ghid-td-mid">800–1.400</td><td class="ghid-td-good">40–90</td></tr>
+          <tr><td><strong>Samsung A55 / A56</strong></td><td class="ghid-td-mid">700–1.200</td><td class="ghid-td-mid">350–600</td><td class="ghid-td-good">20–50</td></tr>
+          <tr><td><strong>Xiaomi Redmi Note 14 Pro</strong></td><td class="ghid-td-mid">500–900</td><td class="ghid-td-good">250–450</td><td class="ghid-td-good">15–40</td></tr>
+          <tr><td><strong>Motorola Moto G85</strong></td><td class="ghid-td-mid">400–700</td><td class="ghid-td-good">200–380</td><td class="ghid-td-good">15–35</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Argument de vânzare folie</div>
+        <div class="ghid-fraze-q">🗣️ „Nu am nevoie de folie, am grijă de telefon."</div>
+        <div class="ghid-fraze-a">„Înțeleg, și probabil aveți dreptate că aveți grijă. Dar ecranul unui Samsung S26 Ultra se repară la 2.000–3.000 lei. Folia costă 50 lei — adică 1% din prețul reparației. E ca o asigurare pe care nu trebuie s-o plătiți lunar."</div>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Argument pentru husă</div>
+        <div class="ghid-fraze-q">🗣️ „Husa e prea scumpă, mai bine fără."</div>
+        <div class="ghid-fraze-a">„O husă de 40 lei protejează colțurile și spatele — cele mai vulnerabile puncte. La un telefon de 2.000 lei, o zgârietură adâncă sau o crăpătură la spate scade valoarea cu 300-500 lei la revânzare. Husa se amortizează din prima zi."</div>
+      </div>
+
+      <div class="ghid-tip good">
+        <span class="ghid-tip-icon">💡</span>
+        <div class="ghid-tip-text"><strong>Tehnica „investiție vs cheltuială":</strong> Nu spune „costă X lei" — spune „protejează un telefon de Y lei". Clientul trebuie să simtă că economisește bani, nu că cheltuie.</div>
+      </div>
+
+      <div class="ghid-done-strip" id="done-8"><span>✅</span> Secțiunea 9 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 10 — UPSELL NATURAL ════════ -->
+  <div class="ghid-section" id="ghid-s9">
+    <div class="ghid-section-head" onclick="toggleGhidSection(9)">
+      <div class="ghid-section-icon" style="background:rgba(234,88,12,.1);">📈</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 10</div>
+        <div class="ghid-section-title">Upsell Natural — De la O Folie la Pachet Complet</div>
+        <div class="ghid-section-desc">Cum treci de la „o folie" la folie + husă + protecție spate fără să pari agresiv</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+      <p style="font-size:13.5px;color:#4a4f6e;margin-bottom:16px;line-height:1.6;">Upsell-ul bun nu se simte ca vânzare. Clientul trebuie să simtă că tu îl ajuți să facă cea mai bună alegere — nu că îl convingi să cheltuie mai mult.</p>
+
+      <div class="ghid-info-grid">
+        <div class="ghid-info-card" style="border-top:3px solid #059669;">
+          <div class="ghid-info-card-icon">1️⃣</div>
+          <div class="ghid-info-card-title">Pasul 1 — Ascultă, nu impune</div>
+          <div class="ghid-info-card-text">Clientul vine pentru o folie. Aplici folia, dai-i satisfacția completării. Abia după upsell-ezi: „Vreți și o husă ca să fie protejat complet?" — nu înainte de a livra ce a cerut.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #4f46e5;">
+          <div class="ghid-info-card-icon">2️⃣</div>
+          <div class="ghid-info-card-title">Pasul 2 — Completare logică</div>
+          <div class="ghid-info-card-text">„Am pus folia pe ecran. Dar colțurile și spatele rămân goale. O husă subțire completează protecția fără să adauge volum." — Arăți logic, nu agresiv.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #f59e0b;">
+          <div class="ghid-info-card-icon">3️⃣</div>
+          <div class="ghid-info-card-title">Pasul 3 — Pachetul vizual</div>
+          <div class="ghid-info-card-text">Pune fizic pe tejghea: folia + husa + protectia spate, împreuna. „Uite cum arată set complet." Clientul vede produsele, nu un catalog. Rata de acceptare crește cu 40%.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #dc2626;">
+          <div class="ghid-info-card-icon">❌</div>
+          <div class="ghid-info-card-title">Ce să NU faci</div>
+          <div class="ghid-info-card-text">Nu lista toate produsele din magazin. Nu repeta de 3 ori dacă clientul zice nu. Nu propune un produs mai scump decât telefonul clientului. Dacă clientul refuză — zâmbești și mulțumești.</div>
+        </div>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Script upsell natural</div>
+        <div class="ghid-fraze-q">🗣️ Situație: Clientul a cumpărat doar folie TPU</div>
+        <div class="ghid-fraze-a">„Am aplicat folia — ecranul e protejat acum. Dacă vreți, am și huse potrivite pentru modelul ăsta — una transparentă subțire sau una cu protecție mai serioasă la colțuri. Vreți să vedeți opțiunile? Sau e suficient deocamdată?"</div>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Script pachet complet</div>
+        <div class="ghid-fraze-q">🗣️ Situație: Clientul întreabă „Ce îmi recomandați?"</div>
+        <div class="ghid-fraze-a">„Cel mai bun set pentru telefonul dvs. ar fi: o folie TPU pe ecran, o husă silicon pentru colțuri și spate, și dacă îl folosiți și în mișcare — o husă cu agățătoare sau armored. Toate trei împreună vă costă sub 100 lei și telefonul e protejat complet."</div>
+      </div>
+
+      <div class="ghid-tip good">
+        <span class="ghid-tip-icon">🎯</span>
+        <div class="ghid-tip-text"><strong>Regula 1+1:</strong> Propune mereu un singur produs adițional, nu mai multe deodată. „Folie + husă" e natural. „Folie + husă + cablu + power bank + căști" e agresiv și respingător.</div>
+      </div>
+
+      <div class="ghid-done-strip" id="done-9"><span>✅</span> Secțiunea 10 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 11 — CONECTORI & CABLURI ════════ -->
+  <div class="ghid-section" id="ghid-s10">
+    <div class="ghid-section-head" onclick="toggleGhidSection(10)">
+      <div class="ghid-section-icon" style="background:rgba(79,70,229,.1);">🔌</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 11</div>
+        <div class="ghid-section-title">Tipuri de Conectori & Cabluri</div>
+        <div class="ghid-section-desc">USB-C vs Lightning vs micro-USB · Ce cablu la ce telefon · USB 3.2 vs 2.0</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+
+      <div class="ghid-info-grid">
+        <div class="ghid-info-card" style="border-top:3px solid #4f46e5;">
+          <div class="ghid-info-card-icon">🔵</div>
+          <div class="ghid-info-card-title">USB-C (Universal)</div>
+          <div class="ghid-info-card-text">Standard modern — toate Android-urile noi + iPhone 15/16/17. Conector oval, simetric (nu are sus/jos greșit). <strong>Avantaj:</strong> transfer rapid, încărcare rapidă, poate fi video output.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #555;">
+          <div class="ghid-info-card-icon">🍎</div>
+          <div class="ghid-info-card-title">Lightning (Apple, vechi)</div>
+          <div class="ghid-info-card-text">Exclusiv Apple iPhone 14 și mai vechi, iPad mini, AirPods vechi. Oval subțire cu „limbă" metalică. <strong>Din 2023 Apple a trecut la USB-C</strong> — iPhone 15 în sus nu mai are Lightning!</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #64748b;">
+          <div class="ghid-info-card-icon">📻</div>
+          <div class="ghid-info-card-title">Micro-USB (Vechi)</div>
+          <div class="ghid-info-card-text">Standard vechi Android (până ~2019). Conector asimetric trapezoid — are sus și jos greșit. Mult mai fragil. Viteze mici (USB 2.0 = max 480 Mbps). Rar întâlnit pe telefoane noi, dar la accesorii (boxe, căști) încă apare.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #059669;">
+          <div class="ghid-info-card-icon">⚡</div>
+          <div class="ghid-info-card-title">USB 3.2 vs 2.0</div>
+          <div class="ghid-info-card-text"><strong>USB 2.0:</strong> 480 Mbps transfer — ok pentru încărcare, lent pentru fișiere mari.<br><strong>USB 3.2 Gen 1:</strong> 5 Gbps — de ~10x mai rapid.<br><strong>USB 3.2 Gen 2:</strong> 10 Gbps — transfer unui film HD în secunde. Important la transfer date!</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #f59e0b;">
+          <div class="ghid-info-card-icon">📋</div>
+          <div class="ghid-info-card-title">Ce cablu la ce telefon</div>
+          <div class="ghid-info-card-text"><strong>iPhone 15/16/17:</strong> USB-C<br><strong>iPhone 14 și mai vechi:</strong> Lightning<br><strong>Samsung/Xiaomi/Motorola noi:</strong> USB-C<br><strong>Telefoane vechi (pre-2019):</strong> micro-USB<br>Dacă nu ești sigur — verifică portul de pe telefon.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #dc2626;">
+          <div class="ghid-info-card-icon">🚫</div>
+          <div class="ghid-info-card-title">Capcane Frecvente</div>
+          <div class="ghid-info-card-text">Nu toate cablurile USB-C sunt la fel! Un cablu USB-C ieftin poate fi doar USB 2.0 (încărcare lentă, transfer lent). Cablurile pentru 65W+ trebuie certificate. Verifică specificațiile pe ambalaj.</div>
+        </div>
+      </div>
+
+      <div class="ghid-table-wrap">
+      <table class="ghid-table">
+        <thead><tr><th>Connector</th><th>Telefoane compatibile</th><th>Transfer max</th><th>Încărcare max</th></tr></thead>
+        <tbody>
+          <tr><td><strong>USB-C</strong></td><td>iPhone 15+, toate Android noi</td><td class="ghid-td-good">10–40 Gbps</td><td class="ghid-td-good">100W+</td></tr>
+          <tr><td><strong>Lightning</strong></td><td>iPhone 14 și mai vechi, AirPods vechi</td><td class="ghid-td-mid">480 Mbps</td><td class="ghid-td-mid">30W max</td></tr>
+          <tr><td><strong>Micro-USB</strong></td><td>Telefoane pre-2019, accesorii</td><td class="ghid-td-bad">480 Mbps</td><td class="ghid-td-bad">18W max</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="ghid-quiz" id="quiz-5" data-q="5" data-section="10">
+        <div class="ghid-quiz-title">🧠 Mini Quiz · Secțiunea 11</div>
+        <div class="ghid-quiz-sub">Testează cunoștințele despre conectori</div>
+        <div class="ghid-quiz-questions"></div>
+        <div class="ghid-quiz-score" id="qs-5"></div>
+      </div>
+      <div class="ghid-done-strip" id="done-10"><span>✅</span> Secțiunea 11 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 12 — REZISTENȚĂ LA APĂ ════════ -->
+  <div class="ghid-section" id="ghid-s11">
+    <div class="ghid-section-head" onclick="toggleGhidSection(11)">
+      <div class="ghid-section-icon" style="background:rgba(14,165,233,.1);">💧</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 12</div>
+        <div class="ghid-section-title">Rezistență la Apă — IP67, IP68, IP69</div>
+        <div class="ghid-section-desc">Ce înseamnă fiecare standard · Care telefoane îl au · Cum explici clientului</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+
+      <div class="ghid-info-grid">
+        <div class="ghid-info-card" style="border-top:3px solid #64748b;">
+          <div class="ghid-info-card-icon">🌧️</div>
+          <div class="ghid-info-card-title">IP65 — Jet de apă</div>
+          <div class="ghid-info-card-text">Protecție la jet de apă din orice direcție. Nu poți scufunda telefonul. Bun pentru ploaie și stropeli accidentale. Rar pe flagship-uri, mai des pe telefoane rugged.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #0ea5e9;">
+          <div class="ghid-info-card-icon">🏊</div>
+          <div class="ghid-info-card-title">IP67 — 1m, 30 min</div>
+          <div class="ghid-info-card-text">Poate fi scufundat la <strong>1 metru adâncime, 30 minute</strong>. Bun pentru stropeli accidentale și cădere în chiuvetă. <strong>Exemple:</strong> iPhone 12-13, Samsung A54, Motorola Edge unele modele.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #2563eb;">
+          <div class="ghid-info-card-icon">🤿</div>
+          <div class="ghid-info-card-title">IP68 — 2m+, 30 min</div>
+          <div class="ghid-info-card-text">Scufundare la <strong>2 metri sau mai mult, 30 minute</strong> (fiecare producător specifică adâncimea proprie). <strong>Exemple:</strong> iPhone 15/16/17 (6m!), Samsung S26 (2.5m), Xiaomi 15 Ultra (2m).</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #1d4ed8;">
+          <div class="ghid-info-card-icon">🚿</div>
+          <div class="ghid-info-card-title">IP69K — Jet sub presiune</div>
+          <div class="ghid-info-card-text">Rezistent la jet de apă la presiune înaltă și temperaturi ridicate. Specific telefoanelor <strong>rugged</strong> (de teren, șantier, armată). Exemple: CAT S62, Samsung XCover 7.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #dc2626;">
+          <div class="ghid-info-card-icon">⚠️</div>
+          <div class="ghid-info-card-title">CE NU GARANTEAZĂ IP68</div>
+          <div class="ghid-info-card-text"><strong>IP68 nu înseamnă waterproof complet!</strong> Nu acoperă: apă cu clor (piscine), apă sărată (mare), presiune puternică (scufundare adâncă). Gardul producătorului acoperă condiții de laborator — nu situații reale extreme.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #f59e0b;">
+          <div class="ghid-info-card-icon">📋</div>
+          <div class="ghid-info-card-title">Cum explici clientului</div>
+          <div class="ghid-info-card-text">„IP68 înseamnă că telefonul supraviețuiește dacă cade în chiuvetă sau în ploaie. NU înseamnă că poți face poze sub apă la mare sau la piscină. Și NU acoperă deteriorarea în timp — garniturile se uzează."</div>
+        </div>
+      </div>
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">🚨</span>
+        <div class="ghid-tip-text"><strong>IMPORTANT:</strong> Apple și Samsung NU acoperă deteriorarea prin apă în garanție, chiar dacă telefonul are IP68! Clientul trebuie să știe asta înainte să facă scuba-diving cu iPhone-ul.</div>
+      </div>
+      <div class="ghid-tip good">
+        <span class="ghid-tip-icon">💡</span>
+        <div class="ghid-tip-text"><strong>Frazare corectă:</strong> „Rezistent la apă" = corect. „Impermeabil" sau „waterproof complet" = incorect și periculos dacă clientul se bazează pe asta.</div>
+      </div>
+
+      <div class="ghid-done-strip" id="done-11"><span>✅</span> Secțiunea 12 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 13 — 5G VS 4G ════════ -->
+  <div class="ghid-section" id="ghid-s12">
+    <div class="ghid-section-head" onclick="toggleGhidSection(12)">
+      <div class="ghid-section-icon" style="background:rgba(124,117,240,.1);">📶</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 13</div>
+        <div class="ghid-section-title">5G vs 4G — Merită Upgrade-ul?</div>
+        <div class="ghid-section-desc">Ce e diferit · Rețele în România · Cum explici clientului dacă merită</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+
+      <div class="ghid-info-grid">
+        <div class="ghid-info-card" style="border-top:3px solid #8b5cf6;">
+          <div class="ghid-info-card-icon">📡</div>
+          <div class="ghid-info-card-title">Ce este 5G?</div>
+          <div class="ghid-info-card-text">A 5-a generație de rețele mobile. Viteze teoretice de <strong>1–10 Gbps</strong> (față de 4G: 50–300 Mbps). Latență ultra-scăzută (1ms vs 30-50ms 4G). Capacitate mai mare — mai mulți utilizatori conectați simultan.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #059669;">
+          <div class="ghid-info-card-icon">🇷🇴</div>
+          <div class="ghid-info-card-title">5G în România (2025)</div>
+          <div class="ghid-info-card-text">Disponibil comercial prin <strong>Orange, Vodafone, Digi</strong> în orașele mari (București, Cluj, Timișoara, Iași, Brașov). Acoperire în extindere continuă. Rural: 4G rămâne standard principal încă 2-3 ani.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #f59e0b;">
+          <div class="ghid-info-card-icon">⚡</div>
+          <div class="ghid-info-card-title">Beneficii Reale 5G</div>
+          <div class="ghid-info-card-text">Download ultra-rapid (film 4K în 30 sec). Streaming fără buffering. Gaming online mai fluid. Video-call 4K. <strong>Practic:</strong> simți diferența mai ales în zone aglomerate (mall, stadion, centru oraș).</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #dc2626;">
+          <div class="ghid-info-card-icon">❓</div>
+          <div class="ghid-info-card-title">Merită upgrade-ul?</div>
+          <div class="ghid-info-card-text"><strong>DA dacă:</strong> ești în oraș mare, folosești mult date mobile, vrei telefon durabil 3-4 ani.<br><strong>NU acum dacă:</strong> ești la sat sau în oraș mic fără 5G, folosești WiFi acasă, buget limitat — 5G adaugă 200-500 lei la preț.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #0ea5e9;">
+          <div class="ghid-info-card-icon">🔋</div>
+          <div class="ghid-info-card-title">5G și Bateria</div>
+          <div class="ghid-info-card-text">5G consumă mai multă baterie decât 4G când e activ. Telefoanele moderne gestionează automat comutarea 4G/5G. <strong>Sfat:</strong> în zone fără 5G, dezactivează manual 5G din setări pentru a economisi bateria.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #64748b;">
+          <div class="ghid-info-card-icon">💬</div>
+          <div class="ghid-info-card-title">Cum explici clientului</div>
+          <div class="ghid-info-card-text">„5G e mai rapid decât 4G, dar în România beneficiile reale le simți mai ales în București și orașele mari. Dacă planificați să țineți telefonul 3-4 ani, 5G e o investiție bună pentru viitor."</div>
+        </div>
+      </div>
+
+      <div class="ghid-table-wrap">
+      <table class="ghid-table">
+        <thead><tr><th>Criteriu</th><th>4G LTE</th><th>5G</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Viteză download</strong></td><td class="ghid-td-mid">50–300 Mbps</td><td class="ghid-td-good">1–10 Gbps</td></tr>
+          <tr><td><strong>Latență</strong></td><td class="ghid-td-mid">30–50 ms</td><td class="ghid-td-good">1–10 ms</td></tr>
+          <tr><td><strong>Acoperire RO</strong></td><td class="ghid-td-good">Națională (urban+rural)</td><td class="ghid-td-mid">Orașe mari, în extindere</td></tr>
+          <tr><td><strong>Consum baterie</strong></td><td class="ghid-td-good">Normal</td><td class="ghid-td-mid">Mai mare (10-15%)</td></tr>
+          <tr><td><strong>Prețul telefonului</strong></td><td class="ghid-td-good">Mai mic</td><td class="ghid-td-mid">+200–500 lei</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="ghid-done-strip" id="done-12"><span>✅</span> Secțiunea 13 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 14 — CLIENT NEMULȚUMIT ════════ -->
+  <div class="ghid-section" id="ghid-s13">
+    <div class="ghid-section-head" onclick="toggleGhidSection(13)">
+      <div class="ghid-section-icon" style="background:rgba(220,38,38,.1);">😤</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 14</div>
+        <div class="ghid-section-title">Clientul Nemulțumit — Scripturi Complete</div>
+        <div class="ghid-section-desc">Reclamații frecvente: folie desprinsă, amprentă, husă nepotrivită · Cum dezamorsezi situația</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+      <p style="font-size:13.5px;color:#4a4f6e;margin-bottom:16px;line-height:1.6;">Clientul nemulțumit nu e un inamic — e o oportunitate de a arăta profesionalism. Cum gestionezi reclamația determină dacă clientul se întoarce sau vorbește urât despre tine.</p>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Reclamație frecventă #1</div>
+        <div class="ghid-fraze-q">😤 „S-a desprins folia după 2 zile!"</div>
+        <div class="ghid-fraze-a">„Îmi pare rău că s-a întâmplat asta. Vă rog să-mi arătați telefoanele — o să verific dacă a fost o problemă la aplicare sau dacă e altceva. <em>Dacă e aplicare:</em> o remontez fără costuri. <em>Dacă e că telefonul are colțuri prea rotunjite sau a căzut:</em> îi explic situația și ofer o folie nouă la preț redus."</div>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Reclamație frecventă #2</div>
+        <div class="ghid-fraze-q">😤 „Amprenta nu mai funcționează după folia voastră!"</div>
+        <div class="ghid-fraze-a">„Înțeleg frustrarea — hai să rezolvăm acum. Pe multe telefoane amprenta trebuie re-înregistrată după aplicarea foliei. Mergeți la Setări → Biometrice → Amprentă → ștergeți amprenta veche și adăugați-o din nou cu folia pusă. Dacă tot nu merge, verificăm împreună dacă folia e compatibilă cu modelul exact."</div>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Reclamație frecventă #3</div>
+        <div class="ghid-fraze-q">😤 „Husa nu se potrivește exact — lasă un spațiu la colțuri!"</div>
+        <div class="ghid-fraze-a">„Vă înțeleg preocuparea. Unele huse silicon au un mic joc de 0.5-1mm pentru a permite scoaterea ușoară — asta e normal și intenționat. Dacă jocul e mai mare și pare că husa e pentru alt model, vă schimb imediat cu una corectă."</div>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Reclamație frecventă #4</div>
+        <div class="ghid-fraze-q">😤 „Folia are bule și nu se lipește bine în colțuri!"</div>
+        <div class="ghid-fraze-a">„Vă rog să reveniți cu telefonul. Bulele mici dispar în 24-48 ore de la aplicare — sunt aer rezidual normal. Dacă bulele persistă după 48 ore sau sunt mari, înseamnă că folia nu s-a prins perfect și o remontez fără probleme."</div>
+      </div>
+
+      <div class="ghid-info-grid">
+        <div class="ghid-info-card" style="border-top:3px solid #059669;">
+          <div class="ghid-info-card-icon">✅</div>
+          <div class="ghid-info-card-title">Formula de aur pentru reclamații</div>
+          <div class="ghid-info-card-text"><strong>1. Empatizează</strong> — „Înțeleg frustrarea dvs."<br><strong>2. Nu te apăra</strong> — nu conta că ai dreptate<br><strong>3. Verifică</strong> — uită-te concret la telefon<br><strong>4. Acționează</strong> — oferă soluție imediată</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #dc2626;">
+          <div class="ghid-info-card-icon">❌</div>
+          <div class="ghid-info-card-title">Ce să NU spui niciodată</div>
+          <div class="ghid-info-card-text">„Nu e vina noastră." / „Asta e normal." (fără explicație) / „Nu pot face nimic." / „Garanția nu acoperă asta." (fără să verifici) / „Altcineva a montat, nu eu." — Toate acestea enervează și alungă clientul definitiv.</div>
+        </div>
+      </div>
+
+      <div class="ghid-quiz" id="quiz-6" data-q="6" data-section="13">
+        <div class="ghid-quiz-title">🧠 Mini Quiz · Secțiunea 14</div>
+        <div class="ghid-quiz-sub">Testează gestionarea reclamațiilor</div>
+        <div class="ghid-quiz-questions"></div>
+        <div class="ghid-quiz-score" id="qs-6"></div>
+      </div>
+      <div class="ghid-done-strip" id="done-13"><span>✅</span> Secțiunea 14 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 15 — CE NU GARANTEZI ════════ -->
+  <div class="ghid-section" id="ghid-s14">
+    <div class="ghid-section-head" onclick="toggleGhidSection(14)">
+      <div class="ghid-section-icon" style="background:rgba(217,119,6,.1);">📋</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 15</div>
+        <div class="ghid-section-title">Ce NU Garantezi — Limite Clare</div>
+        <div class="ghid-section-desc">Ce spui clientului înainte să cumpere pentru a evita reclamații ulterioare</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+      <p style="font-size:13.5px;color:#4a4f6e;margin-bottom:16px;line-height:1.6;">E mai bine să informezi clientul corect <strong>înainte</strong> decât să gestionezi o nemulțumire <strong>după</strong>. Comunicarea limitelor clare construiește încredere.</p>
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">🚫</span>
+        <div class="ghid-tip-text"><strong>Folia NU protejează la căderi de la înălțime.</strong> Spune-i clientului: „Folia protejează ecranul la stropeli, praf și zgârieturi mici. La cădere de la 1m+ pe asfalt, ecranul se poate sparge chiar și cu folie. Pentru protecție la impact, recomand husă armored."</div>
+      </div>
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">🚫</span>
+        <div class="ghid-tip-text"><strong>Nu toate husele sunt waterproof.</strong> Spune-i clientului: „Husa silicon/plastic NU face telefonul rezistent la apă — protejează doar la praf și zgârieturi ale carcasei. Dacă vreți protecție la apă, telefonul în sine trebuie să aibă IP67/IP68."</div>
+      </div>
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">🚫</span>
+        <div class="ghid-tip-text"><strong>Transferul de date NU include aplicațiile plătite.</strong> Spune-i clientului înainte de transfer: „Aplicațiile gratuite se reinstalează automat. Aplicațiile plătite (jocuri, aplicații premium) trebuie cumpărate din nou pe contul nou sau re-descărcate dacă folosiți același cont."</div>
+      </div>
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">🚫</span>
+        <div class="ghid-tip-text"><strong>Folia Glass OK NU funcționează 100% pe orice telefon cu ultrasonic.</strong> Spune-i clientului: „Am verificat în SonicDB că modelul dvs. e compatibil cu această sticlă specială. Totuși, după aplicare amprenta trebuie re-înregistrată. Dacă tot nu funcționează, reveniți și o înlocuim cu TPU."</div>
+      </div>
+
+      <div class="ghid-tip warn">
+        <span class="ghid-tip-icon">⚠️</span>
+        <div class="ghid-tip-text"><strong>Rezistența IP68 se degradează în timp.</strong> Garniturile de etanșare se uzează după 1-2 ani de utilizare normală. Un iPhone 17 nou are IP68 excelent — același iPhone după 2 ani de zgârieturi și mici lovituri poate fi mai vulnerabil la apă.</div>
+      </div>
+
+      <div class="ghid-tip warn">
+        <span class="ghid-tip-icon">⚠️</span>
+        <div class="ghid-tip-text"><strong>Cablurile compatibile pot fi mai lente.</strong> Un cablu USB-C generic poate fi USB 2.0 chiar dacă telefonul suportă USB 3.2. Dacă clientul vrea transfer rapid de date, recomandă cabluri certificate sau originale.</div>
+      </div>
+
+      <div class="ghid-done-strip" id="done-14"><span>✅</span> Secțiunea 15 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 16 — TELEFOANE CU PROBLEME COMUNE ════════ -->
+  <div class="ghid-section" id="ghid-s15">
+    <div class="ghid-section-head" onclick="toggleGhidSection(15)">
+      <div class="ghid-section-icon" style="background:rgba(220,38,38,.1);">🚨</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 16</div>
+        <div class="ghid-section-title">Telefoane cu Probleme Comune</div>
+        <div class="ghid-section-desc">Avertismente standard pe model · Samsung A54, iPhone Touch ID mort, Huawei fără Google</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+
+      <div class="ghid-table-wrap">
+      <table class="ghid-table">
+        <thead><tr><th>Model</th><th>Problemă frecventă</th><th>Ce spui clientului</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Samsung A54 5G</strong></td><td class="ghid-td-mid">Ecran sensibil la atingeri fantomă la temperaturi scăzute; senzor ultrasonic capricios</td><td>„Verificați că folosiți degetul uscat la amprentă. La frig, senzorul poate fi mai lent — e normal pentru acest model."</td></tr>
+          <tr><td><strong>Samsung S21 / S22</strong></td><td class="ghid-td-mid">Carcasă din sticlă spate extrem de fragilă</td><td>„Spatele din sticlă se sparge la prima cădere. Husa e obligatorie pe acest model, mai ales pe S21 FE."</td></tr>
+          <tr><td><strong>iPhone SE (orice gen)</strong></td><td class="ghid-td-mid">Touch ID (nu Face ID), ecran mic, fără 5G pe SE 2</td><td>„iPhone SE are senzor Touch ID pe butonul Home — toate foliile funcționează. Nu are 5G pe versiunea veche."</td></tr>
+          <tr><td><strong>iPhone cu Touch ID mort</strong></td><td class="ghid-td-bad">Touch ID nu răspunde, imposibil de înregistrat amprentă nouă</td><td>„Dacă Touch ID nu funcționează, e probabil o problemă hardware — trebuie dus la service Apple sau autorizat. Nu e legat de folie."</td></tr>
+          <tr><td><strong>Huawei P40/P50/Mate 50+</strong></td><td class="ghid-td-bad">Fără Google Play Store, fără Google Maps/Gmail/YouTube nativ</td><td>„OBLIGATORIU de spus înainte de orice vânzare: acest Huawei nu are aplicații Google. Maps, Gmail, YouTube nu funcționează nativ. Există alternativa Huawei AppGallery, dar are mai puține aplicații."</td></tr>
+          <tr><td><strong>Xiaomi cu MIUI vechi</strong></td><td class="ghid-td-mid">Publicitate în interfață, setări complicate, baterie optimizare agresivă blochează notificări</td><td>„HyperOS (versiunile noi) e mai curat. Pe modele vechi cu MIUI, unele aplicații nu primesc notificări dacă nu dezactivați optimizarea bateriei pentru ele."</td></tr>
+          <tr><td><strong>Motorola buget (sub 600 lei)</strong></td><td class="ghid-td-mid">Actualizări Android oprite după 2 ani; cameră slabă în condiții de lumină scăzută</td><td>„Motorola la buget mic dă actualizări 2 ani. Camera e bună ziua, mai puțin bună noaptea. Ideal pentru utilizare simplă (apeluri, WhatsApp, social media)."</td></tr>
+          <tr><td><strong>Realme / OnePlus vechi</strong></td><td class="ghid-td-mid">Service limitat în România, piese de schimb greu de găsit</td><td>„Dacă se defectează ecranul sau bateria, service-ul autorizat e greu de găsit în România. Atenționați clientul înainte de cumpărare."</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="ghid-tip warn">
+        <span class="ghid-tip-icon">💡</span>
+        <div class="ghid-tip-text"><strong>Regula avertismentului proactiv:</strong> Dacă știi că un model are o problemă frecventă, spune-i clientului ÎNAINTE să apară situația. Clientul informat nu se întoarce cu reclamații — clientul surprins, da.</div>
+      </div>
+
+      <div class="ghid-done-strip" id="done-15"><span>✅</span> Secțiunea 16 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 17 — CICLUL DE VIAȚĂ ════════ -->
+  <div class="ghid-section" id="ghid-s16">
+    <div class="ghid-section-head" onclick="toggleGhidSection(16)">
+      <div class="ghid-section-icon" style="background:rgba(5,150,105,.1);">🔄</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 17</div>
+        <div class="ghid-section-title">Ciclul de Viață al unui Telefon</div>
+        <div class="ghid-section-desc">Când e momentul bun de upgrade · Semne că telefonul e pe sfârșite</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+
+      <div class="ghid-info-grid">
+        <div class="ghid-info-card" style="border-top:3px solid #dc2626;">
+          <div class="ghid-info-card-icon">🔋</div>
+          <div class="ghid-info-card-title">Semnul #1 — Baterie umflată</div>
+          <div class="ghid-info-card-text"><strong>Pericol imediat!</strong> Dacă ecranul sau spatele telefonului se ridică, bateria e umflată. Nu mai folosi telefonul — poate lua foc sau exploda. Mergi urgent la service sau reciclare. Nu „mai ține" cu bateria umflată.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #f59e0b;">
+          <div class="ghid-info-card-icon">🔄</div>
+          <div class="ghid-info-card-title">Semnul #2 — Actualizări oprite</div>
+          <div class="ghid-info-card-text">Când producătorul oprește actualizările de securitate, telefonul devine vulnerabil la atacuri și incompatibil cu aplicații noi. <strong>Recomandare upgrade:</strong> Android sub 11, iPhone sub iOS 16, sau dacă nu mai primește patch-uri de securitate.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #8b5cf6;">
+          <div class="ghid-info-card-icon">🖥️</div>
+          <div class="ghid-info-card-title">Semnul #3 — Ecran ars (burn-in)</div>
+          <div class="ghid-info-card-text">Pe ecranele OLED vechi, pixelii se „ard" și lasă imagini fantomă permanente. Vizibil ca o umbră a barei de status sau a tastaturii. Nu se repară software — ecranul trebuie înlocuit sau telefonul schimbat.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #0ea5e9;">
+          <div class="ghid-info-card-icon">🐌</div>
+          <div class="ghid-info-card-title">Semnul #4 — Performanță degradată</div>
+          <div class="ghid-info-card-text">Dacă telefonul e din ce în ce mai lent după 3-4 ani chiar și după resetare, procesorul e depășit de noile aplicații. Resetare completă = 6 luni în plus maxim. Soluție reală = telefon nou.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #059669;">
+          <div class="ghid-info-card-icon">📅</div>
+          <div class="ghid-info-card-title">Momentul optim de upgrade</div>
+          <div class="ghid-info-card-text"><strong>Buget:</strong> după 2-3 ani sau când nu mai primește actualizări.<br><strong>Mid-range:</strong> după 3-4 ani.<br><strong>Flagship:</strong> după 4-5 ani (primesc actualizări mai mult).<br>Momentul ideal = când ai o ofertă bună, nu când se strică!</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #64748b;">
+          <div class="ghid-info-card-icon">💸</div>
+          <div class="ghid-info-card-title">Valoarea la revânzare</div>
+          <div class="ghid-info-card-text">iPhone păstrează valoarea cel mai bine (~50% din preț după 2 ani). Samsung ~35-40%. Xiaomi/Realme ~25-35%. <strong>Sfat pentru clienți:</strong> telefon cu husă și folie din prima zi = ecran curat = preț de revânzare mai bun.</div>
+        </div>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Frazare pentru upgrade</div>
+        <div class="ghid-fraze-q">🗣️ „Telefonul meu e mai lent, dar mai funcționează. Merită să schimb?"</div>
+        <div class="ghid-fraze-a">„Depinde de ce simți zilnic. Dacă te enervează de mai multe ori pe zi — da, merită. Dacă e ocazional — mai poți ține câteva luni. Cel mai bun moment e să schimbi când telefoanele noi din categoria ta au o ofertă bună, nu să aștepți să se strice complet — atunci iei decizii grăbite."</div>
+      </div>
+
+      <div class="ghid-done-strip" id="done-16"><span>✅</span> Secțiunea 17 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 18 — PROTECȚIE DATE PERSONALE ════════ -->
+  <div class="ghid-section" id="ghid-s17">
+    <div class="ghid-section-head" onclick="toggleGhidSection(17)">
+      <div class="ghid-section-icon" style="background:rgba(79,70,229,.1);">🔐</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 18</div>
+        <div class="ghid-section-title">Protecție Date Personale</div>
+        <div class="ghid-section-desc">Ce rămâne după factory reset · Cum ștergi corect înainte de vânzare sau donare</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+      <p style="font-size:13.5px;color:#4a4f6e;margin-bottom:16px;line-height:1.6;">Clienții care vând sau donează telefonul vechi trebuie informați corect. Un factory reset simplu NU șterge toate datele — poți recupera informații de pe un telefon „resetat" cu software specializat.</p>
+
+      <div class="ghid-info-grid">
+        <div class="ghid-info-card" style="border-top:3px solid #dc2626;">
+          <div class="ghid-info-card-icon">⚠️</div>
+          <div class="ghid-info-card-title">Ce RĂMÂNE după factory reset simplu</div>
+          <div class="ghid-info-card-text">Pe telefoane vechi (pre-2016): datele pot fi recuperate cu software. Pe telefoane moderne cu criptare activată (Android 6+, iOS 8+): datele sunt criptate și practic irecuperabile după reset. Totuși — mai sigur să urmezi pașii corecți.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #059669;">
+          <div class="ghid-info-card-icon">✅</div>
+          <div class="ghid-info-card-title">Pași corecți — Android</div>
+          <div class="ghid-info-card-text"><strong>1.</strong> Activează criptarea (Setări → Securitate) dacă nu e activată.<br><strong>2.</strong> Deconectează contul Google (Setări → Conturi → Google → Elimină).<br><strong>3.</strong> Setări → Management general → Resetare → Resetare date fabrică.<br><strong>4.</strong> Șterge cardul SD separat (dacă există).</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #555;">
+          <div class="ghid-info-card-icon">🍎</div>
+          <div class="ghid-info-card-title">Pași corecți — iPhone</div>
+          <div class="ghid-info-card-text"><strong>1.</strong> Setări → [Numele tău] → Sign Out (deconectare Apple ID).<br><strong>2.</strong> Setări → General → Transfer sau Resetare iPhone → Șterge tot conținutul.<br>iPhone criptează automat — resetarea e complet sigură din start.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #f59e0b;">
+          <div class="ghid-info-card-icon">🗑️</div>
+          <div class="ghid-info-card-title">Ce să nu uiți să ștergi</div>
+          <div class="ghid-info-card-text">✓ Cont Google / Apple ID<br>✓ Cardul SIM (scoate-l fizic!)<br>✓ Cardul microSD (dacă există)<br>✓ Aplicații bancare (deconectează-te mai întâi)<br>✓ WhatsApp backup pe contul cloud</div>
+        </div>
+      </div>
+
+      <div class="ghid-fraze">
+        <div class="ghid-fraze-label">Frazare pentru client</div>
+        <div class="ghid-fraze-q">🗣️ „Vreau să vând telefonul vechi. E suficient să fac resetare din fabrică?"</div>
+        <div class="ghid-fraze-a">„Aproape. Pe iPhone e simplu și sigur — resetarea criptează și șterge tot. Pe Android, asigurați-vă că ați deconectat contul Google ÎNAINTE de resetare, altfel telefonul va rămâne blocat pe contul dvs. și cumpărătorul nu îl poate activa. Și nu uitați să scoateți cardul SIM!"</div>
+      </div>
+
+      <div class="ghid-tip bad">
+        <span class="ghid-tip-icon">🚨</span>
+        <div class="ghid-tip-text"><strong>Blocare FRP (Factory Reset Protection):</strong> Dacă clientul vinde un Android fără să deconecteze contul Google, telefonul rămâne blocat pe acel cont după resetare. Cumpărătorul nu poate activa telefonul fără parola contului original. Aceasta este o problemă serioasă — avertizează mereu înainte!</div>
+      </div>
+
+      <div class="ghid-done-strip" id="done-17"><span>✅</span> Secțiunea 18 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECȚIUNEA 19 — ACCESORII COMPLEMENTARE ════════ -->
+  <div class="ghid-section" id="ghid-s18">
+    <div class="ghid-section-head" onclick="toggleGhidSection(18)">
+      <div class="ghid-section-icon" style="background:rgba(14,165,233,.1);">🎒</div>
+      <div class="ghid-section-meta">
+        <div class="ghid-section-num">Secțiunea 19</div>
+        <div class="ghid-section-title">Accesorii Complementare</div>
+        <div class="ghid-section-desc">Power bank (mAh = câte încărcări) · Căști cu/fără cablu · Încărcătoare originale vs compatibile</div>
+      </div>
+      <span class="ghid-section-tog">▼</span>
+    </div>
+    <div class="ghid-section-body">
+
+      <div class="ghid-info-grid">
+        <div class="ghid-info-card" style="border-top:3px solid #059669;">
+          <div class="ghid-info-card-icon">🔋</div>
+          <div class="ghid-info-card-title">Power Bank — Câte mAh alegi?</div>
+          <div class="ghid-info-card-text"><strong>5.000 mAh</strong> = ~1.5 încărcări telefon mediu. Compact, pentru urgențe.<br><strong>10.000 mAh</strong> = ~2.5-3 încărcări. Ideal pentru voiaj de o zi.<br><strong>20.000 mAh</strong> = ~5-6 încărcări. Ideal pentru călătorii lungi sau mai multe dispozitive.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #f59e0b;">
+          <div class="ghid-info-card-icon">⚡</div>
+          <div class="ghid-info-card-title">Power Bank — Putere de Ieșire</div>
+          <div class="ghid-info-card-text"><strong>10W</strong> = încărcare lentă (telefon mediu = 3-4 ore).<br><strong>18-22.5W</strong> = fast charge compatibil cu majority telefoanelor.<br><strong>45W+</strong> = fast charge pentru laptopuri și flagship-uri.<br>Verifică că power bank-ul suportă protocolul telefonului (PD, Quick Charge etc.).</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #8b5cf6;">
+          <div class="ghid-info-card-icon">🎧</div>
+          <div class="ghid-info-card-title">Căști cu Cablu (Wired)</div>
+          <div class="ghid-info-card-text">Fără latență (ideal gaming/video), nu necesită încărcare, mai fiabile. <strong>Atenție:</strong> iPhone 15+ și multe Android noi nu au mufă jack 3.5mm — necesită adaptor USB-C la jack sau căști USB-C direct.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #0ea5e9;">
+          <div class="ghid-info-card-icon">📡</div>
+          <div class="ghid-info-card-title">Căști Wireless (Bluetooth)</div>
+          <div class="ghid-info-card-text"><strong>TWS (True Wireless):</strong> complet fără fir, confortabile. Autonomie: 4-8 ore + carcasă = 24-40 ore total.<br><strong>Over-ear wireless:</strong> sunet mai bun, noise cancelling. Autonomie 20-40 ore.<br>Latență Bluetooth standard = 150-300ms (vizibil la video). aptX/LDAC = mai bun.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #059669;">
+          <div class="ghid-info-card-icon">🔌</div>
+          <div class="ghid-info-card-title">Încărcătoare Originale</div>
+          <div class="ghid-info-card-text">Recomandate pentru fast charge la viteza maximă. Suportă protocolul proprietar al brandului (Apple MagSafe 25W, Samsung Super Fast Charge 65W, VOOC 120W). Garanție mai bună pentru baterie pe termen lung.</div>
+        </div>
+        <div class="ghid-info-card" style="border-top:3px solid #dc2626;">
+          <div class="ghid-info-card-icon">⚡</div>
+          <div class="ghid-info-card-title">Încărcătoare Compatibile</div>
+          <div class="ghid-info-card-text">Funcționează, dar pot fi mai lente (nu suportă toate protocoalele). <strong>Alege</strong> produse certificate (GaN, USB-IF certificate). <strong>Evita</strong> încărcătoarele extrem de ieftine fără certificări — pot deteriora bateria sau prezenta risc de incendiu.</div>
+        </div>
+      </div>
+
+      <div class="ghid-table-wrap">
+      <table class="ghid-table">
+        <thead><tr><th>Power Bank mAh</th><th>Greutate aprox.</th><th>Încărcări telefon 5000 mAh</th><th>Recomandat pentru</th></tr></thead>
+        <tbody>
+          <tr><td><strong>5.000 mAh</strong></td><td>~120g</td><td class="ghid-td-mid">~1.2 încărcări</td><td>Urgențe, în buzunar</td></tr>
+          <tr><td><strong>10.000 mAh</strong></td><td>~200g</td><td class="ghid-td-mid">~2.2 încărcări</td><td>Voiaj o zi, geantă</td></tr>
+          <tr><td><strong>20.000 mAh</strong></td><td>~350g</td><td class="ghid-td-good">~4-4.5 încărcări</td><td>Camping, călătorii lungi</td></tr>
+          <tr><td><strong>30.000 mAh</strong></td><td>~550g</td><td class="ghid-td-good">~6-7 încărcări</td><td>Grup de persoane, tabletă+telefon</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="ghid-tip warn">
+        <span class="ghid-tip-icon">⚠️</span>
+        <div class="ghid-tip-text"><strong>Nota despre eficiență:</strong> Un power bank de 10.000 mAh NU dă 10.000 mAh unui telefon — eficiența reală e ~70-80% din cauza căldurii și conversiei de tensiune. Un power bank de 10.000 mAh oferă practic ~7.000-8.000 mAh utilizabili.</div>
+      </div>
+
+      <div class="ghid-quiz" id="quiz-7" data-q="7" data-section="18">
+        <div class="ghid-quiz-title">🧠 Mini Quiz · Secțiunea 19</div>
+        <div class="ghid-quiz-sub">Testează cunoștințele despre accesorii</div>
+        <div class="ghid-quiz-questions"></div>
+        <div class="ghid-quiz-score" id="qs-7"></div>
+      </div>
+      <div class="ghid-done-strip" id="done-18"><span>✅</span> Secțiunea 19 parcursă!</div>
+    </div>
+  </div>
+
+  <!-- FELICITARE FINALA -->
+  <div id="ghid-congrats" style="display:none;text-align:center;padding:40px 20px;background:linear-gradient(135deg,rgba(234,88,12,.08),rgba(249,115,22,.04));border:2px solid rgba(234,88,12,.2);border-radius:20px;margin-top:8px;">
+    <div style="font-size:52px;margin-bottom:12px;">🎉</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:#1a1d2e;letter-spacing:-.5px;margin-bottom:8px;">Felicitări! Ai parcurs tot ghidul!</h2>
+    <p style="color:#4a4f6e;font-size:14px;line-height:1.7;max-width:400px;margin:0 auto 20px;">Acum cunoști toate elementele esențiale pentru a fi un agent bun. Practică, pune întrebări și consultă ghidul ori de câte ori ai nevoie.</p>
+    <button onclick="showPage('home')" style="background:#ea580c;color:#fff;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">← Înapoi la pagina principală</button>
+  </div>
+
+</div><!-- end ghid-wrap -->
+</div><!-- end page-ghid -->
+
+<script>
+// ══ GHID DATA ══
+const BRAND_DATA = {
+  samsung: {
+    name: 'Samsung',
+    emoji: '📱',
+    logo: '<svg width="20" height="20" viewBox="0 0 100 100" fill="none" style="vertical-align:middle"><rect width="100" height="100" rx="16" fill="#1428a0"/><text x="50" y="67" font-size="48" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="700">S</text></svg>',
+    color: '#1428a0',
+    rows: [
+      ['Sediu', 'Seoul, Coreea de Sud — fondată 1969'],
+      ['Sisteme de operare', 'Android cu One UI 8.5 (2025/2026)'],
+      ['Game principale', 'S (flagship), A (mid-range), M/F (buget)'],
+      ['Flagship actual', 'Galaxy S26 Ultra — Snapdragon 8 Elite Gen 5, 5000 mAh, 60W, 200MP, 6.9"'],
+      ['Senzor amprentă', 'Ultrasonic pe seria S și unele A; capacitiv pe restul'],
+      ['Actualizări', '4 ani Android + 5 ani securitate (modele recente)'],
+      ['Puncte forte', 'Ecrane AMOLED excelente, cameră versatilă, Privacy Display, service disponibil'],
+      ['Puncte slabe', 'Prețuri mari la flagship, bloatware preinstalat'],
+      ['Clientul tipic', 'Orice categorie de vârstă, toate bugetele'],
+    ]
+  },
+  apple: {
+    name: 'Apple',
+    emoji: '🍎',
+    logo: '<svg width="14" height="18" viewBox="0 0 814 1000" fill="#333" style="vertical-align:middle"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 612 0 510.7 0 413.4c0-199.3 130.4-304.7 258.4-304.7 69.1 0 126.4 45.7 169.4 45.7 41.3 0 106.1-48.3 183.1-48.3 27.9 0 143.2 2.6 219.3 97.9zm-158.9-217.7c30.8-36.8 52.6-88.2 52.6-139.6 0-7.1-.6-14.3-1.9-20.1-49.9 1.9-110.8 33.4-147.1 75.8-28.5 32.4-55.1 83.8-55.1 135.9 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 136-71.4z"/></svg>',
+    color: '#555555',
+    rows: [
+      ['Sediu', 'Cupertino, California, SUA — fondată 1976'],
+      ['Sistem de operare', 'iOS 26 — exclusiv Apple, actualizat anual'],
+      ['Game principale', 'iPhone 17 / Air / Pro / Pro Max (2025)'],
+      ['Flagship actual', 'iPhone 17 Pro Max — A19 Pro, 5088 mAh, 25W MagSafe, 48MP, 6.9", aluminiu'],
+      ['Senzor amprentă', 'Face ID (față) pe toate modelele recente; Touch ID pe SE'],
+      ['Actualizări', '5-6 ani iOS + securitate (Apple Intelligence inclus)'],
+      ['Puncte forte', 'Ecosistem integrat, confidențialitate, longevitate, Apple Intelligence AI'],
+      ['Puncte slabe', 'Prețuri ridicate, mai puțin personalizabil, iCloud plătit'],
+      ['Clientul tipic', 'Utilizatori fideli Apple, profesioniști, tineri stilați'],
+    ]
+  },
+  xiaomi: {
+    name: 'Xiaomi',
+    emoji: '🟠',
+    logo: '<svg width="20" height="20" viewBox="0 0 100 100" fill="none" style="vertical-align:middle"><rect width="100" height="100" rx="16" fill="#ff6900"/><text x="50" y="67" font-size="42" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="900">Mi</text></svg>',
+    color: '#ff6900',
+    rows: [
+      ['Sediu', 'Beijing, China — fondată 2010'],
+      ['Sistem de operare', 'Android cu HyperOS 2 (2025)'],
+      ['Game principale', 'Xiaomi 15 (flagship), Redmi Note 14 Pro (mid), Redmi A4 (buget)'],
+      ['Flagship actual', 'Xiaomi 15 Ultra — Snapdragon 8 Elite, 5410 mAh, 90W, cameră Leica'],
+      ['Senzor amprentă', 'Ultrasonic pe flagship; capacitiv/lateral pe restul'],
+      ['Actualizări', '3-4 ani HyperOS + securitate'],
+      ['Puncte forte', 'Raport preț/performanță excelent, baterii mari, fast charge 90W+'],
+      ['Puncte slabe', 'HyperOS cu reclame, service mai limitat în România'],
+      ['Clientul tipic', 'Tineri, utilizatori tech-savvy, buget mediu'],
+    ]
+  },
+  motorola: {
+    name: 'Motorola',
+    emoji: '📻',
+    logo: '<svg width="20" height="20" viewBox="0 0 100 100" fill="none" style="vertical-align:middle"><circle cx="50" cy="50" r="50" fill="#006ec7"/><text x="50" y="67" font-size="44" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="700">M</text></svg>',
+    color: '#006ec7',
+    rows: [
+      ['Sediu', 'Chicago, USA — parte din grupul Lenovo din 2014'],
+      ['Sistem de operare', 'Android aproape curat (My UX — modificări minime)'],
+      ['Game principale', 'Edge 50 (mid-premium), Moto G85 (mid), Moto E14 (buget)'],
+      ['Flagship actual', 'Motorola Edge 50 Ultra — Snapdragon 8s Gen 3, 4500 mAh, 125W'],
+      ['Senzor amprentă', 'Capacitiv (lateral sau spate); nu folosesc ultrasonic'],
+      ['Actualizări', '2-3 ani (mai puțin față de Samsung/Apple)'],
+      ['Puncte forte', 'Android curat rapid, baterii mari, prețuri accesibile'],
+      ['Puncte slabe', 'Cameră mai slabă la buget, actualizări mai puține'],
+      ['Clientul tipic', 'Vârstnici, utilizatori simpli, buget mic-mediu'],
+    ]
+  },
+  huawei: {
+    name: 'Huawei',
+    emoji: '🌸',
+    logo: '<svg width="20" height="20" viewBox="0 0 100 100" fill="none" style="vertical-align:middle"><rect width="100" height="100" rx="50" fill="#cf0a2c"/><g fill="white"><path d="M50 18 L50 50 L28 62 Z" opacity="0.9"/><path d="M50 18 L50 50 L72 62 Z" opacity="0.7"/><path d="M28 62 L50 50 L50 82 Z" opacity="0.8"/><path d="M72 62 L50 50 L50 82 Z" opacity="0.6"/></g></svg>',
+    color: '#cf0a2c',
+    rows: [
+      ['Sediu', 'Shenzhen, China — fondată 1987'],
+      ['Sistem de operare', 'HarmonyOS 4 (propriu) — fără Google Services!'],
+      ['Game principale', 'Pura 70 Series, Mate 70 Series (premium)'],
+      ['Flagship actual', 'Huawei Mate 70 Pro — Kirin 9020, 5600 mAh, cameră Leica, fără Google'],
+      ['Senzor amprentă', 'Capacitiv (lateral sau sub ecran pe unele modele)'],
+      ['Actualizări', 'Huawei propriile actualizări HarmonyOS'],
+      ['Puncte forte', 'Cameră excelentă (Leica pe unele modele), baterie mare'],
+      ['Puncte slabe', 'Fără Play Store, fără Google Maps/Gmail/YouTube nativ'],
+      ['Clientul tipic', 'Utilizatori care știu ce cumpără, nu depind de Google'],
+    ]
+  },
+  realme: {
+    name: 'Realme',
+    emoji: '🟡',
+    logo: '<svg width="20" height="20" viewBox="0 0 100 100" fill="none" style="vertical-align:middle"><rect width="100" height="100" rx="16" fill="#e9a800"/><text x="50" y="65" font-size="38" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="900">rlme</text></svg>',
+    color: '#e9a800',
+    rows: [
+      ['Sediu', 'Shenzhen, China — fondată 2018 (sub-brand OPPO)'],
+      ['Sistem de operare', 'Android cu Realme UI 6 (bazat pe Android 15)'],
+      ['Game principale', 'GT 7 Pro (flagship), 13 Pro (mid), C75 (buget)'],
+      ['Flagship actual', 'Realme GT 7 Pro — Snapdragon 8 Elite, 6500 mAh, 120W supercharge'],
+      ['Senzor amprentă', 'Capacitiv sau lateral; ultrasonic pe unele GT flagship'],
+      ['Actualizări', '2-3 ani'],
+      ['Puncte forte', 'Design modern, fast charge agresiv 120W, baterii mari, prețuri mici'],
+      ['Puncte slabe', 'Brand relativ nou, service limitat în RO, software inconsistent'],
+      ['Clientul tipic', 'Tineri 18-30 ani, orientați spre design și spec-uri'],
+    ]
+  },
+  oppo: {
+    name: 'OPPO',
+    emoji: '🔵',
+    logo: '<svg width="20" height="20" viewBox="0 0 100 100" fill="none" style="vertical-align:middle"><rect width="100" height="100" rx="16" fill="#1d4c9e"/><circle cx="50" cy="50" r="26" fill="none" stroke="white" stroke-width="10"/><circle cx="50" cy="50" r="10" fill="white"/></svg>',
+    color: '#1d4c9e',
+    rows: [
+      ['Sediu', 'Dongguan, China — fondată 2004'],
+      ['Sistem de operare', 'Android cu ColorOS 15 (2025)'],
+      ['Game principale', 'Find X8 (flagship), Reno 13 (mid-premium), A Series (buget)'],
+      ['Flagship actual', 'OPPO Find X8 Pro — Dimensity 9400, 5910 mAh, 100W, cameră Hasselblad'],
+      ['Senzor amprentă', 'Ultrasonic pe Find X flagship; capacitiv pe restul'],
+      ['Actualizări', '3-4 ani ColorOS + securitate'],
+      ['Puncte forte', 'Design premium, cameră Hasselblad, fast charge SUPERVOOC 100W'],
+      ['Puncte slabe', 'Distribuție mai limitată în România, service mai puțin acoperit'],
+      ['Clientul tipic', 'Tineri, utilizatori care vor aspect premium la preț mediu'],
+    ]
+  }
+};
+
+const QUIZ_DATA = [
+  // Quiz 0 - Tipuri telefoane
+  {
+    questions: [
+      {
+        q: 'Un client vrea un telefon pentru gaming intens și are buget de 3.000+ lei. Ce categorie îi recomanzi?',
+        opts: ['📱 Entry-level (buget)', '🥈 Mid-range', '🥇 Flagship', '📟 Orice model vechi'],
+        correct: 2,
+        explanation: 'Flagship = cel mai performant procesor și GPU, ideal pentru gaming intens. Cu 3.000+ lei intri în gama flagship.'
+      },
+      {
+        q: 'Ce înseamnă RAM într-un telefon?',
+        opts: ['Spațiul pentru poze și aplicații', 'Memoria de lucru — cât poate face simultan', 'Capacitatea bateriei', 'Viteza camerei'],
+        correct: 1,
+        explanation: 'RAM = Random Access Memory = memorie de lucru. Stocare ≠ RAM! Cu mai mult RAM telefonul poate rula mai multe aplicații simultan fără să încetinească.'
+      },
+      {
+        q: 'Un client are iPhone 13 și vrea să treacă pe Android. Ce trebuie să îl avertizezi?',
+        opts: ['Nu poate transfera nimic', 'Pozele din iCloud nu se mută automat pe Google Foto', 'Android e mai slab decât iPhone', 'Nu există diferențe importante'],
+        correct: 1,
+        explanation: 'Pozele din iCloud nu se mută automat. Clientul trebuie să le descarce sau să folosească aplicația „Switch to Android" care face transferul. De asemenea, iMessage-urile nu se transferă.'
+      }
+    ]
+  },
+  // Quiz 1 - Branduri
+  {
+    questions: [
+      {
+        q: 'Un client cumpără Huawei P60 Pro. Ce trebuie să îl avertizezi obligatoriu?',
+        opts: ['Camera nu e bună', 'Nu are Google Play Store și Google Apps', 'Nu are fast charging', 'Nu se face transfer de date pe el'],
+        correct: 1,
+        explanation: 'Huawei nu mai are acces la Google Services din 2020. Nu există Play Store, Google Maps, Gmail nativ. Clientul trebuie să știe asta înainte de cumpărare!'
+      },
+      {
+        q: 'Care brand Samsung e recomandat pentru utilizatorii cu buget mic-mediu (800-1500 lei)?',
+        opts: ['Seria S (flagship)', 'Seria A (mid-range)', 'Seria Z (foldable)', 'Seria Note (veche)'],
+        correct: 1,
+        explanation: 'Seria A = mid-range accesibil. Seria S = flagship scump. Seria Z = foldable premium. Seria A e cea mai vândută din România tocmai pentru prețul accesibil.'
+      }
+    ]
+  },
+  // Quiz 2 - Folii
+  {
+    questions: [
+      {
+        q: 'Un client aduce Samsung S26 Ultra. Ce folie montezi?',
+        opts: ['Orice sticlă călită standard', 'TPU sau PET moale, sau Glass OK după verificare în SonicDB', 'Sticlă Privacy', 'Nu montezi nimic fără confirmare manager'],
+        correct: 1,
+        explanation: 'S26 Ultra are senzor ultrasonic. Verifici în SonicDB dacă e Glass OK. Dacă da, poți pune sticlă specială. Dacă nu, montezi TPU/PET. Sticla standard = amprenta nu funcționează!'
+      },
+      {
+        q: 'Ce folie recomanzi unui client care lucrează mult în exterior, la soare, și se plânge de reflexii?',
+        opts: ['Sticlă lucioasă standard', 'Folie TPU Mat (antireflex)', 'Folie Privacy', 'Folie Hidrogel transparentă'],
+        correct: 1,
+        explanation: 'Folia mat reduce reflexiile luminii ambientale, perfect pentru exterior și iluminare puternică. TPU mat = compatibil cu ultrasonic și reduce strălucirea ecranului.'
+      },
+      {
+        q: 'Clientul vine și zice că amprenta nu mai funcționează după ce i-ai pus folie. Ce faci PRIMUL LUCRU?',
+        opts: ['Îi dai banii înapoi', 'Îl trimiți la service', 'Îl ghidezi să re-înregistreze amprenta cu folia pusă din Setări', 'Dai vina pe telefon'],
+        correct: 2,
+        explanation: 'Pe multe telefoane amprenta trebuie re-înregistrată după aplicarea foliei. Setări → Biometrice/Securitate → Amprentă → Adaugă amprentă nouă (cu folia pusă). Rezolvă 80% din cazuri!'
+      }
+    ]
+  },
+  // Quiz 3 - Fraze utile
+  {
+    questions: [
+      {
+        q: 'Clientul spune: „Îmi sunteți recomandat, dar sticla e prea scumpă, nu are rost." Cum răspunzi?',
+        opts: ['Îi dai discount direct', 'Îi explici că sticla protejează ecranul care costă mult mai mult de înlocuit', 'Îl lași să plece', 'Îi recomanzi ceva mai ieftin fără să explici'],
+        correct: 1,
+        explanation: 'Argumentul de protecție a investiției e cel mai eficient. Un ecran spart = 500-2000 lei. O folie = 30-80 lei. Prezintă-l ca asigurare, nu ca cheltuială suplimentară.'
+      },
+      {
+        q: 'Nu știi răspunsul la o întrebare tehnică a clientului. Ce faci?',
+        opts: ['Inventezi un răspuns plauzibil', 'Spui că nu știi și nu mai întrebi pe nimeni', 'Spui că verifici și cauți în aplicație sau întrebi un coleg', 'Schimbi subiectul'],
+        correct: 2,
+        explanation: 'Onestitatea construiește încredere. „Hai să verific pentru tine" e mult mai bine decât un răspuns greșit. Clienții apreciază seriozitatea și vin din nou.'
+      }
+    ]
+  },
+  // Quiz 4 - Citire telefon
+  {
+    questions: [
+      {
+        q: 'Clientul aduce un telefon și zice „Am un Samsung A5". Cum identifici modelul exact?',
+        opts: ['Ghicești că e A50 pentru că e mai popular', 'Mergi la Setări → Despre telefon și verifici numărul exact de model', 'Îl măsori cu rigla', 'Îl compari vizual cu un poster din magazin'],
+        correct: 1,
+        explanation: 'Setări → Despre telefon e metoda sigură. Samsung A5 poate fi A50, A51, A52, A53, A54, A55 — modele cu dimensiuni diferite. Niciodată nu presupune!'
+      },
+      {
+        q: 'Cum identifici rapid un iPhone 15 față de un iPhone 14?',
+        opts: ['iPhone 15 are notch (U) mare sus', 'iPhone 15 are Dynamic Island (capsulă) și port USB-C în loc de Lightning', 'iPhone 15 e mai gros', 'Nu există diferențe vizibile'],
+        correct: 1,
+        explanation: 'iPhone 15 a introdus Dynamic Island pe toate modelele (nu doar Pro) și USB-C în loc de Lightning. iPhone 14 are notch clasic (U) și Lightning.'
+      }
+    ]
+  },
+  // Quiz 5 - Conectori
+  {
+    questions: [
+      {
+        q: 'Un client aduce iPhone 14 și vrea un cablu de încărcare. Ce îi dai?',
+        opts: ['USB-C la USB-C', 'Lightning la USB-A sau Lightning la USB-C', 'Micro-USB la USB-A', 'Wireless Qi pad'],
+        correct: 1,
+        explanation: 'iPhone 14 și mai vechi folosesc Lightning. iPhone 15 și mai nou folosesc USB-C. Această distincție e critică pentru a vinde cablul corect!'
+      },
+      {
+        q: 'Care este diferența practică între USB 2.0 și USB 3.2 pe un cablu USB-C?',
+        opts: ['Nu există diferență', 'USB 3.2 e mult mai rapid la transfer fișiere (5-10x), important când muți multe poze', 'USB 3.2 are o culoare diferită', 'USB 2.0 încarcă mai rapid'],
+        correct: 1,
+        explanation: 'USB 3.2 transferă date de 10x mai rapid decât USB 2.0. La 100 poze/video nu simți, dar la backup complet al telefonului (10-50GB) diferența e uriașă: minute vs ore.'
+      }
+    ]
+  },
+  // Quiz 6 - Client nemulțumit
+  {
+    questions: [
+      {
+        q: 'Clientul vine furios că folia s-a desprins după 3 zile. Care e primul lucru pe care îl faci?',
+        opts: ['Îi spui că nu e vina ta', 'Empatizezi și ceri să vezi telefonul pentru a evalua situația', 'Îi dai banii înapoi imediat fără să verifici', 'Îl trimiți la producătorul foliei'],
+        correct: 1,
+        explanation: 'Formula: Empatizezi → Verifici concret → Acționezi. Să ceri să vezi telefonul nu e o scuză — e profesionalism. Poate folia s-a montat greșit (remontezi gratuit) sau a căzut telefonul (explici situația).'
+      },
+      {
+        q: 'Ce NU trebuie să spui niciodată unui client nemulțumit?',
+        opts: ['„Hai să verificăm împreună"', '„Nu e vina noastră, e problema telefonului"', '„Îmi pare rău că s-a întâmplat"', '„Vă ofer o soluție acum"'],
+        correct: 1,
+        explanation: 'Fraza „nu e vina noastră" enervează clientul chiar dacă e adevărată. În loc de asta, verifici situația și oferi o soluție. Clienții vor să fie ajutați, nu judecați.'
+      }
+    ]
+  },
+  // Quiz 7 - Accesorii
+  {
+    questions: [
+      {
+        q: 'Clientul vrea un power bank „pentru o zi în oraș". Ce capacitate recomanzi?',
+        opts: ['5.000 mAh — compact, suficient pentru o urgență', '10.000 mAh — bun pentru 2-3 încărcări complete', '30.000 mAh — maxim posibil', '500 mAh — minim pentru birou'],
+        correct: 1,
+        explanation: '10.000 mAh e balansul perfect pentru o zi în oraș: dă ~2-2.5 încărcări complete unui telefon de 5000 mAh, e compact (200g) și se încarcă rapid seara.'
+      },
+      {
+        q: 'Clientul are iPhone 16 și vrea căști cu cablu. Ce trebuie să știi?',
+        opts: ['iPhone 16 are mufă jack 3.5mm — orice căști merg', 'iPhone 16 nu are mufă jack 3.5mm — trebuie căști USB-C sau adaptor', 'iPhone 16 folosește Lightning pentru căști', 'Nu există căști compatibile cu iPhone 16'],
+        correct: 1,
+        explanation: 'iPhone 7 a eliminat jack-ul 3.5mm în 2016. iPhone 15 și 16 folosesc USB-C. Pentru căști cu cablu clientul are nevoie de căști USB-C sau un adaptor USB-C → jack 3.5mm.'
+      }
+    ]
+  }
+];
+
+// ══ STATE ══
+let ghidSectionsDone = new Set();
+let quizStates = {};
+
+function toggleGhidSection(idx) {
+  const el = document.getElementById('ghid-s' + idx);
+  const isOpen = el.classList.contains('open');
+  el.classList.toggle('open', !isOpen);
+  if (!isOpen) {
+    markSectionVisited(idx);
+    // init quiz if needed
+    const qIdx = [0, null, 1, 2, null, null, 3, null][idx] !== undefined ? [0, 1, 2, 3, null, 3, null][idx] : null;
+    initQuizForSection(idx);
+  }
+}
+
+function openGhidSection(idx) {
+  const el = document.getElementById('ghid-s' + idx);
+  if (!el.classList.contains('open')) {
+    el.classList.add('open');
+    markSectionVisited(idx);
+    initQuizForSection(idx);
+  }
+  el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function markSectionVisited(idx) {
+  ghidSectionsDone.add(idx);
+  const toc = document.querySelectorAll('.ghid-toc-item');
+  if (toc[idx]) toc[idx].classList.add('done');
+  updateGhidProgress();
+}
+
+function updateGhidProgress() {
+  const total = 19;
+  const done = ghidSectionsDone.size;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('ghid-pfill').style.width = pct + '%';
+  document.getElementById('ghid-plabel').textContent = done + ' din ' + total + ' secțiuni parcurse';
+  if (done === total) {
+    document.getElementById('ghid-congrats').style.display = 'block';
+    document.getElementById('ghid-congrats').scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+}
+
+// ══ BRAND POPUP ══
+let currentBrand = null;
+function showBrand(key) {
+  const popup = document.getElementById('brand-popup');
+  if (currentBrand === key && popup.classList.contains('show')) {
+    popup.classList.remove('show');
+    currentBrand = null;
+    return;
+  }
+  currentBrand = key;
+  const d = BRAND_DATA[key];
+  document.getElementById('bp-title').innerHTML = (d.logo || d.emoji) + ' ' + d.name;
+  document.getElementById('bp-title').style.color = d.color;
+  document.getElementById('bp-content').innerHTML = d.rows.map(r =>
+    `<div class="ghid-brand-popup-row"><span class="ghid-brand-popup-lbl">${r[0]}</span><span class="ghid-brand-popup-val">${r[1]}</span></div>`
+  ).join('');
+  popup.classList.add('show');
+}
+
+// ══ QUIZ ENGINE ══
+const QUIZ_MAP = {0:0, 1:1, 2:2, 5:3, 7:4, 10:5, 13:6, 18:7}; // sectionIdx -> quizDataIdx
+
+function initQuizForSection(sectionIdx) {
+  const qDataIdx = QUIZ_MAP[sectionIdx];
+  if (qDataIdx === undefined) return;
+  const quizEl = document.getElementById('quiz-' + qDataIdx);
+  if (!quizEl || quizStates[qDataIdx]) return;
+
+  const data = QUIZ_DATA[qDataIdx];
+  quizStates[qDataIdx] = { current: 0, score: 0, total: data.questions.length, answered: false };
+  renderQuizQuestion(qDataIdx);
+}
+
+function renderQuizQuestion(qIdx) {
+  const state = quizStates[qIdx];
+  const data = QUIZ_DATA[qIdx];
+  const qEl = document.getElementById('quiz-' + qIdx);
+  const container = qEl.querySelector('.ghid-quiz-questions');
+  const scoreEl = document.getElementById('qs-' + qIdx);
+
+  if (state.current >= state.total) {
+    // Show score
+    container.innerHTML = '';
+    const pct = Math.round((state.score / state.total) * 100);
+    let msg = pct === 100 ? '🏆 Perfect! Ai răspuns corect la toate întrebările!' :
+              pct >= 66 ? '👍 Bine! Mai exersează puțin.' : '📚 Mai citește secțiunea și încearcă din nou.';
+    scoreEl.innerHTML = `
+      <div class="ghid-quiz-score-num">${state.score}/${state.total}</div>
+      <div class="ghid-quiz-score-txt">${msg}</div>
+      <button class="ghid-quiz-retry" onclick="retryQuiz(${qIdx})">🔄 Încearcă din nou</button>
+    `;
+    scoreEl.classList.add('show');
+
+    // Mark section done
+    const sectionForQuiz = Object.entries(QUIZ_MAP).find(([s,q]) => q == qIdx);
+    if (sectionForQuiz) {
+      const sIdx = parseInt(sectionForQuiz[0]);
+      const doneEl = document.getElementById('done-' + sIdx);
+      if (doneEl) doneEl.classList.add('show');
+    }
+    return;
+  }
+
+  const q = data.questions[state.current];
+  scoreEl.classList.remove('show');
+  container.innerHTML = `
+    <div class="ghid-quiz-q">${state.current + 1}/${state.total} · ${q.q}</div>
+    <div class="ghid-quiz-opts">
+      ${q.opts.map((o, i) => `<button class="ghid-quiz-opt" onclick="answerQuiz(${qIdx},${i})">${o}</button>`).join('')}
+    </div>
+    <div class="ghid-quiz-result" id="qr-${qIdx}"></div>
+    <button class="ghid-quiz-next" id="qn-${qIdx}" onclick="nextQuestion(${qIdx})">Următoarea întrebare →</button>
+  `;
+  state.answered = false;
+}
+
+function answerQuiz(qIdx, chosen) {
+  const state = quizStates[qIdx];
+  if (state.answered) return;
+  state.answered = true;
+
+  const data = QUIZ_DATA[qIdx];
+  const q = data.questions[state.current];
+  const opts = document.querySelectorAll(`#quiz-${qIdx} .ghid-quiz-opt`);
+  const resultEl = document.getElementById('qr-' + qIdx);
+  const nextEl = document.getElementById('qn-' + qIdx);
+
+  opts.forEach(o => o.classList.add('disabled'));
+  opts[q.correct].classList.add('correct');
+
+  if (chosen === q.correct) {
+    state.score++;
+    resultEl.className = 'ghid-quiz-result show ok';
+    resultEl.textContent = '✅ Corect! ' + q.explanation;
+  } else {
+    opts[chosen].classList.add('wrong');
+    resultEl.className = 'ghid-quiz-result show nok';
+    resultEl.textContent = '❌ Greșit. ' + q.explanation;
+  }
+
+  state.current++;
+  nextEl.classList.add('show');
+  if (state.current >= state.total) {
+    nextEl.textContent = 'Vezi rezultatul 🏆';
+  }
+}
+
+function nextQuestion(qIdx) {
+  renderQuizQuestion(qIdx);
+}
+
+function retryQuiz(qIdx) {
+  quizStates[qIdx] = { current: 0, score: 0, total: QUIZ_DATA[qIdx].questions.length, answered: false };
+  document.getElementById('qs-' + qIdx).classList.remove('show');
+  renderQuizQuestion(qIdx);
+}
+</script>
 
 <script>
 function showPage(name) {
